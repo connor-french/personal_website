@@ -3,8 +3,8 @@ project:
 
 website:
   title: "Connor French"
-  site-url: "https://www.connor-french.com"
-  repo-url: https://github.com/connor-french/connorfrench
+  site-url: "https://connor-french.com"
+  repo-url: https://github.com/connor-french/personal_website
   description: "Website of Connor French"
   google-analytics: "G-140J9KG9C2"
   twitter-card: 
