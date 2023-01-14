@@ -1,0 +1,220 @@
+---
+title: Sonification for data communication
+author: Connor French
+description: Sonification as a cool way to understand data and make data communication more accessible.
+date: '2021-04-19'
+aliases:   
+  - ../sonification/
+categories: 
+  - R
+  - Research
+  - Data Visualization
+  - GCDI
+image: featured.png
+---
+
+[Originally published on GC Digital Initiatives](https://digitalfellows.commons.gc.cuny.edu/2021/04/19/sonification-for-data-communication/)
+
+```{r setup, message = FALSE, echo=FALSE}
+library(sonify)
+library(tidyverse)
+library(here)
+
+theme_set(theme_minimal())
+theme_update(axis.title = element_text(size = 16))
+
+knitr::opts_chunk$set(fig.width = 5, fig.height = 4, fig.align = "center")
+```
+
+A few weeks ago my partner shared a [TED Talk](https://www.youtube.com/watch?v=-hY9QSdaReY) with me that changed how I conceptualize data communication. In it [Dr. Wanda Diaz Merced](https://www.ted.com/speakers/wanda_diaz_merced), an astronomer who lost her eyesight in her early twenties, discusses her journey back into science after this setback. A crucial technique helped her interpret hefty astronomy data sets- sonification. [Sonification turns data into sound](https://handbook.floeproject.org/sonification). It is analogous to data visualization, where both methods aim to communicate patterns and relationships within data clearly and efficiently. Not only did sonification make data accessible for Dr. Merced, it helped her uncover patterns obscured by visualizing graphs and charts.
+
+There are [quite a few applications](https://www.techfak.uni-bielefeld.de/ags/ami/publications/media/Hermann2002-SFE.pdf) for sonification. The bing you get when an email lands in your inbox is one familiar example. The recognizable noise conveys a simple piece of information without requiring you to be sitting at the computer or staring at your phone. Representing large data sets gets a little more complicated.
+
+Audio has multiple dimensions that can be exploited to represent information, including:
+
+-   pitch\
+-   loudness\
+-   duration\
+-   spatial arrangement (e.g. stereo panning)
+
+These can be combined to represent multiple data dimensions or used interchangeably to represent the same data in a new way. Best practices are still being formed and are often context-dependent on the user, but a great resource for the latest practices is the [Floe Inclusive Learning Design Handbook](https://handbook.floeproject.org/sonification).
+
+A particular application that is relevant for folks who want to increase the accessibility of their publications is to sonify their existing data visualizations. Below are a few common examples. Each example is a visualization, followed by the sonification. I have chosen to represent values on the y-axis as changes in pitch, while time indicates change along the x-axis. To emphasize the change in time along the x-axis, I have added short white noise pulses for each data point along the x-axis. The listener is "reading" the plot from left to right.
+
+```{r, echo=FALSE}
+# function to generate data
+generate_data <- function(n_obs = 100, 
+                          min_x = 0, 
+                          max_x = 10, 
+                          beta = 1, 
+                          error_sigma = 1, 
+                          is_exponential = FALSE,
+                          exponent = 2,
+                          alpha = 1) {
+  x <- runif(n_obs, min_x, max_x)
+  e <- rnorm(n_obs, 0, error_sigma)
+  
+  if (is_exponential == TRUE) {
+    y <- alpha*x^(exponent*beta) + e
+  } else y <- x*beta + e
+  
+  
+  df <- tibble(predictor = x, response = y)
+  
+  return(df)
+}
+```
+
+A common data visualization technique for single variables is the histogram. These emphasize the distribution of the variable under consideration. Below, I've simulated data representing my mood 15 minutes before eating dinner over the last several weeks.
+
+<br>
+
+```{r, echo=FALSE, fig.cap="A histogram representing the distribution of mood score values."}
+set.seed(62)
+
+univariate_data <- generate_data()
+
+response_hist <- univariate_data %>% 
+  filter(response > 0) %>% 
+  ggplot(aes(x = response)) +
+  geom_histogram(bins = 20, fill = "skyblue", color = "black") +
+  labs(x = "Mood score",
+       y = "Frequency")
+
+response_hist
+```
+
+```{r, echo=FALSE, eval=FALSE}
+ggsave(filename = here("figures", "histogram.png"), 
+       plot = response_hist, width = 5, height = 4, units = "in")
+```
+
+```{r, eval=FALSE, echo=FALSE}
+# get histogram count data for sonification
+hist_data <- ggplot_build(response_hist)$data[[1]]
+
+sound_univariate <- sonify::sonify(y = hist_data$count, 
+                        duration = 10,
+                        pulse_len = 0.1)
+
+tuneR::writeWave(sound_univariate, here("audio", "sound_univariate.wav"))
+```
+
+<br>
+
+<html>
+
+<audio controls>
+
+<source src="sound_univariate.wav" type="audio/wav">
+
+</audio>
+
+</html>
+
+<br> <br> Notice how the pitch oscillates in a similar manner to the shape of the distribution and the pulses are evenly spaced, representing the bins of the distribution!
+
+<br> Now, let's sonify two variables at once! The visualization below is a scatterplot, a common technique for two continuous variables. The data is simulated to represent how much I crave a burger depending on how hungry I am.\
+<br>
+
+```{r, echo=FALSE, fig.cap="A scatterplot representing a linear relationship between two variables. Hunger level on the x axis and burger craving strength on the y axis"}
+set.seed(7485)
+
+linear_data <- generate_data(n_obs = 50, beta = 1.2, error_sigma = 1, is_exponential = FALSE)
+
+linear_plot <- linear_data %>%
+  ggplot(aes(x = predictor, y = response)) +
+  geom_point(fill = "skyblue", color = "black", size = 3, shape = 21) +
+  labs(x = "Hunger level", y = "Burger craving strength")
+
+linear_plot
+```
+
+```{r, echo=FALSE, eval=FALSE}
+ggsave(filename = here("figures", "linear_scatter.png"), 
+       plot = linear_plot, width = 5, height = 4, units = "in")
+```
+
+```{r, echo=FALSE, eval=FALSE}
+sound_linear <- sonify::sonify(x = linear_data$predictor, 
+                        y = linear_data$response, 
+                        duration = 10,
+                        pulse_len = 0.1)
+
+tuneR::writeWave(sound_linear, here("audio", "sound_linear.wav"))
+```
+
+<br>
+
+<html>
+
+<audio controls>
+
+<source src="sound_linear.wav" type="audio/wav">
+
+</audio>
+
+</html>
+
+<br> <br>
+
+Notice how the pitch increase with time, but there are oscillations which represent error around a perfect linear relationship. Also notice how the pulses are less even- the points aren't evenly distributed on the x-axis. Pretty cool!
+
+<br>
+
+The final visualization I'll present is an exponential relationship between two variables. The simulated data in this scenario represents my craving for a big ol' plate of nachos dependent on how hungry I am.
+
+<br>
+
+```{r, echo=FALSE, fig.cap="A scatterplot representing an exponential relationship between two variables. Hunger level on the x axis and burger craving strength on the y axis"}
+expnt <- 2
+
+set.seed(9999)
+
+exponential_data <- generate_data(is_exponential = TRUE, exponent = expnt)
+
+exponential_plot <- exponential_data %>%
+  ggplot(aes(x = predictor, y = response)) +
+  geom_point(fill = "skyblue", color = "black", size = 3, shape = 21) +
+  labs(x = "Hunger level", y = "Nachos craving strength")
+
+exponential_plot
+```
+
+```{r, echo=FALSE, eval=FALSE}
+ggsave(filename = here("figures", "exponential_scatter.png"), 
+       plot = exponential_plot, width = 5, height = 4, units = "in")
+```
+
+```{r, eval=FALSE, echo=FALSE}
+exponential_sound <- sonify::sonify(x = exponential_data$predictor, 
+                        y = exponential_data$response, 
+                        duration = 10,
+                        pulse_len = 0.1)
+
+tuneR::writeWave(exponential_sound, here("audio", "sound_exponential.wav"))
+```
+
+<br>
+
+<html>
+
+<audio controls>
+
+<source src="sound_exponential.wav" type="audio/wav">
+
+</audio>
+
+</html>
+
+<br> <br>
+
+In this case, the pitch increases, well, exponentially! In addition, the points are tighter together- The pitch oscillates less than the linearly related data. My nacho cravings are pretty consistent.
+
+<br>
+
+These are just a few ways sonification can be incorporated into your data communication and exploration arsenal. Besides making data more accessible to those who are blind or low vision, sonification opens up another avenue of data exploration to uncover patterns not evident in a visßual medium. Dr. Merced was able to [hear a distinct frequency pattern](https://youtu.be/-hY9QSdaReY?t=287) not evident from a chart that led her to discover that star formation likely plays an important part in supernova explosions! Sighted astronomers now use sonfication as a complement to visualization to investigate their data. If you would like to take a crack at sonification yourself, there are a [variety](https://osf.io/vgaxh/wiki/Resources/) of [resources](https://jarednielsen.medium.com/data-sonification-and-web-scraping-with-node-js-and-tone-js-eaf2cd35a000). The sonifications for this post were created using the R package [sonify](https://cran.r-project.org/web/packages/sonify/index.html), which is a straightforward interface that will get you there quickly, without much overhead. You can find the R code for this blog post [here](https://raw.githubusercontent.com/connor-french/sonification_ttt_post/main/sonification_ttt_post.Rmd).
+
+<br>
+
+Those of us at the [Graduate Center Digital Initiatives](https://gcdi.commons.gc.cuny.edu/) strive to make interactions with digital media more accessible. We provide a variety of resources to take advantage of digital tools in your research. In addition, we provide community and support with the [Digital Fellows](https://digitalfellows.commons.gc.cuny.edu/), so I encourage you to take a look and connect with us!

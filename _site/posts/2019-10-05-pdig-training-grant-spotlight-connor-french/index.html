@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Connor French">
+<meta name="dcterms.date" content="2019-10-12">
+<meta name="description" content="A review of Applied Machine Learning in R workshop I used the Provost’s Digital Innovation Training Grant for.">
+
+<title>Connor French - PDIG Training Grant Spotlight: Connor French</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-140J9KG9C2"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
+</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Connor French - PDIG Training Grant Spotlight: Connor French">
+<meta name="twitter:description" content="A review of Applied Machine Learning in R workshop I used the Provost's Digital Innovation Training Grant for.">
+<meta name="twitter:image" content="https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-10-05-pdig-training-grant-spotlight-connor-french/featured.png">
+<meta name="twitter:creator" content="@frog_phylo">
+<meta name="twitter:image-height" content="300">
+<meta name="twitter:image-width" content="298">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Connor French</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html">
+ <span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html">
+ <span class="menu-text">Projects</span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">PDIG Training Grant Spotlight: Connor French</h1>
+                  <div>
+        <div class="description">
+          A review of Applied Machine Learning in R workshop I used the Provost’s Digital Innovation Training Grant for.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Research</div>
+                <div class="quarto-category">GCDI</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Connor French </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 12, 2019</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p><a href="https://gcdi.commons.gc.cuny.edu/2019/09/11/pdig-training-grant-spotlight-connor-french/">Originally published on GC Digital Initiatives</a></p>
+<p>There are a lot of insects in the world. Like a lot a lot. Recent estimates put <a href="https://www.pnas.org/content/112/24/7519.short">the number of insect species</a> at a whopping 5.5 million. Only about a million have names, leaving the other 4.5 million or so species undescribed. To put this into context, there are <a href="https://amphibiaweb.org/amphibian/speciesnums.html">8,053 described amphibian species</a> and the projected number of undescribed species remains in the thousands. While I consider all life to be equally important (and I’m particularly fond of amphibians- I mean, just <a href="https://www.google.com/search?rlz=1C5CHFA_enUS832US832&amp;biw=1343&amp;bih=650&amp;tbm=isch&amp;sa=1&amp;ei=6XpJXc7tOayv_Qac8oGQBA&amp;q=ranitomeya&amp;oq=ranitomeya&amp;gs_l=img.3..35i39l2j0i67l2j0l6.53933.55501..55948...0.0..1.371.943.9j3-1......0....1..gws-wiz-img.ujvBzQEfoC8&amp;ved=0ahUKEwiOhpG-p-7jAhWsV98KHRx5AEIQ4dUDCAY&amp;uact=5">look at these</a>), the gap in our understanding of insect diversity is especially concerning. They’re important for <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/plantsanimals/pollinate/">agriculture</a>, <a href="https://www.youtube.com/watch?v=S0qm_L_HPdM">flowering plants</a>, <a href="https://www.fws.gov/midwest/endangered/insects/ambb/abb_fact.html">decomposition</a>, and a host of other functions. Without a firm understanding of existing insect diversity, scientists can’t accurately determine the causes of <a href="https://www.nationalgeographic.com/animals/2019/02/why-insect-populations-are-plummeting-and-why-it-matters/">rapid declines</a> in insect populations across the globe.</p>
+<p>Needless to say, describing 4.5 million species of insect is an onerous task. That’s why, as part of my PhD dissertation, I’m devising a new metric of diversity that skirts around this problem. Although I would love to go into excruciating detail about what it is, I’ll leave that up to my dissertation chapter. Briefly, I use <a href="https://www.genome.gov/about-genomics/fact-sheets/DNA-Sequencing-Fact-Sheet">DNA sequences</a> from insects collected by researchers from <a href="http://www.boldsystems.org/">across the globe</a> to summarize the <a href="http://b4fa.org/bioscience-in-brief/plantbreeding/genetic-diversity/">genetic diversity</a> of insect communities, rather than their species diversity. This makes data collection much more feasible across a broad scale. However, exactly what it tells us about insect communities is still uncertain.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://gcdi.commons.gc.cuny.edu/wp-content/blogs.dir/885/files/2019/09/bold_insects-300x150.png" class="img-fluid figure-img" alt="Global map of insect DNA sampling."></p>
+<p></p><figcaption class="figure-caption">A map of insect DNA sequences deposited in the Barcode of Life Data System. Warmer colors indicate densely sampled areas.</figcaption><p></p>
+</figure>
+</div>
+<p>To remedy this, I’m using <a href="https://searchenterpriseai.techtarget.com/definition/machine-learning-ML">machine learning</a>. Machine learning, the part-statistics, part-algorithmic wizardry that helps Snapchat <a href="https://medium.com/cracking-the-data-science-interview/snapchats-filters-how-computer-vision-recognizes-your-face-9907d6904b91">turn your face into an alien</a> and Facebook <a href="https://research.fb.com/blog/category/machine-learning/">recommend you</a> custom underwear, can also be used to answer important scientific questions. In a <a href="https://www.theguardian.com/news/2018/mar/12/what-is-biodiversity-and-why-does-it-matter-to-us">biodiversity</a> context, machine learning can help clarify what about the environment, whether that is climate, topography, human-mediated habitat loss, etc., best predicts a selected metric of diversity. In my project planning stages, I decided to use this approach to assess the relationships my new metric has with other global-scale processes. However, I only had a rudimentary knowledge of the capabilities of a machine learning approach.</p>
+<p>That’s why I decided to take the <a href="https://blog.rstudio.com/2019/02/06/rstudio-conf-2019-workshops/">Applied Machine Learning in R</a> two-day workshop in Austin, Texas. The workshop’s goal was to “step through the process of building, visualizing, testing, and comparing models that are based on prediction.” This was exactly what I needed. Unfortunately, since it was a part of an industry conference for tech professionals, the <a href="https://www.rstudio.com/conference/">rstudio::conf2019</a>, it was prohibitively expensive. Luckily, I was able to secure a <a href="https://digitalgrants.commons.gc.cuny.edu/">Provost’s Digital Innovation Training Grant</a>, which covered the costly tuition. As a University of Texas at Austin alumni, I easily found a couch to crash on, which cut expenses significantly. The prime location and generous help from the <a href="https://gcdi.commons.gc.cuny.edu/">GC Digital Initiatives</a> paved my way to the workshop.</p>
+<p>In between eating <a href="http://www.vaquerotaquero.com/">street tacos</a> and taking dips at <a href="https://www.austintexas.org/listings/barton-springs-pool/4687/">Barton Springs Pool</a>, I learned the basics of performing machine learning analyses in <a href="https://www.youtube.com/watch?v=9kYUGMg_14s">R</a>, a programming language centered around statistical analysis. Going in, I had a strong background in R, but I did not have a working knowledge of machine learning. The workshop’s <a href="https://github.com/topepo/rstudio-conf-2019">exercises</a> and <a href="https://resources.rstudio.com/authors/max-kuhn">strong leadership</a> gave me more confidence in using the machine learning techniques I was already familiar with and introduced me to algorithms I had never heard of. It was one of these new algorithms– I point out it’s named <a href="https://bradleyboehmke.github.io/HOML/mars.html">MARS</a> for the statistically and astronomically inclined– that I decided to use for my dissertation chapter. It strikes a balance between predictive power and explanatory ease that I am aiming for in my project.</p>
+<p>After some months of pulling my hair out, working through the kinks of how to wrangle 4.7 million insect DNA sequences, I was able to use my new machine learning skills to perform preliminary analyses of my data. The results, which I presented as a <a href="https://www.dropbox.com/s/8nhvskh6xarg6ej/poster_ConnorFrench.pdf?dl=0">poster</a> at the <a href="https://www.evolutionmeetings.org/evolution-2019---providence.html">Evolution</a> conference in Providence, Rhode Island, point toward my metric being a useful summary of insect biodiversity. I received numerous bits of positive feedback that I am currently using to finalize my analyses and publish this work in a professional journal. Initially, I thought this project would take up a large chunk of my PhD, but with the help of the Applied Machine Workshop and GC Digital Initiatives, I was able to jumpstart my analyses and will put out a stronger product, sooner. In due course, I hope my research leads to a stronger understanding of insect diversity and how us humans are impacting it.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{french2019,
+  author = {Connor French},
+  title = {PDIG {Training} {Grant} {Spotlight:} {Connor} {French}},
+  date = {2019-10-12},
+  url = {https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-10-05-pdig-training-grant-spotlight-connor-french},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2019" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Connor French. 2019. <span>“PDIG Training Grant Spotlight: Connor
+French.”</span> October 12, 2019. <a href="https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-10-05-pdig-training-grant-spotlight-connor-french">https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-10-05-pdig-training-grant-spotlight-connor-french</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="connor-french/connorfrench" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><i class="fa-regular fa-copyright" aria-label="copyright"></i> Connor French, 2022<br> All content licensed under <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-sa" aria-label="creative-commons-sa"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">(CC BY-NC-SA 4.0)</a></div>   
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> Inspiration and code snippets taken from <a href="https://www.andreashandel.com/posts/2022-10-01-hugo-to-quarto-migration/">this post</a><br> <a href="https://github.com/connor-french/connorfrench">Source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -1,0 +1,43 @@
+project:
+  type: website
+
+website:
+  title: "Connor French"
+  site-url: "https://www.connor-french.com"
+  repo-url: https://github.com/connor-french/connorfrench
+  description: "Website of Connor French"
+  google-analytics: "G-140J9KG9C2"
+  twitter-card: 
+    creator: "@frog_phylo"
+  cookie-consent: false 
+  search: true
+  navbar:
+    
+    left:
+      - text: "About"
+        file: about.qmd
+      - text: "Posts"
+        file: posts.qmd
+      - text: "Projects"
+        file: projects.qmd
+  page-footer:
+    left: |
+      {{< fa regular copyright >}} Connor French, 2022<br>
+      All content licensed under {{< fa brands creative-commons >}}
+      {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-sa >}} {{< fa brands creative-commons-nc >}} [(CC BY-NC-SA 4.0)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+    right: |
+      Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)<br>
+      Inspiration and code snippets taken from [this post](https://www.andreashandel.com/posts/2022-10-01-hugo-to-quarto-migration/)<br>
+      [Source at {{< fa brands github >}} GitHub](https://github.com/connor-french/connorfrench)
+
+
+format:
+  html:
+    theme: 
+      light: minty
+      dark: cyborg
+    css: styles.css
+    toc: true
+
+editor: visual
+

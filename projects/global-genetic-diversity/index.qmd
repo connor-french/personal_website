@@ -1,0 +1,22 @@
+---
+title: "Macrogenetics"
+description: "Investigating global and regional patterns of assemblage-wide genetic diversity."
+image: hex-macrogenetics.png
+image-alt: macrogenetics logo
+image-width: "100px"
+categories:
+  - Research
+  - Modeling
+  - Global
+about:
+  template: solana
+  image: hex-macrogenetics.png
+---
+
+Resolving global patterns of biodiversity is essential for understanding how life is distributed across the world and where it is most important to protect it. As yet, global-scale assessments have largely focused on species richness, phylogenetic diversity, species abundances, and functional trait diversity. Only recently, however, have advances in DNA barcoding and metabarcoding been utilized for global studies of biodiversity. Large-scale georeferenced DNA barcode surveys have great potential beyond their original use as a tool for assessing species diversity. They help identify adaptive potential and ecosystem resilience to disturbance, and more generally catalyze understanding of how intraspecific variation correlates with critical ecological functions. I am investigating patterns in this fundamental biodiversity metric, genetic diversity, at a global scale to uncover diversity patterns and inform hypotheses of the processes generating these patterns.
+
+Related papers:\
+**Global determinants of insect genetic diversity** (2022)\
+**French, C.M.**, Bertola, L.D., Carnaval, A.C., Economo, E.P., Kass, J.M., Lohman, D.J., Marske, K.A., Meier, R., Overcast, I., Rominger, A.J., Staniczenko, P., Hickerson, M.J.\
+*bioRxiv*. [10.1101/2022.02.09.479762](10.1101/2022.02.09.479762). \
+[PDF](https://www.biorxiv.org/content/10.1101/2022.02.09.479762v1.full.pdf) [Github](https://www.github.com/connor-french/global-insect-macrogenetics)

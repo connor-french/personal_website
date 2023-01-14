@@ -1,0 +1,26 @@
+---
+title: "Spatial population genetics"
+description: "Fine-scaled investigation of genetic diversity across space"
+image: popgen-graphic.png
+image-alt: spatial population genetics logo
+categories:
+  - Research
+  - Modeling
+  - Local
+about:
+  template: solana
+  image: popgen-graphic.png
+---
+
+Everything exists in space. Where an organism's ancestors were influences where it is now and where it is now influences where its decendents will be in the future. Organisms also don't exist in isolation. Their environment-and the spatial arrangement of their environment-influence where they live, how many there are, and who they mate with. Each organism has a unique lineage that can be traced through time and space. These lineages are encoded in their genomes, which contain stories of organisms and their ancestors. The stories of organisms, populations, and the environments they inhabit enthrall me. I'm interested in describing the patterns, investigating the processes, and telling the stories of populations, encoded in their genomes.
+
+Related papers:\
+**Forest cover and geographical distance influence fine-scale genetic structure of leaf-toed geckos in the tropical dry forests of western Mexico** (2022)\
+**French, C.M.**, Berezin, C.T., Overcast, I., De La Cruz, F.R.M., Basu, S., Bernal, R.L.M., Murphy, R.W., Hickerson, M.J., Blair, C.\
+Biological Journal of the Linnean Society. 137(4), pp. 686-699.\
+[PDF](files/publications/french_et_al_2022_BJLS.pdf) [Github](https://github.com/connor-french/gecko-project)
+
+**Speciation with introgression: Phylogeography and systematics of the Ameerega petersi group (Dendrobatidae).** (2019)\
+**French, C.M.**, Deutsch, M.S., Chávez G., Almora C.E., Brown, J.L.\
+*Molecular Phylogenetics and Evolution*. 138, 31-42.\
+[PDF](files/publications/french_et_al_2019_MPE.pdf)

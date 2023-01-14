@@ -1,0 +1,38 @@
+{
+  "index.qmd": {
+    "index.html": "21e00792"
+  },
+  "about.qmd": {
+    "about.html": "49e9f48c"
+  },
+  "posts/2019-10-05-pdig-training-grant-spotlight-connor-french/index.qmd": {
+    "index.html": "5633fd36"
+  },
+  "posts.qmd": {
+    "posts.html": "e0a5f5ce"
+  },
+  "posts/2019-11-20-leaflet_tutorial/index.qmd": {
+    "index.html": "13f524d5"
+  },
+  "posts/2020-11-20_gis-at-scale/index.qmd": {
+    "index.html": "2f1bc3f2"
+  },
+  "posts/2021-04-19-sonification_ttt_post/index.qmd": {
+    "index.html": "925942dc"
+  },
+  "posts/2020-06-24-funding-for-undergrads/index.qmd": {
+    "index.html": "4553437e"
+  },
+  "posts/2020-05-07-rstudio-cloud-for-education/index.qmd": {
+    "index.html": "d4fe0a1c"
+  },
+  "projects/global-genetic-diversity/index.qmd": {
+    "index.html": "c584e03b"
+  },
+  "projects.qmd": {
+    "projects.html": "6f3c06f5"
+  },
+  "projects/spatial-population-genetics/index.qmd": {
+    "index.html": "68d83027"
+  }
+}

@@ -1,0 +1,42 @@
+---
+title: GIS at Scale with Google Earth Engine
+author: Connor French
+description: An introduction to using Google Earth Engine for computationally expensive spatial analysis tasks.  
+date: '2020-11-20'
+aliases:   
+  - ../gis-at-scale/
+categories: 
+  - GIS
+  - Research
+  - Data Visualization
+  - GCDI
+image: featured.png
+---
+
+[Originally published on GC Digital Initiatives](https://wp.me/p846lD-1x6)
+
+Sometimes your GIS project needs some extra oomph. Maybe finding the data you need to understand deforestation in Brazil is giving you a headache. Or, you need to run a machine learning algorithm on 50 gigabytes of weather station data and your poor laptop is melting the finish off of your dining room table. <a href="https://earthengine.google.com/" target="_blank" rel="noopener noreferrer">Google Earth Engine</a> (GEE) is here to help.
+
+From <a href="https://earthengine.google.com/" target="_blank" rel="noopener noreferrer">the website</a>, GEE's purpose is to:
+
+<ul>
+
+<li>Provide an interactive platform for geospatial algorithm development at scale</li>
+
+<li>Enable high-impact, data-driven science</li>
+
+<li>Make substantive progress on global challenges that involve large geospatial datasets</li>
+
+</ul>
+
+GEE is designed to make large-scale GIS projects feasible, but is also suitable for smaller projects. My main use-case is to pull environmental data from their <a href="https://developers.google.com/earth-engine/datasets" target="_blank" rel="noopener noreferrer">petabyte scale database</a> to model the potential distribution of species through time, e.g. this set of maps projecting the distribution of a species of Peruvian poison dart frog as it's changed since the mid-Pleistocene.
+
+![The first five panels show models of a frog species' potential range from the present-day back to the mid-Pleistocene. The sixth panel shows areas of stability in the frog's range over this time period. These models were constructed using publicly available environmental data related to the frog's ecological tolerances](projections.png)
+
+Large amounts of data can be pulled down with a single line of code! An "Earth Engine Snippet" is provided for each dataset that you can copy into your GEE <a href="https://developers.google.com/earth-engine/guides/playground" target="_blank" rel="noopener noreferrer">code editor</a>.
+
+![Example dataset highlighting the type of data available on Google Earth Engine and the ease of acquiring it through the Earth Engine Snippet.](terraclim.png)
+
+In addition to acquiring data, a myriad of data processing and analytical tools are available. From cropping an image to <a href="https://developers.google.com/earth-engine/guides/machine-learning" target="_blank" rel="noopener noreferrer">machine learning</a>, these tasks are performed on the <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer">Google Cloud platform</a>, saving your computer from unnecessary RAM overload. There is a bit of a learning curve to using these tools, especially for those unfamiliar with coding. Thankfully, <a href="https://developers.google.com/earth-engine/guides" target="_blank" rel="noopener noreferrer">learning resources are plentiful</a>. And for those with a preferred coding language, GEE code has been translated to <a href="https://developers.google.com/earth-engine/guides/getstarted" target="_blank" rel="noopener noreferrer">JavaScript</a> (the native language), <a href="https://www.earthdatascience.org/tutorials/intro-google-earth-engine-python-api/" target="_blank" rel="noopener noreferrer">python</a>, and <a href="https://r-spatial.github.io/rgee/" target="_blank" rel="noopener noreferrer">R</a>! My preferred language is R, and there are <a href="https://r-spatial.github.io/rgee/" target="_blank" rel="noopener noreferrer">a ton of examples</a> to base your own ideas off of. For your next big GIS project, I recommend giving Google Earth Engine a shot!
+
+Should you need help with your GIS project, we have some great resources through the GC Digital Fellows. For coding help and camaraderie, check out the <a href="http://cuny.is/pug">Python User Group (PUG)</a> and the <a href="http://cuny.is/rug">R User Group (RUG)</a>. To hang out with folks interested in everything GIS, check out the <a href="http://cuny.is/gis">GIS Working Group</a>!

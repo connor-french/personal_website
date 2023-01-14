@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: 0c9e73ef-8b7e-4f10-9a5e-33043e693fba
+      url: 'https://connor-french.com'

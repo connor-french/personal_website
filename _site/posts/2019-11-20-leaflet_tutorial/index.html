@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Connor French">
+<meta name="dcterms.date" content="2019-11-20">
+<meta name="description" content="A short tutorial of how to use the leaflet R package to create an interactive map.">
+
+<title>Connor French - Interactively explore geographic data in R using leaflet</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-140J9KG9C2"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
+</script>
+<script src="../../site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="../../site_libs/jquery-1.12.4/jquery.min.js"></script>
+<link href="../../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="../../site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="../../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="../../site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="../../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="../../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="../../site_libs/leaflet-binding-2.1.1/leaflet.js"></script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta name="twitter:title" content="Connor French - Interactively explore geographic data in R using leaflet">
+<meta name="twitter:description" content="A short tutorial of how to use the leaflet R package to create an interactive map.">
+<meta name="twitter:image" content="https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-11-20-leaflet_tutorial/featured.png">
+<meta name="twitter:creator" content="@frog_phylo">
+<meta name="twitter:image-height" content="159">
+<meta name="twitter:image-width" content="600">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Connor French</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../posts.html">
+ <span class="menu-text">Posts</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../projects.html">
+ <span class="menu-text">Projects</span></a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Interactively explore geographic data in R using leaflet</h1>
+                  <div>
+        <div class="description">
+          A short tutorial of how to use the leaflet R package to create an interactive map.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Research</div>
+                <div class="quarto-category">Tutorial</div>
+                <div class="quarto-category">GCDI</div>
+                <div class="quarto-category">GIS</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Connor French </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 20, 2019</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#why-leaflet" id="toc-why-leaflet" class="nav-link active" data-scroll-target="#why-leaflet">Why leaflet?</a></li>
+  <li><a href="#goal-of-the-tutorial" id="toc-goal-of-the-tutorial" class="nav-link" data-scroll-target="#goal-of-the-tutorial">Goal of the tutorial</a></li>
+  <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
+  <li><a href="#read-in-and-pre-process-data" id="toc-read-in-and-pre-process-data" class="nav-link" data-scroll-target="#read-in-and-pre-process-data">Read in and pre-process data</a></li>
+  <li><a href="#plot-a-basic-map" id="toc-plot-a-basic-map" class="nav-link" data-scroll-target="#plot-a-basic-map">Plot a basic map</a></li>
+  <li><a href="#customization" id="toc-customization" class="nav-link" data-scroll-target="#customization">Customization</a></li>
+  <li><a href="#go-further" id="toc-go-further" class="nav-link" data-scroll-target="#go-further">Go further</a></li>
+  </ul>
+</nav>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p><a href="https://digitalfellows.commons.gc.cuny.edu/2019/11/21/interactively-explore-geographic-data-in-r-using-leaflet/">Originally published on GC Digital Initiatives</a></p>
+<section id="why-leaflet" class="level3">
+<h3 class="anchored" data-anchor-id="why-leaflet">Why leaflet?</h3>
+<p>Making a data visualization interactive opens up a host of opportunities for new insights. This is especially true for geographic data. While a static map is preferable for publication in a journal or a book, an interactive map is suitable for exploring data or packing more information in an accessible format. Patterns may emerge when viewing data at different scales or when toggling through features.</p>
+<p>There are a number of tools for building interactive maps. <a href="https://leafletjs.com/">Leaflet</a> is one of the most popular open-source JavaScript libraries for creating interactive maps. The <a href="https://rstudio.github.io/leaflet/">leaflet R package</a> is a high-level interface that makes it easy to create beautiful interactive maps in a few lines of code. Using R rather than point-and-click software like <a href="http://desktop.arcgis.com/en/arcmap/">ArcMap</a> and others makes your life easier through reproducible code that can be shared for others to recreate your map or that you can return to when you inevitably need to fix something. I use leaflet regularly for data exploration and for sharing preliminary results with collaborators. You can also include leaflet maps in <a href="https://rmarkdown.rstudio.com/">RMarkdown</a> documents, <a href="https://shiny.rstudio.com/">Shiny</a> apps, and even post them to your website!</p>
+</section>
+<section id="goal-of-the-tutorial" class="level3">
+<h3 class="anchored" data-anchor-id="goal-of-the-tutorial">Goal of the tutorial</h3>
+<p>The goal of this tutorial is to provide you with a basic understanding of leaflet functionality and the tools and resources to make your own interactive maps. You will:</p>
+<ol type="1">
+<li><p>Read in geographic data for plotting</p></li>
+<li><p>Plot locations of interest using markers</p></li>
+<li><p>Color locations according to a factor</p></li>
+<li><p>Include pop-up text that provides metadata about the locations of interest</p></li>
+</ol>
+</section>
+<section id="installation" class="level3">
+<h3 class="anchored" data-anchor-id="installation">Installation</h3>
+<p>You will need to install four packages for this tutorial. The <span style="color:red">dplyr</span> package for data manipulation, the <span style="color:red">sf</span> package for handling spatial data, the <span style="color:red">rgbif</span> package for acquiring the data, and finally the <span style="color:red">leaflet</span> package for mapping. All packages are available on CRAN.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"sf"</span>, <span class="st">"rgbif"</span>, <span class="st">"leaflet"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(packages, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now that the packages are installed, you need to load them into your environment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgbif)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="read-in-and-pre-process-data" class="level3">
+<h3 class="anchored" data-anchor-id="read-in-and-pre-process-data">Read in and pre-process data</h3>
+<p>The data you’re going to work with are some locations where rain frogs, genus <em>Breviceps</em> (aka <a href="https://www.youtube.com/watch?v=cBkWhkAZ9ds">the cute grumpy frog</a>), have been found. Using the <span style="color:red">rgbif</span> package, you’re querying the large <a href="https://www.gbif.org/">Global Biodiversity Information Repository</a> to obtain the species occurrences. After obtaining the data, some filtering is necessary. First, you’re filtering out observations that do not have latitude or longitude coordinates (<span style="color:gray">hasCoordinate = TRUE</span>) and selecting only the relevant columns for your visualization (<span style="color:gray">select()</span>). Then, you’re converting the data frame that <span style="color:red">rgbif</span> returns into a simple features (<span style="color:red">sf</span>) data frame that contains information about which columns to use as coordinates (<span style="color:gray">coords = …</span>) and what the data’s coordinate reference system is (<span style="color:gray">crs = …</span>).</p>
+<p>If the <strong>%&gt;%</strong> bit is confusing, don’t worry- I’ll explain in the next section.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://allthatsinteresting.com/wordpress/wp-content/uploads/2019/04/desert-rain-frog.png" class="img-fluid figure-img" style="width:50.0%" alt="source: allthatsinteresting.com"></p>
+<p></p><figcaption class="figure-caption">source: allthatsinteresting.com</figcaption><p></p>
+</figure>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>frog_gbif <span class="ot">&lt;-</span> <span class="fu">occ_search</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">genusKey =</span> <span class="dv">3240854</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">hasCoordinate =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">limit =</span> <span class="dv">100</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  .[[<span class="st">"data"</span>]] <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    genus,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    species,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    family, </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    eventDate, </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    decimalLongitude, </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    decimalLatitude</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>(</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">"decimalLongitude"</span>, <span class="st">"decimalLatitude"</span>),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">crs =</span> <span class="st">"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="plot-a-basic-map" class="level3">
+<h3 class="anchored" data-anchor-id="plot-a-basic-map">Plot a basic map</h3>
+<p>Plotting a basic map only takes three lines of code! The necessary steps to make a leaflet map are:</p>
+<ol type="1">
+<li><p><strong>Initialize a map widget</strong> using the <span style="color:gray">leaflet()</span> function.</p></li>
+<li><p><strong>Add layers</strong> using the suite of commands the begin with <span style="color:gray">add*()</span>, e.g.&nbsp;<span style="color:gray">addTiles()</span>, which added the OpenStreetMap tiles and <span style="color:gray">addMarkers()</span>, which added our locality data</p></li>
+<li><p><strong>Print the result</strong>. In this case I’m printing the map to the console without assigning it to a variable first.</p></li>
+</ol>
+<p>The <strong>%&gt;%</strong> (pipe) operator is used to make code easier to read and help the mapmaking process flow organically. It pipes the output of one function into the input of the next. Intuitively, you can think of the following code as “I initialize the map widget <em>and then</em> add the basemap tiles <em>and then</em> add the locality markers.”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span>  <span class="co"># Add default OpenStreetMap map tiles</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">data =</span> frog_gbif)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-a918dda3be8882ba9dbe" style="width:100%;height:464px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a918dda3be8882ba9dbe">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[-33.819138,-33.334053,-34.39227,-21.091778,-29.040835,-21.080971,-33.939719,-33.976855,-33.85058,-30.730894,-25.227552,-33.969492,-29.527697,-33.954212,-33.983837,-15.783165,-33.945498,-28.677082,-34.094362,-13.862857,-33.951747,-33.984109,-33.984977,-33.984971,-33.984952,-33.984963,-33.984937,-33.983983,-27.770816,-34.069528,-34.03723,-24.393639,-34.060554,-33.73917,-24.392948,-34.408865,-34.227842,-34.422,-34.200127,-34.017613,-33.941008,-34.014037,-34.528526,-34.017629,-33.95551,-33.99857,-33.766734,-27.758275,-33.964609,-34.357918,-34.055812,-27.767681,-16.49387,-27.767681,-16.4979,-34.0599,-27.770738,-33.688177,-27.75845,-34.06018,-33.766317,-34.112518,-27.762189,-27.769773,-27.760381,-33.782978,-34.059247,-32.781278,-33.783127,-33.72848,-34.102808,-33.778932,-33.782325,-34.102801,-33.978554,-33.783147,-34.059743,-32.780107,-34.415787,-34.390234,-33.78265,-34.05923,-33.241514,-34.0588,-34.059983,-33.608558,-24.559805,-33.934553,-29.802275,-34.288545,-33.963447,-34.055172,-34.288312,-34.292705,-32.090367,-33.3276,-34.048763,-34.261963,-34.049319,-33.877424],[23.154692,26.567878,19.272742,31.836615,29.340938,31.821667,22.504172,18.420045,23.187273,28.142622,28.553756,18.445814,30.517855,18.454193,18.43968,34.996262,22.463935,28.916072,18.977285,33.947076,18.47657,20.82391,20.82374,20.823748,20.823702,20.823784,20.823764,20.824317,32.05266,18.630047,18.433047,31.779459,18.41511,21.922237,31.780147,20.617392,18.86474,20.6536,18.868796,18.917857,20.277967,18.924975,19.490165,18.917822,18.400871,18.408728,18.44683,32.039761,18.413651,21.041272,18.408172,32.041592,39.67575,32.041592,39.66919,18.413831,32.052422,19.099193,32.039778,18.422316,18.445834,18.402178,32.039872,32.042381,32.0414,19.048566,18.415147,18.163511,19.04858,18.957238,18.407178,19.046996,19.048522,18.406936,18.484521,19.048678,18.414163,18.163885,20.632675,20.615704,19.048492,18.415447,19.086251,18.415355,18.418927,19.110014,30.808955,18.87357,30.703913,18.852857,18.41068,18.437217,18.857843,18.858547,19.052703,26.493161,19.009075,19.135571,19.004464,18.59803],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-34.528526,-13.862857],"lng":[18.163511,39.67575]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>This is nice and all, but there’s more you can do to make the visualization informative and appealing.</p>
+</section>
+<section id="customization" class="level3">
+<h3 class="anchored" data-anchor-id="customization">Customization</h3>
+<p>Now you’re going to add some pizazz to the map. You’re going to color the labels according to the species and add some popup text with information about the family the individual belongs to, its species name, and the date it was collected. In addition, you’re going to use addCircleMarkers instead of addMarkers to use circles instead of flags. Finally, you’re adding a legend so the colors make sense.</p>
+<p>Detailed explanations of what each function is doing are provided as code comments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, a color palette needs to be set. We're using the viridis palette, but feel free to explore the options available! I set the domain to NULL because I think it's more flexible to have a general color palette that can be attributed to factors later.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">colorFactor</span>(<span class="at">palette =</span> <span class="st">"viridis"</span>, <span class="at">domain =</span> <span class="cn">NULL</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This is the text that will go into the popup labels! The popup argument accepts html input, so I'm using "&lt;br&gt;" to indicate line breaks. I'd recommend printing this to your console so you can see what the popup argument will be parsing.</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>popup_label <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Family:"</span>, frog_gbif<span class="sc">$</span>family, <span class="st">"&lt;br&gt;"</span>, </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Species:"</span>, frog_gbif<span class="sc">$</span>species, <span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Date Collected:"</span>, frog_gbif<span class="sc">$</span>eventDate</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addTiles</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># You're adding circle markers here. In addition, we're specifying the color and popup labels for the markers. The tilde (~) is telling the color argument to accept the output of the pal object, which is now returning colors mapped to each species. Other plotting software like ggplot don't require a tilde to map to factors or numbers, so this may look foreign, but leaflet does and it just takes a little getting used to.</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(<span class="at">data =</span> frog_gbif,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                   <span class="at">color =</span> <span class="sc">~</span><span class="fu">pal</span>(species),</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>                   <span class="at">popup =</span> popup_label) <span class="sc">%&gt;%</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># We're specifying the legend to be in the bottom left of the map. Colors are specified a little differently here. The "pal" argument specifies the palette being used and the "values" argument specifies the values to map to. We're using the tilde here so it knows that you're mapping to a factor. </span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLegend</span>(</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> frog_gbif,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bottomleft"</span>, </span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">pal =</span> pal,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="sc">~</span>species,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">opacity =</span> .<span class="dv">9</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Species"</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-3a8da5b2a065f696aef8" style="width:100%;height:464px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3a8da5b2a065f696aef8">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[-33.819138,-33.334053,-34.39227,-21.091778,-29.040835,-21.080971,-33.939719,-33.976855,-33.85058,-30.730894,-25.227552,-33.969492,-29.527697,-33.954212,-33.983837,-15.783165,-33.945498,-28.677082,-34.094362,-13.862857,-33.951747,-33.984109,-33.984977,-33.984971,-33.984952,-33.984963,-33.984937,-33.983983,-27.770816,-34.069528,-34.03723,-24.393639,-34.060554,-33.73917,-24.392948,-34.408865,-34.227842,-34.422,-34.200127,-34.017613,-33.941008,-34.014037,-34.528526,-34.017629,-33.95551,-33.99857,-33.766734,-27.758275,-33.964609,-34.357918,-34.055812,-27.767681,-16.49387,-27.767681,-16.4979,-34.0599,-27.770738,-33.688177,-27.75845,-34.06018,-33.766317,-34.112518,-27.762189,-27.769773,-27.760381,-33.782978,-34.059247,-32.781278,-33.783127,-33.72848,-34.102808,-33.778932,-33.782325,-34.102801,-33.978554,-33.783147,-34.059743,-32.780107,-34.415787,-34.390234,-33.78265,-34.05923,-33.241514,-34.0588,-34.059983,-33.608558,-24.559805,-33.934553,-29.802275,-34.288545,-33.963447,-34.055172,-34.288312,-34.292705,-32.090367,-33.3276,-34.048763,-34.261963,-34.049319,-33.877424],[23.154692,26.567878,19.272742,31.836615,29.340938,31.821667,22.504172,18.420045,23.187273,28.142622,28.553756,18.445814,30.517855,18.454193,18.43968,34.996262,22.463935,28.916072,18.977285,33.947076,18.47657,20.82391,20.82374,20.823748,20.823702,20.823784,20.823764,20.824317,32.05266,18.630047,18.433047,31.779459,18.41511,21.922237,31.780147,20.617392,18.86474,20.6536,18.868796,18.917857,20.277967,18.924975,19.490165,18.917822,18.400871,18.408728,18.44683,32.039761,18.413651,21.041272,18.408172,32.041592,39.67575,32.041592,39.66919,18.413831,32.052422,19.099193,32.039778,18.422316,18.445834,18.402178,32.039872,32.042381,32.0414,19.048566,18.415147,18.163511,19.04858,18.957238,18.407178,19.046996,19.048522,18.406936,18.484521,19.048678,18.414163,18.163885,20.632675,20.615704,19.048492,18.415447,19.086251,18.415355,18.418927,19.110014,30.808955,18.87357,30.703913,18.852857,18.41068,18.437217,18.857843,18.858547,19.052703,26.493161,19.009075,19.135571,19.004464,18.59803],10,null,null,{"interactive":true,"className":"","stroke":true,"color":["#38598C","#85D54A","#25858E","#482173","#FDE725","#482173","#38598C","#25858E","#38598C","#FDE725","#482173","#25858E","#482173","#2D708E","#2D708E","#1E9B8A","#38598C","#FDE725","#440154","#1E9B8A","#2D708E","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#482173","#C2DF23","#2D708E","#51C46A","#2D708E","#25858E","#51C46A","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#440154","#25858E","#25858E","#25858E","#C2DF23","#1E9B8A","#25858E","#C2DF23","#25858E","#433E85","#1E9B8A","#433E85","#1E9B8A","#2D708E","#433E85","#25858E","#1E9B8A","#2D708E","#C2DF23","#C2DF23","#482173","#1E9B8A","#433E85","#25858E","#2D708E","#2BB07F","#25858E","#2D708E","#25858E","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2BB07F","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2D708E","#25858E","#51C46A","#2D708E","#482173","#25858E","#25858E","#2D708E","#25858E","#25858E","#2BB07F","#85D54A","#440154","#25858E","#25858E","#2D708E"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#38598C","#85D54A","#25858E","#482173","#FDE725","#482173","#38598C","#25858E","#38598C","#FDE725","#482173","#25858E","#482173","#2D708E","#2D708E","#1E9B8A","#38598C","#FDE725","#440154","#1E9B8A","#2D708E","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#482173","#C2DF23","#2D708E","#51C46A","#2D708E","#25858E","#51C46A","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#440154","#25858E","#25858E","#25858E","#C2DF23","#1E9B8A","#25858E","#C2DF23","#25858E","#433E85","#1E9B8A","#433E85","#1E9B8A","#2D708E","#433E85","#25858E","#1E9B8A","#2D708E","#C2DF23","#C2DF23","#482173","#1E9B8A","#433E85","#25858E","#2D708E","#2BB07F","#25858E","#2D708E","#25858E","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2BB07F","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2D708E","#25858E","#51C46A","#2D708E","#482173","#25858E","#25858E","#2D708E","#25858E","#25858E","#2BB07F","#85D54A","#440154","#25858E","#25858E","#2D708E"],"fillOpacity":0.2},null,null,["Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-01-11T16:35:09","Family: Brevicipitidae <br> Species: Breviceps pentheri <br> Date Collected: 2022-01-12T19:10:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-01-24T09:00:10","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-01-23T08:24:17","Family: Brevicipitidae <br> Species: Breviceps verrucosus <br> Date Collected: 2022-01-29T15:05:41","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-01-25T15:20:05","Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-01-29T11:20:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-01-24T10:17:52","Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-01-18T16:18:49","Family: Brevicipitidae <br> Species: Breviceps verrucosus <br> Date Collected: 2022-01-01T08:34:00","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-01-14T23:58:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-02-02T00:00:00","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-02-21T07:11:06","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-02-07T18:35:48","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-02-12T14:45:18","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-02-01T05:20:00","Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-03-02T11:20:00","Family: Brevicipitidae <br> Species: Breviceps verrucosus <br> Date Collected: 2022-03-08T09:43:00","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-21T13:39:00","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-03-19T16:05:31","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-03-12T09:55:00","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-23T19:37:25","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-25T07:51:26","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-24T08:45:51","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-24T09:00:24","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-24T09:03:18","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-25T07:49:09","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-25T06:07:33","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-03-16T19:49:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-04-11T09:11:07","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-04-13T09:51:10","Family: Brevicipitidae <br> Species: Breviceps passmorei <br> Date Collected: 2022-04-16T21:03:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-04-06T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-12T22:53:08","Family: Brevicipitidae <br> Species: Breviceps passmorei <br> Date Collected: 2022-04-18T22:11:02","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-26T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-29T12:42:25","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-26T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-29T12:41:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-01T12:51:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-10T10:55:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-01T17:55:00","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-05-06T14:26:27","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-01T12:51:43","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-12T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-13T00:00:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-14T15:19:00","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-17T11:45:30","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-19T14:18:28","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-19T08:21:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-19T00:00:00","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-05-18T17:24:00","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-16T08:34:00","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-05-26T10:31:10","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-13T09:35:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-05-24T11:17:00","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-05-18T17:15:36","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-22T11:53:58","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-17T11:53:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-05-24T00:00:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-14T16:30:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-28T00:00:00","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-05-28T12:14:41","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-27T11:14:13","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-06-07T12:52:28","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T10:21:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-10T13:05:00","Family: Brevicipitidae <br> Species: Breviceps namaquensis <br> Date Collected: 2022-06-20T12:29:44","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T10:21:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-16T09:04:46","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-22T12:51:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T13:31:44","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-22T11:49:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-23T14:07:19","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T13:00:36","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-27T00:00:00","Family: Brevicipitidae <br> Species: Breviceps namaquensis <br> Date Collected: 2022-06-20T12:25:50","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-15T09:38:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-14T13:13:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T13:14:26","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-10T13:05:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-18T00:00:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-10T13:05:34","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-18T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-01T12:23:45","Family: Brevicipitidae <br> Species: Breviceps passmorei <br> Date Collected: 2022-07-03T11:28:22","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-07-07T15:39:09","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-07-10T15:01:41","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-09T12:04:01","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-15T11:08:17","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-07-07T12:58:47","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-12T21:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-09T14:35:17","Family: Brevicipitidae <br> Species: Breviceps namaquensis <br> Date Collected: 2022-07-29T23:29:29","Family: Brevicipitidae <br> Species: Breviceps pentheri <br> Date Collected: 2022-07-30T16:29:11","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-08-06T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-08-03T12:07:59","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-08-05T14:41:20","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-08-12T13:31:38"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154","#482173","#433E85","#38598C","#2D708E","#25858E","#1E9B8A","#2BB07F","#51C46A","#85D54A","#C2DF23","#FDE725"],"labels":["Breviceps acutirostris","Breviceps adspersus","Breviceps carruthersi","Breviceps fuscus","Breviceps gibbosus","Breviceps montanus","Breviceps mossambicus","Breviceps namaquensis","Breviceps passmorei","Breviceps pentheri","Breviceps rosei","Breviceps verrucosus"],"na_color":null,"na_label":"NA","opacity":0.9,"position":"bottomleft","type":"factor","title":"Species","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[-34.528526,-13.862857],"lng":[18.163511,39.67575]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>And there you have it! This is just the tip of the iceberg with what leaflet can do. You can plot polygons, lines, rasters, icons, and more with only a little more code.</p>
+</section>
+<section id="go-further" class="level3">
+<h3 class="anchored" data-anchor-id="go-further">Go further</h3>
+<p>Here are some more resources to learn more about leaflet and general GIS in R.</p>
+<p><a href="https://rstudio.github.io/leaflet/">leaflet documentation</a></p>
+<p><a href="https://www.earthdatascience.org/courses/earth-analytics/get-data-using-apis/leaflet-r/">A more involved tutorial</a> that shows off some more leaflet features.</p>
+<p><a href="https://bookdown.org/robinlovelace/geocompr/">Geocomputation in R</a> free, online book. It’s a wonderful resource for GIS in R.</p>
+<p><a href="https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html">Making static maps in R</a> with sf and ggplot2.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{french2019,
+  author = {Connor French},
+  title = {Interactively Explore Geographic Data in {R} Using Leaflet},
+  date = {2019-11-20},
+  url = {https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-11-20-leaflet_tutorial},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2019" class="csl-entry quarto-appendix-citeas" role="doc-biblioentry">
+Connor French. 2019. <span>“Interactively Explore Geographic Data in R
+Using Leaflet.”</span> November 20, 2019. <a href="https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-11-20-leaflet_tutorial">https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-11-20-leaflet_tutorial</a>.
+</div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://utteranc.es/client.js" repo="connor-french/connorfrench" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left"><i class="fa-regular fa-copyright" aria-label="copyright"></i> Connor French, 2022<br> All content licensed under <i class="fa-brands fa-creative-commons" aria-label="creative-commons"></i> <i class="fa-brands fa-creative-commons-by" aria-label="creative-commons-by"></i> <i class="fa-brands fa-creative-commons-sa" aria-label="creative-commons-sa"></i> <i class="fa-brands fa-creative-commons-nc" aria-label="creative-commons-nc"></i> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">(CC BY-NC-SA 4.0)</a></div>   
+    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> Inspiration and code snippets taken from <a href="https://www.andreashandel.com/posts/2022-10-01-hugo-to-quarto-migration/">this post</a><br> <a href="https://github.com/connor-french/connorfrench">Source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>

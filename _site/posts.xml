@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Connor French</title>
+<link>https://delightful-alfajores-5cb3d1.netlify.app/posts.html</link>
+<atom:link href="https://delightful-alfajores-5cb3d1.netlify.app/posts.xml" rel="self" type="application/rss+xml"/>
+<description>Website of Connor French</description>
+<generator>quarto-1.2.269</generator>
+<lastBuildDate>Mon, 19 Apr 2021 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Sonification for data communication</title>
+  <dc:creator>Connor French</dc:creator>
+  <link>https://delightful-alfajores-5cb3d1.netlify.app/posts/2021-04-19-sonification_ttt_post/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><a href="https://digitalfellows.commons.gc.cuny.edu/2021/04/19/sonification-for-data-communication/">Originally published on GC Digital Initiatives</a></p>
+<div class="cell">
+
+</div>
+<p>A few weeks ago my partner shared a <a href="https://www.youtube.com/watch?v=-hY9QSdaReY">TED Talk</a> with me that changed how I conceptualize data communication. In it <a href="https://www.ted.com/speakers/wanda_diaz_merced">Dr.&nbsp;Wanda Diaz Merced</a>, an astronomer who lost her eyesight in her early twenties, discusses her journey back into science after this setback. A crucial technique helped her interpret hefty astronomy data sets- sonification. <a href="https://handbook.floeproject.org/sonification">Sonification turns data into sound</a>. It is analogous to data visualization, where both methods aim to communicate patterns and relationships within data clearly and efficiently. Not only did sonification make data accessible for Dr.&nbsp;Merced, it helped her uncover patterns obscured by visualizing graphs and charts.</p>
+<p>There are <a href="https://www.techfak.uni-bielefeld.de/ags/ami/publications/media/Hermann2002-SFE.pdf">quite a few applications</a> for sonification. The bing you get when an email lands in your inbox is one familiar example. The recognizable noise conveys a simple piece of information without requiring you to be sitting at the computer or staring at your phone. Representing large data sets gets a little more complicated.</p>
+<p>Audio has multiple dimensions that can be exploited to represent information, including:</p>
+<ul>
+<li>pitch<br>
+</li>
+<li>loudness<br>
+</li>
+<li>duration<br>
+</li>
+<li>spatial arrangement (e.g.&nbsp;stereo panning)</li>
+</ul>
+<p>These can be combined to represent multiple data dimensions or used interchangeably to represent the same data in a new way. Best practices are still being formed and are often context-dependent on the user, but a great resource for the latest practices is the <a href="https://handbook.floeproject.org/sonification">Floe Inclusive Learning Design Handbook</a>.</p>
+<p>A particular application that is relevant for folks who want to increase the accessibility of their publications is to sonify their existing data visualizations. Below are a few common examples. Each example is a visualization, followed by the sonification. I have chosen to represent values on the y-axis as changes in pitch, while time indicates change along the x-axis. To emphasize the change in time along the x-axis, I have added short white noise pulses for each data point along the x-axis. The listener is “reading” the plot from left to right.</p>
+<div class="cell" data-layout-align="center">
+
+</div>
+<p>A common data visualization technique for single variables is the histogram. These emphasize the distribution of the variable under consideration. Below, I’ve simulated data representing my mood 15 minutes before eating dinner over the last several weeks.</p>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://delightful-alfajores-5cb3d1.netlify.app/posts/2021-04-19-sonification_ttt_post/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="480"></p>
+<p></p><figcaption class="figure-caption">A histogram representing the distribution of mood score values.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<p><br></p>
+
+<audio controls="">
+<source src="sound_univariate.wav" type="audio/wav">
+</audio>
+
+<p><br> <br> Notice how the pitch oscillates in a similar manner to the shape of the distribution and the pulses are evenly spaced, representing the bins of the distribution!</p>
+<p><br> Now, let’s sonify two variables at once! The visualization below is a scatterplot, a common technique for two continuous variables. The data is simulated to represent how much I crave a burger depending on how hungry I am.<br>
+<br></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://delightful-alfajores-5cb3d1.netlify.app/posts/2021-04-19-sonification_ttt_post/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="480"></p>
+<p></p><figcaption class="figure-caption">A scatterplot representing a linear relationship between two variables. Hunger level on the x axis and burger craving strength on the y axis</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<p><br></p>
+
+<audio controls="">
+<source src="sound_linear.wav" type="audio/wav">
+</audio>
+
+<p><br> <br></p>
+<p>Notice how the pitch increase with time, but there are oscillations which represent error around a perfect linear relationship. Also notice how the pulses are less even- the points aren’t evenly distributed on the x-axis. Pretty cool!</p>
+<p><br></p>
+<p>The final visualization I’ll present is an exponential relationship between two variables. The simulated data in this scenario represents my craving for a big ol’ plate of nachos dependent on how hungry I am.</p>
+<p><br></p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://delightful-alfajores-5cb3d1.netlify.app/posts/2021-04-19-sonification_ttt_post/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="480"></p>
+<p></p><figcaption class="figure-caption">A scatterplot representing an exponential relationship between two variables. Hunger level on the x axis and burger craving strength on the y axis</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<div class="cell" data-layout-align="center">
+
+</div>
+<p><br></p>
+
+<audio controls="">
+<source src="sound_exponential.wav" type="audio/wav">
+</audio>
+
+<p><br> <br></p>
+<p>In this case, the pitch increases, well, exponentially! In addition, the points are tighter together- The pitch oscillates less than the linearly related data. My nacho cravings are pretty consistent.</p>
+<p><br></p>
+<p>These are just a few ways sonification can be incorporated into your data communication and exploration arsenal. Besides making data more accessible to those who are blind or low vision, sonification opens up another avenue of data exploration to uncover patterns not evident in a visßual medium. Dr.&nbsp;Merced was able to <a href="https://youtu.be/-hY9QSdaReY?t=287">hear a distinct frequency pattern</a> not evident from a chart that led her to discover that star formation likely plays an important part in supernova explosions! Sighted astronomers now use sonfication as a complement to visualization to investigate their data. If you would like to take a crack at sonification yourself, there are a <a href="https://osf.io/vgaxh/wiki/Resources/">variety</a> of <a href="https://jarednielsen.medium.com/data-sonification-and-web-scraping-with-node-js-and-tone-js-eaf2cd35a000">resources</a>. The sonifications for this post were created using the R package <a href="https://cran.r-project.org/web/packages/sonify/index.html">sonify</a>, which is a straightforward interface that will get you there quickly, without much overhead. You can find the R code for this blog post <a href="https://raw.githubusercontent.com/connor-french/sonification_ttt_post/main/sonification_ttt_post.Rmd">here</a>.</p>
+<p><br></p>
+<p>Those of us at the <a href="https://gcdi.commons.gc.cuny.edu/">Graduate Center Digital Initiatives</a> strive to make interactions with digital media more accessible. We provide a variety of resources to take advantage of digital tools in your research. In addition, we provide community and support with the <a href="https://digitalfellows.commons.gc.cuny.edu/">Digital Fellows</a>, so I encourage you to take a look and connect with us!</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{french2021,
+  author = {Connor French},
+  title = {Sonification for Data Communication},
+  date = {2021-04-19},
+  url = {https://delightful-alfajores-5cb3d1.netlify.app/posts/2021-04-19-sonification_ttt_post},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2021" class="csl-entry quarto-appendix-citeas">
+Connor French. 2021. <span>“Sonification for Data Communication.”</span>
+April 19, 2021. <a href="https://delightful-alfajores-5cb3d1.netlify.app/posts/2021-04-19-sonification_ttt_post">https://delightful-alfajores-5cb3d1.netlify.app/posts/2021-04-19-sonification_ttt_post</a>.
+</div></div></section></div> ]]></description>
+  <category>R</category>
+  <category>Research</category>
+  <category>Data Visualization</category>
+  <category>GCDI</category>
+  <guid>https://delightful-alfajores-5cb3d1.netlify.app/posts/2021-04-19-sonification_ttt_post/index.html</guid>
+  <pubDate>Mon, 19 Apr 2021 04:00:00 GMT</pubDate>
+  <media:content url="https://delightful-alfajores-5cb3d1.netlify.app/posts/2021-04-19-sonification_ttt_post/featured.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
+<item>
+  <title>GIS at Scale with Google Earth Engine</title>
+  <dc:creator>Connor French</dc:creator>
+  <link>https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-11-20_gis-at-scale/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><a href="https://wp.me/p846lD-1x6">Originally published on GC Digital Initiatives</a></p>
+<p>Sometimes your GIS project needs some extra oomph. Maybe finding the data you need to understand deforestation in Brazil is giving you a headache. Or, you need to run a machine learning algorithm on 50 gigabytes of weather station data and your poor laptop is melting the finish off of your dining room table. <a href="https://earthengine.google.com/" target="_blank" rel="noopener noreferrer">Google Earth Engine</a> (GEE) is here to help.</p>
+<p>From <a href="https://earthengine.google.com/" target="_blank" rel="noopener noreferrer">the website</a>, GEE’s purpose is to:</p>
+<ul>
+<li>
+Provide an interactive platform for geospatial algorithm development at scale
+</li>
+<li>
+Enable high-impact, data-driven science
+</li>
+<li>
+Make substantive progress on global challenges that involve large geospatial datasets
+</li>
+</ul>
+<p>GEE is designed to make large-scale GIS projects feasible, but is also suitable for smaller projects. My main use-case is to pull environmental data from their <a href="https://developers.google.com/earth-engine/datasets" target="_blank" rel="noopener noreferrer">petabyte scale database</a> to model the potential distribution of species through time, e.g.&nbsp;this set of maps projecting the distribution of a species of Peruvian poison dart frog as it’s changed since the mid-Pleistocene.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-11-20_gis-at-scale/projections.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">The first five panels show models of a frog species’ potential range from the present-day back to the mid-Pleistocene. The sixth panel shows areas of stability in the frog’s range over this time period. These models were constructed using publicly available environmental data related to the frog’s ecological tolerances</figcaption><p></p>
+</figure>
+</div>
+<p>Large amounts of data can be pulled down with a single line of code! An “Earth Engine Snippet” is provided for each dataset that you can copy into your GEE <a href="https://developers.google.com/earth-engine/guides/playground" target="_blank" rel="noopener noreferrer">code editor</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-11-20_gis-at-scale/terraclim.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Example dataset highlighting the type of data available on Google Earth Engine and the ease of acquiring it through the Earth Engine Snippet.</figcaption><p></p>
+</figure>
+</div>
+<p>In addition to acquiring data, a myriad of data processing and analytical tools are available. From cropping an image to <a href="https://developers.google.com/earth-engine/guides/machine-learning" target="_blank" rel="noopener noreferrer">machine learning</a>, these tasks are performed on the <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer">Google Cloud platform</a>, saving your computer from unnecessary RAM overload. There is a bit of a learning curve to using these tools, especially for those unfamiliar with coding. Thankfully, <a href="https://developers.google.com/earth-engine/guides" target="_blank" rel="noopener noreferrer">learning resources are plentiful</a>. And for those with a preferred coding language, GEE code has been translated to <a href="https://developers.google.com/earth-engine/guides/getstarted" target="_blank" rel="noopener noreferrer">JavaScript</a> (the native language), <a href="https://www.earthdatascience.org/tutorials/intro-google-earth-engine-python-api/" target="_blank" rel="noopener noreferrer">python</a>, and <a href="https://r-spatial.github.io/rgee/" target="_blank" rel="noopener noreferrer">R</a>! My preferred language is R, and there are <a href="https://r-spatial.github.io/rgee/" target="_blank" rel="noopener noreferrer">a ton of examples</a> to base your own ideas off of. For your next big GIS project, I recommend giving Google Earth Engine a shot!</p>
+<p>Should you need help with your GIS project, we have some great resources through the GC Digital Fellows. For coding help and camaraderie, check out the <a href="http://cuny.is/pug">Python User Group (PUG)</a> and the <a href="http://cuny.is/rug">R User Group (RUG)</a>. To hang out with folks interested in everything GIS, check out the <a href="http://cuny.is/gis">GIS Working Group</a>!</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{french2020,
+  author = {Connor French},
+  title = {GIS at {Scale} with {Google} {Earth} {Engine}},
+  date = {2020-11-20},
+  url = {https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-11-20_gis-at-scale},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2020" class="csl-entry quarto-appendix-citeas">
+Connor French. 2020. <span>“GIS at Scale with Google Earth
+Engine.”</span> November 20, 2020. <a href="https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-11-20_gis-at-scale">https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-11-20_gis-at-scale</a>.
+</div></div></section></div> ]]></description>
+  <category>GIS</category>
+  <category>Research</category>
+  <category>Data Visualization</category>
+  <category>GCDI</category>
+  <guid>https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-11-20_gis-at-scale/index.html</guid>
+  <pubDate>Fri, 20 Nov 2020 05:00:00 GMT</pubDate>
+  <media:content url="https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-11-20_gis-at-scale/featured.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
+<item>
+  <title>Funding sources for undergraduate research in ecology and evolution</title>
+  <dc:creator>Connor French</dc:creator>
+  <link>https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-06-24-funding-for-undergrads/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="resources" class="level2">
+<h2 class="anchored" data-anchor-id="resources">Resources</h2>
+<section id="for-students" class="level3">
+<h3 class="anchored" data-anchor-id="for-students">For students</h3>
+<section id="broad" class="level4">
+<h4 class="anchored" data-anchor-id="broad">Broad</h4>
+<p>Undergraduate Teaching Assistanceships</p>
+<ul>
+<li><p>Opportunities vary per university, but check with your department and work-study websites for information. Sometimes these opportunities aren’t advised well- if you have a class where you would like to do this, it doesn’t hurt to ask the instructor about opportunities!</p></li>
+<li><p>Here is an example program: <a href="https://cns.utexas.edu/tides/faculty/ugta-resources/students">University of Texas College of Natural Sciences</a> <a href="https://www.nsf.gov/crssprgm/reu/">NSF Research Experiences for Undergraduates</a><br>
+<a href="https://www.physiology.org/ugsrf?SSO=Y">American Physiology Society Undergraduate Summer Research Fellowship</a></p></li>
+<li><p>$4,000 stipend, up to $1,300 in EB travel expenses and a one year complimentary APS membership. 10 week position.</p></li>
+</ul>
+<p><a href="http://www.sws.org/Awards-and-Grants/student-research-grants.html">Society of Wetland Scientists Student Research Grant</a><br>
+<a href="http://www.batcon.org/our-work/initiatives/award-grants-scholarships">Bat Conservation International Student Research Scholarship</a></p>
+<ul>
+<li>Opens in October</li>
+</ul>
+<p><a href="https://www.gcamerica.org/scholarships">Garden Club of America Scholarships</a></p>
+<ul>
+<li>There are a variety of scholarships available</li>
+<li>Subject list: Botany, Coastal Wetland Studies, Conservation &amp; Ecological Restoration, Desert Studies, Garden History &amp; Design, Horticulture &amp; Related Fields, International Work &amp; Study, Landscape Architecture, Native Bird Habitat, Pollinator Research, Summer Environmental Study, Urban Forestry</li>
+</ul>
+<p><a href="https://www.noaa.gov/office-education/hollings-scholarship">National Oceanic and Atmospheric Administration Ernest F. Hollings Undergraduate Scholarship</a></p>
+<ul>
+<li>Includes academic assistance (up to $9500 per year) for two years and a 10-week paid summer internship ($700 per week)</li>
+</ul>
+<p><a href="https://www.sigmaxi.org/programs/grants-in-aid">Sigma Xi Grants in Aid of Research</a></p>
+<p><a href="https://www.clarku.edu/departments/hero-program/">Human-Environment Regional Observatory Fellowship</a></p>
+<ul>
+<li>Eight week stipend and academic credit</li>
+</ul>
+</section>
+<section id="local" class="level4">
+<h4 class="anchored" data-anchor-id="local">Local</h4>
+<p><a href="https://www.hudsonriver.org/grants#polgar-fellowship">Hudson River Foundation Polgar Fellowship</a></p>
+<ul>
+<li>$5000 summertime grant in New York and New Jersey area</li>
+</ul>
+</section>
+</section>
+<section id="for-faculty" class="level3">
+<h3 class="anchored" data-anchor-id="for-faculty">For faculty</h3>
+<p><a href="https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=5518&amp;org=NSF">NSF Facilitating Research at Primarily Undergraduate Universities</a></p>
+<p>R01 supplements for URM students are available:<br>
+</p>
+<blockquote class="twitter-tweet blockquote">
+<p lang="en" dir="ltr">
+</p><p>If you are an URM student and your mentor has an active R01, they could apply for a diversity supplement to cover your stipend, tuition, and up to 4K in institutional allowance. I also have a diversity supplement application to share. DM if interested.</p>
+<p></p>
+<p>— Anny Reyes, MS (<span class="citation" data-cites="annyreyesNeuro">@annyreyesNeuro</span>) <a href="https://twitter.com/annyreyesNeuro/status/1270755167818756098?ref_src=twsrc%5Etfw">June 10, 2020</a></p>
+</blockquote>
+<script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</section>
+<section id="databases" class="level3">
+<h3 class="anchored" data-anchor-id="databases">Databases</h3>
+<p><a href="https://grantstoindividuals.org/">Grants to Individuals</a></p>
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{french2020,
+  author = {Connor French},
+  title = {Funding Sources for Undergraduate Research in Ecology and
+    Evolution},
+  date = {2020-06-24},
+  url = {https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-06-24-funding-for-undergrads},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2020" class="csl-entry quarto-appendix-citeas">
+Connor French. 2020. <span>“Funding Sources for Undergraduate Research
+in Ecology and Evolution.”</span> June 24, 2020. <a href="https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-06-24-funding-for-undergrads">https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-06-24-funding-for-undergrads</a>.
+</div></div></section></div> ]]></description>
+  <category>Research</category>
+  <category>Resource</category>
+  <guid>https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-06-24-funding-for-undergrads/index.html</guid>
+  <pubDate>Wed, 24 Jun 2020 04:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>RStudio Cloud for Education</title>
+  <dc:creator>Connor French</dc:creator>
+  <link>https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-05-07-rstudio-cloud-for-education/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><a href="https://digitalfellows.commons.gc.cuny.edu/2020/05/07/rstudio-cloud-for-education/">Originally published on GC Digital Initiatives</a></p>
+<p>The R programming language is a powerful analytical tool that is commonly taught alongside applied fields like statistics, ecology, finance, and more. Efficiently integrating the language into a course can be difficult. For example, the time to set up programming exercises, troubleshoot technical issues, and follow progress can quickly eat away at time you as an instructor would probably like to spend covering course material. This is especially true in the current remote learning environment. The less setup and maintenance, the better.</p>
+<p>Luckily RStudio, the company behind the popular interactive development environment, has a strong, free(!) solution. RStudio Cloud allows teams to manage R projects in a common space. It is a way for team members (students, teachers, etc.) to collaborate, using the same set of software managed from a central location that the administrator, i.e.&nbsp;the teacher, has control over. The “central location” is a remote server hosted by RStudio that removes much of the headache from admin duties (and having to contact IT). This means that you can load all necessary files and packages into a central location and distribute RStudio sessions to each of your students without worrying about differences in operating system, versioning differences, etc. If a student has a problem, you can check on their project and even make fixes from your computer (with some restrictions)!</p>
+<p>The structure of RStudio Cloud is as follows:</p>
+<p>A project. This is the fundamental unit of work. You store code, packages, and files here.</p>
+<p>The workspace. This is where you create projects. Only you can access your project, but you can adjust permissions to let them be viewed and copied by other users.</p>
+<p>A private space. This is critical for teaching! You decide who can access this workspace. Inviting and organizing to your private space is simple.</p>
+<p>You can find a detailed and readable guide here! If you are not quite sure this is for you, below is a typical use case, containing only the essential details.</p>
+<p>You first set up a private space and determine who can access the space. As an administrator, you can manage membership and can view, edit, and manage all projects in the space. When you add users to the space, their default position is a contributor- they can create, manage, and edit their own projects. If you are fortunate to have a teaching assistant, you can change their permission to moderator, giving them permission to view, manage, and edit all projects in the space. Note- administrators and moderators can edit other users’ projects, but they can only do this when the user has closed the project. Otherwise, you’ll get this error:</p>
+<p><img src="https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-05-07-rstudio-cloud-for-education/disconnected.png" class="img-fluid"></p>
+<p>You first create a project within this space and populate it with files, packages, and code that you want students to access. When you are ready to distribute the project, you then change the permissions to allow everyone in the space access and select the option to make this project an assignment. Assignments make it easy for students to obtain their own copy of the project (this includes files, packages, and code), which they do by clicking on the assignments link. They can then edit their own copy, interacting with the R script exactly like they would on their personal computer. All users have the ability to download files to their personal computer if they choose.</p>
+<p>The working environment for a user looks like a typical RStudio window:</p>
+<p><img src="https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-05-07-rstudio-cloud-for-education/workspace_ss.png" class="img-fluid"></p>
+<p>And that’s it! There is plenty more detailed discussion of RStudio Cloud’s capabilities and options here.</p>
+<p>There are a few notable limitations to RStudio Cloud. It is in beta, so there may be some instabilities. Feedback is generally positive, and most recommendations are to save often in case the session crashes, which is rare. The initial member limit for workspaces is 10 members, but all requests for more space are honored (anecdotally, classroom sizes &gt; 100 students are possible). Each project copy is given 1 GB of memory and 1 CPU, so large data possibilities are limited. If your course requires large computational resources and you have these available locally or through a paid cloud service, RStudio Server may be another viable option. Development is happening rapidly, so more features will likely be available soon!</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{french2020,
+  author = {Connor French},
+  title = {RStudio {Cloud} for {Education}},
+  date = {2020-05-07},
+  url = {https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-05-07-rstudio-cloud-for-education},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2020" class="csl-entry quarto-appendix-citeas">
+Connor French. 2020. <span>“RStudio Cloud for Education.”</span> May 7,
+2020. <a href="https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-05-07-rstudio-cloud-for-education">https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-05-07-rstudio-cloud-for-education</a>.
+</div></div></section></div> ]]></description>
+  <category>GCDI</category>
+  <category>R</category>
+  <category>Teaching</category>
+  <guid>https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-05-07-rstudio-cloud-for-education/index.html</guid>
+  <pubDate>Thu, 07 May 2020 04:00:00 GMT</pubDate>
+  <media:content url="https://delightful-alfajores-5cb3d1.netlify.app/posts/2020-05-07-rstudio-cloud-for-education/featured.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
+<item>
+  <title>Interactively explore geographic data in R using leaflet</title>
+  <dc:creator>Connor French</dc:creator>
+  <link>https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-11-20-leaflet_tutorial/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><a href="https://digitalfellows.commons.gc.cuny.edu/2019/11/21/interactively-explore-geographic-data-in-r-using-leaflet/">Originally published on GC Digital Initiatives</a></p>
+<section id="why-leaflet" class="level3">
+<h3 class="anchored" data-anchor-id="why-leaflet">Why leaflet?</h3>
+<p>Making a data visualization interactive opens up a host of opportunities for new insights. This is especially true for geographic data. While a static map is preferable for publication in a journal or a book, an interactive map is suitable for exploring data or packing more information in an accessible format. Patterns may emerge when viewing data at different scales or when toggling through features.</p>
+<p>There are a number of tools for building interactive maps. <a href="https://leafletjs.com/">Leaflet</a> is one of the most popular open-source JavaScript libraries for creating interactive maps. The <a href="https://rstudio.github.io/leaflet/">leaflet R package</a> is a high-level interface that makes it easy to create beautiful interactive maps in a few lines of code. Using R rather than point-and-click software like <a href="http://desktop.arcgis.com/en/arcmap/">ArcMap</a> and others makes your life easier through reproducible code that can be shared for others to recreate your map or that you can return to when you inevitably need to fix something. I use leaflet regularly for data exploration and for sharing preliminary results with collaborators. You can also include leaflet maps in <a href="https://rmarkdown.rstudio.com/">RMarkdown</a> documents, <a href="https://shiny.rstudio.com/">Shiny</a> apps, and even post them to your website!</p>
+</section>
+<section id="goal-of-the-tutorial" class="level3">
+<h3 class="anchored" data-anchor-id="goal-of-the-tutorial">Goal of the tutorial</h3>
+<p>The goal of this tutorial is to provide you with a basic understanding of leaflet functionality and the tools and resources to make your own interactive maps. You will:</p>
+<ol type="1">
+<li><p>Read in geographic data for plotting</p></li>
+<li><p>Plot locations of interest using markers</p></li>
+<li><p>Color locations according to a factor</p></li>
+<li><p>Include pop-up text that provides metadata about the locations of interest</p></li>
+</ol>
+</section>
+<section id="installation" class="level3">
+<h3 class="anchored" data-anchor-id="installation">Installation</h3>
+<p>You will need to install four packages for this tutorial. The <span style="color:red">dplyr</span> package for data manipulation, the <span style="color:red">sf</span> package for handling spatial data, the <span style="color:red">rgbif</span> package for acquiring the data, and finally the <span style="color:red">leaflet</span> package for mapping. All packages are available on CRAN.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">packages <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"dplyr"</span>, <span class="st" style="color: #20794D;">"sf"</span>, <span class="st" style="color: #20794D;">"rgbif"</span>, <span class="st" style="color: #20794D;">"leaflet"</span>)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;">install.packages</span>(packages, <span class="at" style="color: #657422;">dependencies =</span> <span class="cn" style="color: #8f5902;">TRUE</span>)</span></code></pre></div>
+</div>
+<p>Now that the packages are installed, you need to load them into your environment.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;">library</span>(dplyr)</span>
+<span id="cb2-2"><span class="fu" style="color: #4758AB;">library</span>(sf)</span>
+<span id="cb2-3"><span class="fu" style="color: #4758AB;">library</span>(rgbif)</span>
+<span id="cb2-4"><span class="fu" style="color: #4758AB;">library</span>(leaflet)</span></code></pre></div>
+</div>
+</section>
+<section id="read-in-and-pre-process-data" class="level3">
+<h3 class="anchored" data-anchor-id="read-in-and-pre-process-data">Read in and pre-process data</h3>
+<p>The data you’re going to work with are some locations where rain frogs, genus <em>Breviceps</em> (aka <a href="https://www.youtube.com/watch?v=cBkWhkAZ9ds">the cute grumpy frog</a>), have been found. Using the <span style="color:red">rgbif</span> package, you’re querying the large <a href="https://www.gbif.org/">Global Biodiversity Information Repository</a> to obtain the species occurrences. After obtaining the data, some filtering is necessary. First, you’re filtering out observations that do not have latitude or longitude coordinates (<span style="color:gray">hasCoordinate = TRUE</span>) and selecting only the relevant columns for your visualization (<span style="color:gray">select()</span>). Then, you’re converting the data frame that <span style="color:red">rgbif</span> returns into a simple features (<span style="color:red">sf</span>) data frame that contains information about which columns to use as coordinates (<span style="color:gray">coords = …</span>) and what the data’s coordinate reference system is (<span style="color:gray">crs = …</span>).</p>
+<p>If the <strong>%&gt;%</strong> bit is confusing, don’t worry- I’ll explain in the next section.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-11-20-leaflet_tutorial/https:/allthatsinteresting.com/wordpress/wp-content/uploads/2019/04/desert-rain-frog.png" class="img-fluid figure-img" style="width:50.0%" alt="source: allthatsinteresting.com"></p>
+<p></p><figcaption class="figure-caption">source: allthatsinteresting.com</figcaption><p></p>
+</figure>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">frog_gbif <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">occ_search</span>(</span>
+<span id="cb3-2">  <span class="at" style="color: #657422;">genusKey =</span> <span class="dv" style="color: #AD0000;">3240854</span>,</span>
+<span id="cb3-3">  <span class="at" style="color: #657422;">hasCoordinate =</span> <span class="cn" style="color: #8f5902;">TRUE</span>,</span>
+<span id="cb3-4">  <span class="at" style="color: #657422;">limit =</span> <span class="dv" style="color: #AD0000;">100</span></span>
+<span id="cb3-5">  ) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb3-6">  .[[<span class="st" style="color: #20794D;">"data"</span>]] <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
+<span id="cb3-7">  <span class="fu" style="color: #4758AB;">select</span>(</span>
+<span id="cb3-8">    genus,</span>
+<span id="cb3-9">    species,</span>
+<span id="cb3-10">    family, </span>
+<span id="cb3-11">    eventDate, </span>
+<span id="cb3-12">    decimalLongitude, </span>
+<span id="cb3-13">    decimalLatitude</span>
+<span id="cb3-14">    ) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb3-15">  <span class="fu" style="color: #4758AB;">st_as_sf</span>(</span>
+<span id="cb3-16">    <span class="at" style="color: #657422;">coords =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"decimalLongitude"</span>, <span class="st" style="color: #20794D;">"decimalLatitude"</span>),</span>
+<span id="cb3-17">    <span class="at" style="color: #657422;">crs =</span> <span class="st" style="color: #20794D;">"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"</span></span>
+<span id="cb3-18">    )</span></code></pre></div>
+</div>
+</section>
+<section id="plot-a-basic-map" class="level3">
+<h3 class="anchored" data-anchor-id="plot-a-basic-map">Plot a basic map</h3>
+<p>Plotting a basic map only takes three lines of code! The necessary steps to make a leaflet map are:</p>
+<ol type="1">
+<li><p><strong>Initialize a map widget</strong> using the <span style="color:gray">leaflet()</span> function.</p></li>
+<li><p><strong>Add layers</strong> using the suite of commands the begin with <span style="color:gray">add*()</span>, e.g.&nbsp;<span style="color:gray">addTiles()</span>, which added the OpenStreetMap tiles and <span style="color:gray">addMarkers()</span>, which added our locality data</p></li>
+<li><p><strong>Print the result</strong>. In this case I’m printing the map to the console without assigning it to a variable first.</p></li>
+</ol>
+<p>The <strong>%&gt;%</strong> (pipe) operator is used to make code easier to read and help the mapmaking process flow organically. It pipes the output of one function into the input of the next. Intuitively, you can think of the following code as “I initialize the map widget <em>and then</em> add the basemap tiles <em>and then</em> add the locality markers.”</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;">leaflet</span>() <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;">addTiles</span>() <span class="sc" style="color: #5E5E5E;">%&gt;%</span>  <span class="co" style="color: #5E5E5E;"># Add default OpenStreetMap map tiles</span></span>
+<span id="cb4-3">  <span class="fu" style="color: #4758AB;">addMarkers</span>(<span class="at" style="color: #657422;">data =</span> frog_gbif)</span></code></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-a918dda3be8882ba9dbe" style="width:100%;height:464px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a918dda3be8882ba9dbe">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[-33.819138,-33.334053,-34.39227,-21.091778,-29.040835,-21.080971,-33.939719,-33.976855,-33.85058,-30.730894,-25.227552,-33.969492,-29.527697,-33.954212,-33.983837,-15.783165,-33.945498,-28.677082,-34.094362,-13.862857,-33.951747,-33.984109,-33.984977,-33.984971,-33.984952,-33.984963,-33.984937,-33.983983,-27.770816,-34.069528,-34.03723,-24.393639,-34.060554,-33.73917,-24.392948,-34.408865,-34.227842,-34.422,-34.200127,-34.017613,-33.941008,-34.014037,-34.528526,-34.017629,-33.95551,-33.99857,-33.766734,-27.758275,-33.964609,-34.357918,-34.055812,-27.767681,-16.49387,-27.767681,-16.4979,-34.0599,-27.770738,-33.688177,-27.75845,-34.06018,-33.766317,-34.112518,-27.762189,-27.769773,-27.760381,-33.782978,-34.059247,-32.781278,-33.783127,-33.72848,-34.102808,-33.778932,-33.782325,-34.102801,-33.978554,-33.783147,-34.059743,-32.780107,-34.415787,-34.390234,-33.78265,-34.05923,-33.241514,-34.0588,-34.059983,-33.608558,-24.559805,-33.934553,-29.802275,-34.288545,-33.963447,-34.055172,-34.288312,-34.292705,-32.090367,-33.3276,-34.048763,-34.261963,-34.049319,-33.877424],[23.154692,26.567878,19.272742,31.836615,29.340938,31.821667,22.504172,18.420045,23.187273,28.142622,28.553756,18.445814,30.517855,18.454193,18.43968,34.996262,22.463935,28.916072,18.977285,33.947076,18.47657,20.82391,20.82374,20.823748,20.823702,20.823784,20.823764,20.824317,32.05266,18.630047,18.433047,31.779459,18.41511,21.922237,31.780147,20.617392,18.86474,20.6536,18.868796,18.917857,20.277967,18.924975,19.490165,18.917822,18.400871,18.408728,18.44683,32.039761,18.413651,21.041272,18.408172,32.041592,39.67575,32.041592,39.66919,18.413831,32.052422,19.099193,32.039778,18.422316,18.445834,18.402178,32.039872,32.042381,32.0414,19.048566,18.415147,18.163511,19.04858,18.957238,18.407178,19.046996,19.048522,18.406936,18.484521,19.048678,18.414163,18.163885,20.632675,20.615704,19.048492,18.415447,19.086251,18.415355,18.418927,19.110014,30.808955,18.87357,30.703913,18.852857,18.41068,18.437217,18.857843,18.858547,19.052703,26.493161,19.009075,19.135571,19.004464,18.59803],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-34.528526,-13.862857],"lng":[18.163511,39.67575]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>This is nice and all, but there’s more you can do to make the visualization informative and appealing.</p>
+</section>
+<section id="customization" class="level3">
+<h3 class="anchored" data-anchor-id="customization">Customization</h3>
+<p>Now you’re going to add some pizazz to the map. You’re going to color the labels according to the species and add some popup text with information about the family the individual belongs to, its species name, and the date it was collected. In addition, you’re going to use addCircleMarkers instead of addMarkers to use circles instead of flags. Finally, you’re adding a legend so the colors make sense.</p>
+<p>Detailed explanations of what each function is doing are provided as code comments.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;"># First, a color palette needs to be set. We're using the viridis palette, but feel free to explore the options available! I set the domain to NULL because I think it's more flexible to have a general color palette that can be attributed to factors later.</span></span>
+<span id="cb5-2">pal <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">colorFactor</span>(<span class="at" style="color: #657422;">palette =</span> <span class="st" style="color: #20794D;">"viridis"</span>, <span class="at" style="color: #657422;">domain =</span> <span class="cn" style="color: #8f5902;">NULL</span>)</span>
+<span id="cb5-3">  </span>
+<span id="cb5-4"><span class="co" style="color: #5E5E5E;"># This is the text that will go into the popup labels! The popup argument accepts html input, so I'm using "&lt;br&gt;" to indicate line breaks. I'd recommend printing this to your console so you can see what the popup argument will be parsing.</span></span>
+<span id="cb5-5">popup_label <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">paste</span>(</span>
+<span id="cb5-6">  <span class="st" style="color: #20794D;">"Family:"</span>, frog_gbif<span class="sc" style="color: #5E5E5E;">$</span>family, <span class="st" style="color: #20794D;">"&lt;br&gt;"</span>, </span>
+<span id="cb5-7">  <span class="st" style="color: #20794D;">"Species:"</span>, frog_gbif<span class="sc" style="color: #5E5E5E;">$</span>species, <span class="st" style="color: #20794D;">"&lt;br&gt;"</span>,</span>
+<span id="cb5-8">  <span class="st" style="color: #20794D;">"Date Collected:"</span>, frog_gbif<span class="sc" style="color: #5E5E5E;">$</span>eventDate</span>
+<span id="cb5-9">  )</span>
+<span id="cb5-10"></span>
+<span id="cb5-11"></span>
+<span id="cb5-12"><span class="fu" style="color: #4758AB;">leaflet</span>() <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
+<span id="cb5-13">  <span class="fu" style="color: #4758AB;">addTiles</span>() <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
+<span id="cb5-14">  <span class="co" style="color: #5E5E5E;"># You're adding circle markers here. In addition, we're specifying the color and popup labels for the markers. The tilde (~) is telling the color argument to accept the output of the pal object, which is now returning colors mapped to each species. Other plotting software like ggplot don't require a tilde to map to factors or numbers, so this may look foreign, but leaflet does and it just takes a little getting used to.</span></span>
+<span id="cb5-15">  <span class="fu" style="color: #4758AB;">addCircleMarkers</span>(<span class="at" style="color: #657422;">data =</span> frog_gbif,</span>
+<span id="cb5-16">                   <span class="at" style="color: #657422;">color =</span> <span class="sc" style="color: #5E5E5E;">~</span><span class="fu" style="color: #4758AB;">pal</span>(species),</span>
+<span id="cb5-17">                   <span class="at" style="color: #657422;">popup =</span> popup_label) <span class="sc" style="color: #5E5E5E;">%&gt;%</span></span>
+<span id="cb5-18">  <span class="co" style="color: #5E5E5E;"># We're specifying the legend to be in the bottom left of the map. Colors are specified a little differently here. The "pal" argument specifies the palette being used and the "values" argument specifies the values to map to. We're using the tilde here so it knows that you're mapping to a factor. </span></span>
+<span id="cb5-19">  <span class="fu" style="color: #4758AB;">addLegend</span>(</span>
+<span id="cb5-20">    <span class="at" style="color: #657422;">data =</span> frog_gbif,</span>
+<span id="cb5-21">    <span class="st" style="color: #20794D;">"bottomleft"</span>, </span>
+<span id="cb5-22">    <span class="at" style="color: #657422;">pal =</span> pal,</span>
+<span id="cb5-23">    <span class="at" style="color: #657422;">values =</span> <span class="sc" style="color: #5E5E5E;">~</span>species,</span>
+<span id="cb5-24">    <span class="at" style="color: #657422;">opacity =</span> .<span class="dv" style="color: #AD0000;">9</span>,</span>
+<span id="cb5-25">    <span class="at" style="color: #657422;">title =</span> <span class="st" style="color: #20794D;">"Species"</span></span>
+<span id="cb5-26">  )</span></code></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-3a8da5b2a065f696aef8" style="width:100%;height:464px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3a8da5b2a065f696aef8">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[-33.819138,-33.334053,-34.39227,-21.091778,-29.040835,-21.080971,-33.939719,-33.976855,-33.85058,-30.730894,-25.227552,-33.969492,-29.527697,-33.954212,-33.983837,-15.783165,-33.945498,-28.677082,-34.094362,-13.862857,-33.951747,-33.984109,-33.984977,-33.984971,-33.984952,-33.984963,-33.984937,-33.983983,-27.770816,-34.069528,-34.03723,-24.393639,-34.060554,-33.73917,-24.392948,-34.408865,-34.227842,-34.422,-34.200127,-34.017613,-33.941008,-34.014037,-34.528526,-34.017629,-33.95551,-33.99857,-33.766734,-27.758275,-33.964609,-34.357918,-34.055812,-27.767681,-16.49387,-27.767681,-16.4979,-34.0599,-27.770738,-33.688177,-27.75845,-34.06018,-33.766317,-34.112518,-27.762189,-27.769773,-27.760381,-33.782978,-34.059247,-32.781278,-33.783127,-33.72848,-34.102808,-33.778932,-33.782325,-34.102801,-33.978554,-33.783147,-34.059743,-32.780107,-34.415787,-34.390234,-33.78265,-34.05923,-33.241514,-34.0588,-34.059983,-33.608558,-24.559805,-33.934553,-29.802275,-34.288545,-33.963447,-34.055172,-34.288312,-34.292705,-32.090367,-33.3276,-34.048763,-34.261963,-34.049319,-33.877424],[23.154692,26.567878,19.272742,31.836615,29.340938,31.821667,22.504172,18.420045,23.187273,28.142622,28.553756,18.445814,30.517855,18.454193,18.43968,34.996262,22.463935,28.916072,18.977285,33.947076,18.47657,20.82391,20.82374,20.823748,20.823702,20.823784,20.823764,20.824317,32.05266,18.630047,18.433047,31.779459,18.41511,21.922237,31.780147,20.617392,18.86474,20.6536,18.868796,18.917857,20.277967,18.924975,19.490165,18.917822,18.400871,18.408728,18.44683,32.039761,18.413651,21.041272,18.408172,32.041592,39.67575,32.041592,39.66919,18.413831,32.052422,19.099193,32.039778,18.422316,18.445834,18.402178,32.039872,32.042381,32.0414,19.048566,18.415147,18.163511,19.04858,18.957238,18.407178,19.046996,19.048522,18.406936,18.484521,19.048678,18.414163,18.163885,20.632675,20.615704,19.048492,18.415447,19.086251,18.415355,18.418927,19.110014,30.808955,18.87357,30.703913,18.852857,18.41068,18.437217,18.857843,18.858547,19.052703,26.493161,19.009075,19.135571,19.004464,18.59803],10,null,null,{"interactive":true,"className":"","stroke":true,"color":["#38598C","#85D54A","#25858E","#482173","#FDE725","#482173","#38598C","#25858E","#38598C","#FDE725","#482173","#25858E","#482173","#2D708E","#2D708E","#1E9B8A","#38598C","#FDE725","#440154","#1E9B8A","#2D708E","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#482173","#C2DF23","#2D708E","#51C46A","#2D708E","#25858E","#51C46A","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#440154","#25858E","#25858E","#25858E","#C2DF23","#1E9B8A","#25858E","#C2DF23","#25858E","#433E85","#1E9B8A","#433E85","#1E9B8A","#2D708E","#433E85","#25858E","#1E9B8A","#2D708E","#C2DF23","#C2DF23","#482173","#1E9B8A","#433E85","#25858E","#2D708E","#2BB07F","#25858E","#2D708E","#25858E","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2BB07F","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2D708E","#25858E","#51C46A","#2D708E","#482173","#25858E","#25858E","#2D708E","#25858E","#25858E","#2BB07F","#85D54A","#440154","#25858E","#25858E","#2D708E"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#38598C","#85D54A","#25858E","#482173","#FDE725","#482173","#38598C","#25858E","#38598C","#FDE725","#482173","#25858E","#482173","#2D708E","#2D708E","#1E9B8A","#38598C","#FDE725","#440154","#1E9B8A","#2D708E","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#482173","#C2DF23","#2D708E","#51C46A","#2D708E","#25858E","#51C46A","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#440154","#25858E","#25858E","#25858E","#C2DF23","#1E9B8A","#25858E","#C2DF23","#25858E","#433E85","#1E9B8A","#433E85","#1E9B8A","#2D708E","#433E85","#25858E","#1E9B8A","#2D708E","#C2DF23","#C2DF23","#482173","#1E9B8A","#433E85","#25858E","#2D708E","#2BB07F","#25858E","#2D708E","#25858E","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2BB07F","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2D708E","#25858E","#51C46A","#2D708E","#482173","#25858E","#25858E","#2D708E","#25858E","#25858E","#2BB07F","#85D54A","#440154","#25858E","#25858E","#2D708E"],"fillOpacity":0.2},null,null,["Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-01-11T16:35:09","Family: Brevicipitidae <br> Species: Breviceps pentheri <br> Date Collected: 2022-01-12T19:10:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-01-24T09:00:10","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-01-23T08:24:17","Family: Brevicipitidae <br> Species: Breviceps verrucosus <br> Date Collected: 2022-01-29T15:05:41","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-01-25T15:20:05","Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-01-29T11:20:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-01-24T10:17:52","Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-01-18T16:18:49","Family: Brevicipitidae <br> Species: Breviceps verrucosus <br> Date Collected: 2022-01-01T08:34:00","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-01-14T23:58:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-02-02T00:00:00","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-02-21T07:11:06","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-02-07T18:35:48","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-02-12T14:45:18","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-02-01T05:20:00","Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-03-02T11:20:00","Family: Brevicipitidae <br> Species: Breviceps verrucosus <br> Date Collected: 2022-03-08T09:43:00","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-21T13:39:00","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-03-19T16:05:31","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-03-12T09:55:00","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-23T19:37:25","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-25T07:51:26","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-24T08:45:51","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-24T09:00:24","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-24T09:03:18","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-25T07:49:09","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-25T06:07:33","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-03-16T19:49:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-04-11T09:11:07","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-04-13T09:51:10","Family: Brevicipitidae <br> Species: Breviceps passmorei <br> Date Collected: 2022-04-16T21:03:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-04-06T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-12T22:53:08","Family: Brevicipitidae <br> Species: Breviceps passmorei <br> Date Collected: 2022-04-18T22:11:02","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-26T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-29T12:42:25","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-26T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-29T12:41:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-01T12:51:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-10T10:55:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-01T17:55:00","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-05-06T14:26:27","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-01T12:51:43","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-12T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-13T00:00:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-14T15:19:00","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-17T11:45:30","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-19T14:18:28","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-19T08:21:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-19T00:00:00","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-05-18T17:24:00","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-16T08:34:00","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-05-26T10:31:10","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-13T09:35:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-05-24T11:17:00","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-05-18T17:15:36","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-22T11:53:58","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-17T11:53:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-05-24T00:00:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-14T16:30:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-28T00:00:00","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-05-28T12:14:41","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-27T11:14:13","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-06-07T12:52:28","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T10:21:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-10T13:05:00","Family: Brevicipitidae <br> Species: Breviceps namaquensis <br> Date Collected: 2022-06-20T12:29:44","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T10:21:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-16T09:04:46","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-22T12:51:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T13:31:44","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-22T11:49:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-23T14:07:19","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T13:00:36","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-27T00:00:00","Family: Brevicipitidae <br> Species: Breviceps namaquensis <br> Date Collected: 2022-06-20T12:25:50","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-15T09:38:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-14T13:13:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T13:14:26","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-10T13:05:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-18T00:00:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-10T13:05:34","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-18T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-01T12:23:45","Family: Brevicipitidae <br> Species: Breviceps passmorei <br> Date Collected: 2022-07-03T11:28:22","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-07-07T15:39:09","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-07-10T15:01:41","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-09T12:04:01","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-15T11:08:17","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-07-07T12:58:47","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-12T21:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-09T14:35:17","Family: Brevicipitidae <br> Species: Breviceps namaquensis <br> Date Collected: 2022-07-29T23:29:29","Family: Brevicipitidae <br> Species: Breviceps pentheri <br> Date Collected: 2022-07-30T16:29:11","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-08-06T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-08-03T12:07:59","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-08-05T14:41:20","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-08-12T13:31:38"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154","#482173","#433E85","#38598C","#2D708E","#25858E","#1E9B8A","#2BB07F","#51C46A","#85D54A","#C2DF23","#FDE725"],"labels":["Breviceps acutirostris","Breviceps adspersus","Breviceps carruthersi","Breviceps fuscus","Breviceps gibbosus","Breviceps montanus","Breviceps mossambicus","Breviceps namaquensis","Breviceps passmorei","Breviceps pentheri","Breviceps rosei","Breviceps verrucosus"],"na_color":null,"na_label":"NA","opacity":0.9,"position":"bottomleft","type":"factor","title":"Species","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[-34.528526,-13.862857],"lng":[18.163511,39.67575]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p>And there you have it! This is just the tip of the iceberg with what leaflet can do. You can plot polygons, lines, rasters, icons, and more with only a little more code.</p>
+</section>
+<section id="go-further" class="level3">
+<h3 class="anchored" data-anchor-id="go-further">Go further</h3>
+<p>Here are some more resources to learn more about leaflet and general GIS in R.</p>
+<p><a href="https://rstudio.github.io/leaflet/">leaflet documentation</a></p>
+<p><a href="https://www.earthdatascience.org/courses/earth-analytics/get-data-using-apis/leaflet-r/">A more involved tutorial</a> that shows off some more leaflet features.</p>
+<p><a href="https://bookdown.org/robinlovelace/geocompr/">Geocomputation in R</a> free, online book. It’s a wonderful resource for GIS in R.</p>
+<p><a href="https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html">Making static maps in R</a> with sf and ggplot2.</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{french2019,
+  author = {Connor French},
+  title = {Interactively Explore Geographic Data in {R} Using Leaflet},
+  date = {2019-11-20},
+  url = {https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-11-20-leaflet_tutorial},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2019" class="csl-entry quarto-appendix-citeas">
+Connor French. 2019. <span>“Interactively Explore Geographic Data in R
+Using Leaflet.”</span> November 20, 2019. <a href="https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-11-20-leaflet_tutorial">https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-11-20-leaflet_tutorial</a>.
+</div></div></section></div> ]]></description>
+  <category>Research</category>
+  <category>Tutorial</category>
+  <category>GCDI</category>
+  <category>GIS</category>
+  <guid>https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-11-20-leaflet_tutorial/index.html</guid>
+  <pubDate>Wed, 20 Nov 2019 05:00:00 GMT</pubDate>
+  <media:content url="https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-11-20-leaflet_tutorial/featured.png" medium="image" type="image/png" height="38" width="144"/>
+</item>
+<item>
+  <title>PDIG Training Grant Spotlight: Connor French</title>
+  <dc:creator>Connor French</dc:creator>
+  <link>https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-10-05-pdig-training-grant-spotlight-connor-french/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p><a href="https://gcdi.commons.gc.cuny.edu/2019/09/11/pdig-training-grant-spotlight-connor-french/">Originally published on GC Digital Initiatives</a></p>
+<p>There are a lot of insects in the world. Like a lot a lot. Recent estimates put <a href="https://www.pnas.org/content/112/24/7519.short">the number of insect species</a> at a whopping 5.5 million. Only about a million have names, leaving the other 4.5 million or so species undescribed. To put this into context, there are <a href="https://amphibiaweb.org/amphibian/speciesnums.html">8,053 described amphibian species</a> and the projected number of undescribed species remains in the thousands. While I consider all life to be equally important (and I’m particularly fond of amphibians- I mean, just <a href="https://www.google.com/search?rlz=1C5CHFA_enUS832US832&amp;biw=1343&amp;bih=650&amp;tbm=isch&amp;sa=1&amp;ei=6XpJXc7tOayv_Qac8oGQBA&amp;q=ranitomeya&amp;oq=ranitomeya&amp;gs_l=img.3..35i39l2j0i67l2j0l6.53933.55501..55948...0.0..1.371.943.9j3-1......0....1..gws-wiz-img.ujvBzQEfoC8&amp;ved=0ahUKEwiOhpG-p-7jAhWsV98KHRx5AEIQ4dUDCAY&amp;uact=5">look at these</a>), the gap in our understanding of insect diversity is especially concerning. They’re important for <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/plantsanimals/pollinate/">agriculture</a>, <a href="https://www.youtube.com/watch?v=S0qm_L_HPdM">flowering plants</a>, <a href="https://www.fws.gov/midwest/endangered/insects/ambb/abb_fact.html">decomposition</a>, and a host of other functions. Without a firm understanding of existing insect diversity, scientists can’t accurately determine the causes of <a href="https://www.nationalgeographic.com/animals/2019/02/why-insect-populations-are-plummeting-and-why-it-matters/">rapid declines</a> in insect populations across the globe.</p>
+<p>Needless to say, describing 4.5 million species of insect is an onerous task. That’s why, as part of my PhD dissertation, I’m devising a new metric of diversity that skirts around this problem. Although I would love to go into excruciating detail about what it is, I’ll leave that up to my dissertation chapter. Briefly, I use <a href="https://www.genome.gov/about-genomics/fact-sheets/DNA-Sequencing-Fact-Sheet">DNA sequences</a> from insects collected by researchers from <a href="http://www.boldsystems.org/">across the globe</a> to summarize the <a href="http://b4fa.org/bioscience-in-brief/plantbreeding/genetic-diversity/">genetic diversity</a> of insect communities, rather than their species diversity. This makes data collection much more feasible across a broad scale. However, exactly what it tells us about insect communities is still uncertain.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-10-05-pdig-training-grant-spotlight-connor-french/https:/gcdi.commons.gc.cuny.edu/wp-content/blogs.dir/885/files/2019/09/bold_insects-300x150.png" class="img-fluid figure-img" alt="Global map of insect DNA sampling."></p>
+<p></p><figcaption class="figure-caption">A map of insect DNA sequences deposited in the Barcode of Life Data System. Warmer colors indicate densely sampled areas.</figcaption><p></p>
+</figure>
+</div>
+<p>To remedy this, I’m using <a href="https://searchenterpriseai.techtarget.com/definition/machine-learning-ML">machine learning</a>. Machine learning, the part-statistics, part-algorithmic wizardry that helps Snapchat <a href="https://medium.com/cracking-the-data-science-interview/snapchats-filters-how-computer-vision-recognizes-your-face-9907d6904b91">turn your face into an alien</a> and Facebook <a href="https://research.fb.com/blog/category/machine-learning/">recommend you</a> custom underwear, can also be used to answer important scientific questions. In a <a href="https://www.theguardian.com/news/2018/mar/12/what-is-biodiversity-and-why-does-it-matter-to-us">biodiversity</a> context, machine learning can help clarify what about the environment, whether that is climate, topography, human-mediated habitat loss, etc., best predicts a selected metric of diversity. In my project planning stages, I decided to use this approach to assess the relationships my new metric has with other global-scale processes. However, I only had a rudimentary knowledge of the capabilities of a machine learning approach.</p>
+<p>That’s why I decided to take the <a href="https://blog.rstudio.com/2019/02/06/rstudio-conf-2019-workshops/">Applied Machine Learning in R</a> two-day workshop in Austin, Texas. The workshop’s goal was to “step through the process of building, visualizing, testing, and comparing models that are based on prediction.” This was exactly what I needed. Unfortunately, since it was a part of an industry conference for tech professionals, the <a href="https://www.rstudio.com/conference/">rstudio::conf2019</a>, it was prohibitively expensive. Luckily, I was able to secure a <a href="https://digitalgrants.commons.gc.cuny.edu/">Provost’s Digital Innovation Training Grant</a>, which covered the costly tuition. As a University of Texas at Austin alumni, I easily found a couch to crash on, which cut expenses significantly. The prime location and generous help from the <a href="https://gcdi.commons.gc.cuny.edu/">GC Digital Initiatives</a> paved my way to the workshop.</p>
+<p>In between eating <a href="http://www.vaquerotaquero.com/">street tacos</a> and taking dips at <a href="https://www.austintexas.org/listings/barton-springs-pool/4687/">Barton Springs Pool</a>, I learned the basics of performing machine learning analyses in <a href="https://www.youtube.com/watch?v=9kYUGMg_14s">R</a>, a programming language centered around statistical analysis. Going in, I had a strong background in R, but I did not have a working knowledge of machine learning. The workshop’s <a href="https://github.com/topepo/rstudio-conf-2019">exercises</a> and <a href="https://resources.rstudio.com/authors/max-kuhn">strong leadership</a> gave me more confidence in using the machine learning techniques I was already familiar with and introduced me to algorithms I had never heard of. It was one of these new algorithms– I point out it’s named <a href="https://bradleyboehmke.github.io/HOML/mars.html">MARS</a> for the statistically and astronomically inclined– that I decided to use for my dissertation chapter. It strikes a balance between predictive power and explanatory ease that I am aiming for in my project.</p>
+<p>After some months of pulling my hair out, working through the kinks of how to wrangle 4.7 million insect DNA sequences, I was able to use my new machine learning skills to perform preliminary analyses of my data. The results, which I presented as a <a href="https://www.dropbox.com/s/8nhvskh6xarg6ej/poster_ConnorFrench.pdf?dl=0">poster</a> at the <a href="https://www.evolutionmeetings.org/evolution-2019---providence.html">Evolution</a> conference in Providence, Rhode Island, point toward my metric being a useful summary of insect biodiversity. I received numerous bits of positive feedback that I am currently using to finalize my analyses and publish this work in a professional journal. Initially, I thought this project would take up a large chunk of my PhD, but with the help of the Applied Machine Workshop and GC Digital Initiatives, I was able to jumpstart my analyses and will put out a stronger product, sooner. In due course, I hope my research leads to a stronger understanding of insect diversity and how us humans are impacting it.</p>
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{french2019,
+  author = {Connor French},
+  title = {PDIG {Training} {Grant} {Spotlight:} {Connor} {French}},
+  date = {2019-10-12},
+  url = {https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-10-05-pdig-training-grant-spotlight-connor-french},
+  langid = {en}
+}
+</code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2019" class="csl-entry quarto-appendix-citeas">
+Connor French. 2019. <span>“PDIG Training Grant Spotlight: Connor
+French.”</span> October 12, 2019. <a href="https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-10-05-pdig-training-grant-spotlight-connor-french">https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-10-05-pdig-training-grant-spotlight-connor-french</a>.
+</div></div></section></div> ]]></description>
+  <category>Research</category>
+  <category>GCDI</category>
+  <guid>https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-10-05-pdig-training-grant-spotlight-connor-french/index.html</guid>
+  <pubDate>Sat, 12 Oct 2019 04:00:00 GMT</pubDate>
+  <media:content url="https://delightful-alfajores-5cb3d1.netlify.app/posts/2019-10-05-pdig-training-grant-spotlight-connor-french/featured.png" medium="image" type="image/png" height="145" width="144"/>
+</item>
+</channel>
+</rss>

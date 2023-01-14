@@ -1,0 +1,19 @@
+---
+title: ""
+---
+
+## Current position
+
+I am a PhD candidate in the [Mike Hickerson](https://hickerlab.wordpress.com/) and [Ana Carnaval](https://carnavallab.org/) labs at the City University of New York, City College campus. I am currently supported as a software engineer, developing the [roleShiny application](https://github.com/role-model/roleShiny) and contributing to the [roleR R package](https://github.com/role-model/roleR). Both of which provide students and researchers access to the [Rules of Life Engine (RoLE) model](https://role-model.github.io/about), which is
+
+> a mechanistic, simulation-based hypothesis-testing and data synthesis framework enabling scientists with multi-dimensional biodiversity data to generate and test parameterized hypotheses about the processes driving biodiversity patterns
+
+## Research focus
+
+My research focuses on understanding how populations, species, and communities evolve across space in response to changing environments. The spatial, temporal, and taxonomic scales I work with vary, ranging from single-species landscape genetics to global-scale macrogenetics. In addition to empirical work, I am also wading into the waters of simulation-based testing of spatial population genetic theory and software development to facilitate these types of analyses.
+
+## Previous positions
+
+From 2016 to 2018 I completed a M.S. in [Zoology](https://zoology.siu.edu/) at [Southern Illinois University at Carbondale](https://siu.edu/). I worked with [Jason Brown](https://www.jasonleebrown.org/) on the systematics and phylogeography of a genus of poison frogs in Peru and helped develop the second version of [SDMtoolbox](http://www.sdmtoolbox.org/), a python-based ArcGIS toolbox for spatial studies of ecology, evolution and genetics.
+
+From 2011 to 2015 I completed a B.S. in Biology- [Ecology, Evolution, and Behavior](https://integrativebio.utexas.edu/) at [University of Texas at Austin.](https://www.utexas.edu/) I completed undergraduate research with [Daniel Bolnick](https://bolnicklab.wordpress.com/), [David Cannatella](http://cannatellalab.org/), and the [Texas Biodiversity Collections](https://biodiversity.utexas.edu/collections).
