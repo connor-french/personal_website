@@ -5,7 +5,7 @@ about:
   image: files/avatar.jpg
   links:
     - text: CV
-      href: https://github.com/connor-french/personal_website/blob/main/files/cv_modern.pdf
+      href: https://github.com/connor-french/cv/blob/master/cv_modern/cv_modern.pdf
     - icon: github
       text: Github
       href: https://github.com/connor-french
