@@ -1,0 +1,76 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
+@import url(https://fonts.googleapis.com/css?family=Fira+Mono:400,700);
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+// fonts
+$font-family-sans-serif: "Lato", sans-serif !default;
+$font-family-serif: "Lato", serif !default;
+$font-family-monospace: "Fira Mono", monospace !default;
+$presentation-heading-font: "Lora", serif !default;
+
+// colors
+$theme-white: #fff;
+$theme-black: #050707;
+$theme-orange: #f5bc3f; 
+$theme-codebg: #f2f2f2;
+$theme-green: #2E8138;
+
+
+$body-bg: $theme-white !default;
+$body-color: $theme-black !default;
+$link-color: $theme-green !default;
+$code-block-bg: $theme-codebg !default;
+$code-block-font-size: 0.7em;
+
+// presentation
+$presentation-font-smaller: 40px;
+$presentation-font-size-root: 50px;
+
+/*-- scss:rules --*/
+
+// text
+h1 {
+  font-family: "Fira Mono";
+  font-size: 26px;
+}
+
+.author, .date {
+  font-size: 34px;
+}
+        
+
+.reveal pre.sourceCode code {
+    max-height: 700px;
+}
+
+.smalltext {
+    font-size: $presentation-font-smaller;
+}
+
+.reveal .slide aside .aside-footnotes {
+  font-size: 26px;
+}
+
+// display 
+.v-center-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 90%;
+        }
+        
+.full-slide-figure {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.full-slide-figure img {
+    max-width: 100%;
+    max-height: 100%;
+}

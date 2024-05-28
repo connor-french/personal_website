@@ -1,5 +1,6 @@
 project:
   type: website
+  pre-render: slides/2024-06-04_dissertation/index.qmd
 
 website:
   title: "Connor French"
@@ -20,6 +21,9 @@ website:
         file: posts.qmd
       - text: "Projects"
         file: projects.qmd
+      - text: "Slides"
+        file: slides.qmd
+
   page-footer:
     left: |
       {{< fa regular copyright >}} Connor French, 2022<br>

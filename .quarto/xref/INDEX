@@ -34,5 +34,14 @@
   },
   "projects/spatial-population-genetics/index.qmd": {
     "index.html": "68d83027"
+  },
+  "readme.md": {
+    "readme.html": "d6d12465"
+  },
+  "slides.qmd": {
+    "slides.html": "7ab444e8"
+  },
+  "slides/2024-06-04_dissertation/index.qmd": {
+    "index.html": "02c44f6b"
   }
 }

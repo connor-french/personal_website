@@ -1,6 +1,7 @@
 {
   "hash": "81d920465eb1247a38aef5f9dc3e675b",
   "result": {
+    "engine": "knitr",
     "markdown": "---\ntitle: \"\"\nabout:\n  template: trestles\n  image: files/avatar.jpg\n  links:\n    - text: CV\n      href: https://github.com/connor-french/cv/blob/master/cv_modern/cv_modern.pdf\n    - icon: github\n      text: Github\n      href: https://github.com/connor-french\n    - icon: twitter\n      text: Twitter\n      href: https://twitter.com/frog_phylo\n    - icon: linkedin\n      text: LinkedIn\n      href: https://www.linkedin.com/in/connormfrench/\n    - icon: google-scholar\n      text: Google Scholar\n      href: https://scholar.google.com/citations?user=LAiEcKoAAAAJ&hl=en\n    - icon: orcid\n      text: ORCID\n      href: https://orcid.org/0000-0002-5255-3884\ncomments: false\n---\n\n::: {.cell}\n\n:::\n\n\nI am a PhD candidate in the [Mike Hickerson](https://hickerlab.wordpress.com/) and [Ana Carnaval](https://carnavallab.org/) labs at the City University of New York, City College campus.\n\nMy research focuses on understanding how populations, species, and communities evolve in response to changing environments.\n\nI'm passionate about [data science](posts.qmd), [photography](https://www.instagram.com/connorfrenchphotography/), music, and my dog Buckley!\n",
     "supporting": [],
     "filters": [
