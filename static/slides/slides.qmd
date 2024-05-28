@@ -17,6 +17,7 @@ resources:
   - "!(.qmd|.rmd)"
 ---
 
+## Slides
 ```{r, echo=FALSE,warning=FALSE}
 
 # sourced from https://github.com/jthomasmock/themockup-blog/blob/master/static/resources/resources.qmd
@@ -62,3 +63,7 @@ data_in %>%
     )
   )
 ```
+
+## Other
+::: {#slides}
+:::

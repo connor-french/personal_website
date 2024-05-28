@@ -1,6 +1,6 @@
 ---
-title: "Presentations"
-description: "From here and there"
+title: "Nothing yet"
+description: "TBD"
 resources:
   - "**"
   - "!(.qmd|.rmd)"
