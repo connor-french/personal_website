@@ -44,5 +44,14 @@
   "slides/2024-06-04_dissertation/index.qmd": {
     "index.html": "02c44f6b",
     "slides.html": "2dfd3199"
+  },
+  "slides/2024-06-04_dissertation/slides.qmd": {
+    "slides.html": "dfb1d68a"
+  },
+  "static/slides/slides.qmd": {
+    "slides.html": "b7450894"
+  },
+  "static/slides/index.qmd": {
+    "index.html": "01085f26"
   }
 }

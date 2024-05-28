@@ -21,7 +21,7 @@ website:
       - text: "Projects"
         file: projects.qmd
       - text: "Slides"
-        file: slides.qmd
+        file: static/slides/slides.qmd
 
   page-footer:
     left: |

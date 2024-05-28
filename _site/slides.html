@@ -82,9 +82,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      searchColumns: ["listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -177,7 +177,7 @@ window.Quarto = {
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./slides.html" aria-current="page"> 
+    <a class="nav-link" href="./static/slides/slides.html"> 
 <span class="menu-text">Slides</span></a>
   </li>  
 </ul>
@@ -210,7 +210,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(0)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -224,50 +224,13 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-title" data-direction="asc">
-          Title
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Author
-        </option>
-     </select>
-  </div>
     <div class="input-group input-group-sm quarto-listing-filter">
       <span class="input-group-text"><i class="bi bi-search"></i></span>
       <input type="text" class="search form-control" placeholder="Filter">
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1716857188649" data-listing-reading-time-sort="12" data-listing-word-count-sort="2287">
-<div class="thumbnail">
-<p><a href="./slides/2024-06-04_dissertation/index.html" class="no-external"></a></p><a href="./slides/2024-06-04_dissertation/index.html" class="no-external">
-<p class="card-img-top"><img src="slides/2024-06-04_dissertation/images/temperature_change.gif"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./slides/2024-06-04_dissertation/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./slides/2024-06-04_dissertation/index.html" class="no-external">The influence of environmental change on genetic diversity across spatial and taxonomic scales</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./slides/2024-06-04_dissertation/index.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./slides/2024-06-04_dissertation/index.html" class="no-external">Video from: https://bedford.io/projects/coaltrace/</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./slides/2024-06-04_dissertation/index.html" class="no-external"></a></p><a href="./slides/2024-06-04_dissertation/index.html" class="no-external">
-<div class="listing-author">
-Connor M. French
-</div>
-</a>
-</div>
-</div>
+
 </div>
 <div class="listing-no-matching d-none">
 No matching items

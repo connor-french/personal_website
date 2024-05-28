@@ -11,9 +11,9 @@
     ]
   },
   {
-    "listing": "/slides.html",
+    "listing": "/static/slides/slides.html",
     "items": [
-      "/slides/2024-06-04_dissertation/index.html"
+      "/static/slides/index.html"
     ]
   },
   {
@@ -22,5 +22,9 @@
       "/projects/spatial-population-genetics/index.html",
       "/projects/global-genetic-diversity/index.html"
     ]
+  },
+  {
+    "listing": "/slides.html",
+    "items": []
   }
 ]

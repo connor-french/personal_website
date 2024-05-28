@@ -1,0 +1,19 @@
+{
+  "hash": "cdf8d3d874143f6bcdd2681f4df9ee76",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Slides\"\ndescription: \"For your perusal\"\ntoc: false\nlisting:\n  - id: \"resources\"\n    sort-ui: false\n    filter-ui: true\n    categories: false\n    type: table\n    page-size: 10\n    fields: [title, description]\n    contents: \n      - \"*.qmd\"\nresources:\n  - \"**\"\n  - \"!(.qmd|.rmd)\"\n---\n\n::: {.cell}\n::: {.cell-output-display}\n\n```{=html}\n<div id=\"htmlwidget-1ae7611c500b1fc571a7\" class=\"reactable html-widget \" style=\"width:auto;height:auto;\"></div>\n<script type=\"application/json\" data-for=\"htmlwidget-1ae7611c500b1fc571a7\">{\"x\":{\"tag\":{\"name\":\"Reactable\",\"attribs\":{\"data\":{\"Project\":[\"Dissertation pre-defense seminar\"],\"url\":[\"https://connor-french.com//static/slides/dissertation.html\"],\"Description\":[\"An overview of my PhD dissertation research\"]},\"columns\":[{\"accessor\":\"Project\",\"name\":\"Title\",\"type\":\"character\",\"cell\":[{\"name\":\"a\",\"attribs\":{\"href\":\"https://connor-french.com//static/slides/dissertation.html\"},\"children\":[\"Dissertation pre-defense seminar\"]}],\"minWidth\":150},{\"accessor\":\"url\",\"name\":\"url\",\"type\":\"character\",\"show\":false},{\"accessor\":\"Description\",\"name\":\"Description\",\"type\":\"character\",\"minWidth\":250}],\"searchable\":true,\"defaultPageSize\":10,\"paginationType\":\"numbers\",\"showPageInfo\":true,\"minRows\":1,\"theme\":{\"borderColor\":\"#dfe2e5\",\"stripedColor\":\"#f6f8fa\",\"highlightColor\":\"#f0f5f9\",\"cellPadding\":\"8px 12px\",\"style\":{\"fontFamily\":\"-apple-system, Lato, sans-serif\",\"fontSize\":\"16px\"}},\"language\":{\"searchPlaceholder\":\"Filter\"},\"dataKey\":\"10f3880fc6c2738af991a436e76305c7\"},\"children\":[]},\"class\":\"reactR_markup\"},\"evals\":[],\"jsHooks\":[]}</script>\n```\n\n:::\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<script src=\"../../site_libs/core-js-2.5.3/shim.min.js\"></script>\n<script src=\"../../site_libs/react-17.0.0/react.min.js\"></script>\n<script src=\"../../site_libs/react-17.0.0/react-dom.min.js\"></script>\n<script src=\"../../site_libs/reactwidget-1.0.0/react-tools.js\"></script>\n<script src=\"../../site_libs/htmlwidgets-1.6.2/htmlwidgets.js\"></script>\n<script src=\"../../site_libs/reactable-binding-0.3.0/reactable.js\"></script>\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
