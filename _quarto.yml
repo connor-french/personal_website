@@ -1,6 +1,5 @@
 project:
   type: website
-  pre-render: slides/2024-06-04_dissertation/index.qmd
 
 website:
   title: "Connor French"

@@ -1,0 +1,612 @@
+---
+title: "The influence of environmental change on genetic diversity across spatial and taxonomic scales"
+author: "Connor M. French"
+format: 
+  revealjs:
+    theme: css/style.scss
+    fig-width: 8
+    fig-height: 6
+    width: 1920
+    height: 1080
+    slide-number: true
+    incremental: true
+    embed-resources: true
+editor: visual
+---
+
+```{r}
+#| label: outline
+#| eval: false
+# Audience: Jenna and first year grad student
+# Time: 45-50 minutes
+# Take-away message: the impact of environmental change on genetic diversity is complex and can be studied across spatial and taxonomic scales
+# 
+# General Outline:
+# - Introduction (3 minutes)
+# - Chapter one (15 minutes): Global determinants of insect mitochondrial genetic diversity
+#   - Take-away message: The global distribution of insect genetic diversity peaks in the subtropics and is driven by seasonally warm temperatures and climate stability
+# - Chapter two (15 minutes): Demographic responses to past climate change in Brazilian Enyalius lizards using spatially-explicit coalescent modeling
+#   - Take-away message: Linking SDMs with spatially-explicit coalescent models can be used to test hypotheses about the ecology of species and the impact of past climate change on genetic diversity
+# - Chapter three (10 minutes): *spaceprime*: a Python package to facilitate spatially-explicit coalescent models in *msprime*
+#   - Take-away message: *spaceprime* makes complex eco-evolutionary models a little easier
+# - Conclusions (3 minutes)
+# - Bibliography
+# - Acknowledgements (2 minutes)
+
+```
+
+```{r}
+#| label: setup
+
+# load libraries
+library(tidyverse)
+library(gganimate)
+library(smoothr)
+library(sf)
+library(rphylopic)
+library(rnaturalearth)
+library(ggtext)
+
+
+
+# set the theme
+theme_set(theme_bw())
+
+# theme_update isn't working, so I'm setting the text sizes as variables
+axis_title_size  <- 60
+axis_text_size  <- 45
+caption_size <- 18
+
+```
+
+## The Earth is constantly changing
+
+::: columns
+::: {.column width="50%"}
+![](images/temperature_change.gif){fig-align="center"}
+:::
+
+::: {.column width="50%"}
+![](images/temp_line_plot.gif){fig-align="center"}
+:::
+:::
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="33%"}
+### Populations shrink or expand...
+
+```{r}
+#| label: pop-shrink-expand
+#| eval: false
+
+# Read and transform the localities data
+locs <- read_sf("data/distincta_localities_ex.geojson") %>% 
+  st_transform(5880)
+
+# Draw minimum convex hull around localities
+mch <- st_convex_hull(st_union(locs))
+
+# Smooth the polygon
+mch_smooth <- smooth(mch, method = "chaikin")
+
+# Shrink the polygon using sf
+
+small_polys <- map(seq(1, 150, 5), \(x) st_buffer(mch_smooth, dist = -units::set_units(x, "km")) %>% 
+                     smooth(method = "chaikin"))
+
+poly_maps <- map(small_polys, \(x) ggplot() +
+                   geom_sf(data = x, fill = "darkgreen", color = "black") +
+                   theme_void())
+
+# convert to a gif
+images <- map(poly_maps, function(plot) {
+  # Save each plot to a temporary file
+  plot_file <- tempfile(fileext = ".png")
+  ggsave(plot_file, plot, width = 10, height = 8)
+  # Read the image
+  magick::image_read(plot_file)
+})
+
+# Create an animated GIF
+animated_gif <- magick::image_animate(magick::image_join(images), fps = 10)
+
+magick::image_write(animated_gif, "images/popsize_change.gif")
+```
+
+![](images/pop_size_change.svg){fig-align="center"}
+:::
+
+::: {.column .fragment width="33%"}
+### Fragment and reconnect...
+
+```{r}
+#| label: frag-reconnect
+#| eval: false
+
+# Read and transform the localities data
+locs <- read_sf("data/distincta_localities_ex.geojson") %>% 
+  st_transform(5880)
+
+locs_north <- locs %>% 
+  filter(latitude > -25.4)
+
+locs_south <- locs %>% 
+  filter(latitude <= -25.4)
+
+# Draw minimum convex hull around localities
+mch_north <- st_convex_hull(st_union(locs_north))
+mch_south <- st_convex_hull(st_union(locs_south))
+
+# Smooth the polygon
+mch_north_smooth <- smooth(mch_north, method = "chaikin")
+mch_south_smooth <- smooth(mch_south, method = "chaikin")
+
+# Shrink the polygon using sf
+
+small_polys_north <- map(seq(1, 100, 3), \(x) st_buffer(mch_north_smooth, dist = -units::set_units(x, "km")) %>% 
+                     smooth(method = "chaikin"))
+
+small_polys_south <- map(seq(1, 100, 3), \(x) st_buffer(mch_south_smooth, dist = -units::set_units(x, "km")) %>%
+                     smooth(method = "chaikin"))
+
+poly_maps_total <- map2(small_polys_north, small_polys_south, \(x, y) ggplot() +
+                   geom_sf(data = x, fill = "darkgreen", color = "black") +
+                   geom_sf(data = y, fill = "orange", color = "black") +
+                   theme_void())
+
+# convert to a gif
+images <- map(poly_maps_total, function(plot) {
+  # Save each plot to a temporary file
+  plot_file <- tempfile(fileext = ".png")
+  ggsave(plot_file, plot, width = 10, height = 8)
+  # Read the image
+  magick::image_read(plot_file)
+})
+
+# Create an animated GIF
+animated_gif <- magick::image_animate(magick::image_join(images), fps = 5)
+
+magick::image_write(animated_gif, "images/frag_reconnect.gif")
+```
+
+![](images/pop_split.svg){fig-align="center" height="1000"}
+:::
+
+::: {.column .fragment width="33%"}
+### Adapt or go extinct
+
+![](images/adaptation.svg){.absolute top="170" right="200" height="1000"}
+:::
+:::
+
+## Genetic diversity contains signatures of that change
+
+::: v-center-container
+{{< video images/coal_video.mov width="972" height="707" >}}
+:::
+
+::: footer
+Video from: https://bedford.io/projects/coaltrace/
+:::
+
+::: notes
+Genetic diversity is the variation in DNA sequences within a population. It records the history of a population's past, including changes in population size, connectivity, and adaptation to the environment. In this visualization, we see each individual, represented as circles, in a population with their genealogy traced back in time. The length of those lineages represent how much genetic diversity has accumulated over time. When I play the video, you'll see the population change over time, with individuals being born and dying. The colors represent different genetic lineages. This is a simplified example, but it illustrates how genetic diversity can change over time.
+:::
+
+## Genetic diversity can tell stories about
+
+::: columns
+::: {.column width="50%"}
+### *Species*
+
+![](images/pdist-skyline.png) [^1]
+:::
+
+::: {.column .fragment width="50%"}
+### *and Communities*
+
+![](images/comm-skyline.png) [^2]
+:::
+:::
+
+[^1]: Brunes et al. 2015. Org. Divers Evol. 10.1007/s13127-015-0228-4
+
+[^2]: Burbrink et al. 2016. Eco. Letters 10.1111/ele.12695
+
+::: notes
+In general, the higher the genetic diversity the better, as it can provide a population with the raw material to adapt to changing environments.
+:::
+
+## Ectotherms are linked to their environments
+
+::: columns
+::: {.column width="50%"}
+![](images/lizard_basking.jpeg)
+:::
+
+::: {.column width="50%"}
+![](images/dragonfly.jpeg)
+:::
+:::
+
+::: notes
+They may be sensitive to fluctuations in their environment over time.
+:::
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column width="50%"}
+![](images/temperature_change.gif){fig-align="center"}
+:::
+
+::: {.column width="50%"}
+![](images/temp_line_plot.gif){fig-align="center"}
+:::
+:::
+
+::: notes
+With the climate shifting rapidly, it's important to understand how these changes are impacting the genetic diversity of species and communities.
+:::
+
+------------------------------------------------------------------------
+
+::: v-center-container
+**I investigate global and regional patterns of genetic diversity in two groups of ectotherms, insects and lizards, to understand the relationship between environmental change and genetic diversity, from populations to assemblages.**
+:::
+
+------------------------------------------------------------------------
+
+## My questions
+
+#### 1. What is the relationship between assemblage-wide genetic diversity and environmental change in insects?
+
+<br>
+
+#### 2. What can genetic diversity convey about the processes underlying species responses to environmental change? {.fragment}
+
+<br>
+
+#### 3. How can I make integrative modeling of species responses to environmental change more accessible? {.fragment}
+
+------------------------------------------------------------------------
+
+## Chapter 1: Global determinants of insect mitochondrial genetic diversity
+
+## A global perspective is necessary
+
+![](images/mammal-richness.svg){fig-align="center"}
+
+::: footer
+Ceballos and Ehrlich 2006 PNAS 10.1073/pnas.0609334103
+:::
+
+::: notes
+A global perspective is necessary for understanding broad biodiversity patterns and at-risk regions
+:::
+
+## Insects comprise over 93% of the planet's described animal diversity
+
+```{r}
+#| label: insect-barplot
+#| fig-align: center
+#| fig-width: 15
+#| fig-height: 7
+
+# barplot of the number of described insect species versus the number of estimated vertebrate species
+insect_data <- tribble(
+  ~group, ~species,
+  "Insects", 1.3e6,
+  "Vertebrates", 85000
+) %>% 
+mutate(group = fct_relevel(group,  "Vertebrates", "Insects"))
+
+
+ggplot(insect_data, aes(x = group, y = species)) +
+  geom_bar(stat = "identity", fill = "#f5bc3f", color = "black") +
+  theme_bw() +
+  theme(legend.position = "none") +
+  # add labels with the number of species on each bar, with a different hjust for each species
+  geom_text(aes(label = scales::comma(species), y = species, hjust = ifelse(group == "Insects", 1.5, -0.5)), size = 8) +
+  add_phylopic(name = "Cantharis rustica", x = 2, y = 40000, ysize = 0.5) +
+  add_phylopic(name = "Sarcohyla bistincta", x = 1, y = 350000, ysize = 0.5) +
+  labs(caption = "Numbers from: Zhang et al. 2010 Zootaxa 3148.") +
+  coord_flip() +
+  scale_y_continuous(labels = scales::comma) +
+  theme(
+    panel.grid = element_blank(),
+    axis.text = element_text(size = axis_text_size),
+    axis.title = element_blank(),
+    plot.caption = element_text(size = caption_size)
+  )
+```
+
+::: notes
+Estimated number of insect species is even higher: 5.5 million! Stork 2018. Ann. Rev. Entomol. 10.1146/annurev-ento-020117-043348
+:::
+
+## Global biodiversity patterns remain undocumented for most insects
+
+-   Scientists have relied on species richness or species diversity
+-   Describing and cataloging the world's insect diversity is a monumental task
+-   What do we do?
+
+## Genetic diversity is a promising biodiversity metric
+
+-   It does not rely on species identity for calculation
+-   It is robust to certain sampling biases
+-   *macrogenetics* is an emerging field
+
+## Predictions follow those from vertebrates
+
+::: columns
+::: {.column width="50%"}
+::: fragment
+Latitudinal diversity gradient
+
+```{r}
+#| label: lat-div-grad
+#| fig-width: 4
+#| fig-height: 4
+
+# generate data with a negative correlation. the x-axis should start at zero
+set.seed(42)
+lat <- seq(0, 90, length.out = 100)
+div <- 100 - lat + rnorm(100, 0, 10)
+
+lat_plot <- ggplot(data = tibble(lat = lat, div = div), aes(x = lat, y = div)) +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 2) +
+  theme_bw() +
+  labs(x = "Latitude", y = "Genetic Diversity") +
+  theme(
+    axis.title = element_text(size = axis_title_size * .4),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+
+lat_plot
+```
+:::
+
+::: fragment
+Human disturbance
+
+```{r}
+#| label: human-disturbance
+#| fig-width: 4
+#| fig-height: 4
+
+ggplot(data = tibble(lat = lat, div = div), aes(x = lat, y = div)) +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 2) +
+  theme_bw() +
+  labs(x = "Human disturbance", y = "Genetic Diversity") +
+  theme(
+    axis.title = element_text(size = axis_title_size * .4),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+Climate stability
+
+```{r}
+#| label: climate-stability
+#| fig-width: 4
+#| fig-height: 4
+
+ggplot(data = tibble(lat = lat, div = -div), aes(x = lat, y = div)) +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linewidth = 2) +
+  theme_bw() +
+  labs(x = "Climate stability", y = "Genetic Diversity") +
+  theme(
+    axis.title = element_text(size = axis_title_size * .4),
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+```
+:::
+:::
+:::
+
+## I compiled the largest animal macrogenetic dataset to date
+
+-   2,415,415 mtDNA sequences
+-   98,417 operational taxonomic units (OTUs) [^3]
+
+[^3]: OTUs are a proxy for species
+
+::: notes
+For the purposes of this talk, we can think of OTUs as a proxy for species, although there are important differences that matter depending on the context of the study.
+:::
+
+## I compiled the largest animal macrogenetic dataset to date
+
+![](images/order_summary_fig.png){fig-align="center"}
+
+## 
+
+```{r}
+#| label: sample-map
+#| warnings: false
+
+
+crs_behr <- "+proj=cea +lon_0=0 +lat_ts=30 +x_0=0 +y_0=0 +datum=WGS84 +ellps=WGS84 +units=m +no_defs"
+
+base_map <- ne_coastline(scale = "medium", returnclass = "sf") %>% 
+st_transform(crs_behr)
+
+# read in the data
+sample_df <- read_sf("data/full_sf.geojson", crs = crs_behr) %>% 
+  filter(num_otu >= 100) 
+
+map_plot <- ggplot() +
+  geom_sf(data = base_map, fill = "gray80", color = "gray40") +
+  geom_sf(data = sample_df, aes(fill = num_ind, color = num_ind)) +
+  scale_fill_viridis_c(option = "plasma", na.value = "transparent", trans="log10") +
+  scale_color_viridis_c(option = "plasma", na.value = "transparent", trans = "log10", guide = FALSE) +
+  labs(
+    fill = "",
+    title = "*Sampling is most dense in the northern hemisphere*") +
+  coord_sf(expand = FALSE) +
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    # legend.position = "inside",
+    # legend.position.inside = c(0.2, 0.345),
+    legend.text = element_text(size = 6),
+    legend.key.size = unit(0.5, "cm"),
+    plot.title = element_markdown(size = 10)
+    )
+
+# save to images
+ggsave("images/sample_map.svg", map_plot, width=1400, height=900, units="px")
+```
+
+![](images/sample_map.svg){fig-align="center"}
+
+::: notes
+Grid cells had a 193 km by 193 km resolution and we summarized the genetic diversity for all OTUs (that is, species) in each sampled grid cell. I only retained grid cells that had at least 100 individuals for the final analysis, although I explored multiple resolutions and thresholds and ensured that results were robust across these choices.
+:::
+
+## Summarizing genetic diversity
+
+::: r-stack
+::: {.fragment .fade-out}
+For each OTU, I calculated the mean number of pairwise differences between sequences
+
+![](images/seq-align.svg){.absolute top="100" left="480" width="1000" height="1000"}
+:::
+
+::: {.fragment .fade-in-then-out}
+![](images/genetic_diversity.svg){.absolute top="0" left="480" width="1000" height="1000"}
+:::
+
+::: {.fragment .fade-in-then-out}
+![](images/gendiv_cells.svg){.absolute top="0" left="400" width="1200" height="1400"}
+:::
+
+::: {.fragment .fade-in-then-out}
+<br>
+
+**Genetic diversity mean (GDM)** = the average genetic diversity among all OTUs
+
+<br>
+
+**Genetic diversity evenness (GDE)** = the evenness of the shape of the genetic diversity distribution
+:::
+
+::: {.fragment .fade-in-then-out}
+![](images/gendiv_cells_labelled.svg){.absolute top="0" left="400" width="1200" height="1400"}
+:::
+
+::: {.fragment .fade-in}
+![](images/gendiv_full.svg){.absolute top="0" left="400" width="1200" height="1800"}
+:::
+:::
+
+::: notes
+Many pairwise differences equals higher genetic diversity for that OTU. But then we summarize them across all OTUs in a grid cell to get a measure of genetic diversity for that grid cell's insect assemblage.
+:::
+
+------------------------------------------------------------------------
+
+::: v-center-container
+**GDE/GDM \~ latitude + climate + climate stability + human influence + habitat + topography**
+:::
+
+------------------------------------------------------------------------
+
+## Global maps of insect genetic diversity
+
+::: r-stack
+::: {.fragment .fade-out}
+```{r}
+#| label: gde-map
+mess_gde_sf <- read_sf("data/mess_gde.geojson") %>% 
+  st_set_crs(crs_behr)
+
+gde_df <- read_rds("data/full_preds_sf_gde.rds") %>%  
+  pluck("min_otu_100") %>% 
+  st_set_crs(crs_behr) %>% 
+  st_join(mess_gde_sf %>% 
+  select(mess_binary), st_equals) %>%
+  # mask out the values in non-analogous climate
+  mutate(
+    across(where(is.double), ~if_else(mess_binary == "non_analogous", NA_real_, .x), .names = "mask_{.col}")
+  )
+
+map_plot <- ggplot() +
+  geom_sf(data = gde_df, aes(fill = mask_.pred, color =  mask_.pred)) +
+  geom_sf(data = base_map, fill = "transparent", color = "black") +
+  scale_fill_viridis_c(option = "rocket", na.value = "gray80") +
+  scale_color_viridis_c(option = "rocket", na.value = "gray80", guide = "none") +
+  labs(
+    fill = "",
+    title = "*Global distribution of predicted genetic diversity evenness*") +
+  coord_sf(expand = FALSE) +
+  theme_void() +
+  theme(
+    legend.position = "bottom",
+    # legend.position = "inside",
+    # legend.position.inside = c(0.2, 0.345),
+    legend.text = element_text(size = 6),
+    legend.key.size = unit(0.5, "cm"),
+    plot.title = element_markdown(size = 10)
+    )
+
+# save to images
+ggsave("images/gde_map.svg", map_plot, width=1400, height=900, units="px")
+```
+
+![](images/gde_map.svg){.absolute top="100" left="200" width="1400" height="900"}
+:::
+
+::: fragment
+```{r}
+#| label: gde-hs-map
+
+map_sf_gde_hs <- gde_df %>% 
+  arrange(desc(mask_.pred)) %>% 
+  slice_head(prop = 0.1)
+
+gde_hs_map <- ggplot() +
+  geom_sf(data = base_map, fill = "transparent") +
+  geom_sf(data = map_sf_gde_hs, fill = "red", color = "red") +
+  labs(
+      title = "*Hotspots are mostly in warm, arid, environments*") +
+    coord_sf(expand = FALSE) +
+    theme_void() +
+    theme(
+      plot.title = element_markdown(size = 10)
+      )
+
+ggsave("images/gde_hs_map.svg", gde_hs_map, width=1400, height=900, units="px")
+```
+
+![](images/gde_hs_map.svg){.absolute top="0" left="200" width="1400" height="900"}
+:::
+:::
+
+## GDE peaks in the subtropics
+
+::: r-stack
+::: {.fragment .fade-out}
+```{r}
+#| label: lat-plot-2
+lat_plot
+```
+:::
+
+::: fragment
+![](images/latitude_scatter_gde.svg){.absolute top="50" left="480" width="1000" height="1000"}
+:::
+:::
