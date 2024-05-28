@@ -1,13 +1,13 @@
 {
   "listingMap": {
+    "slides.qmd": [
+      "slides"
+    ],
     "projects.qmd": [
       "projects"
     ],
     "posts.qmd": [
       "posts"
-    ],
-    "slides.qmd": [
-      "slides"
     ]
   }
 }

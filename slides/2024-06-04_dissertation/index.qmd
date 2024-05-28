@@ -2,6 +2,10 @@
 title: "The influence of environmental change on genetic diversity across spatial and taxonomic scales"
 author: "Connor M. French"
 format: 
+  html: 
+    default:
+      echo: false
+    
   revealjs:
     theme: css/style.scss
     fig-width: 8
@@ -10,7 +14,8 @@ format:
     height: 1080
     slide-number: true
     incremental: true
-    embed-resources: true
+    output-file: slides.html
+    echo: false
 editor: visual
 ---
 

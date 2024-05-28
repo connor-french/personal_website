@@ -1,12 +1,5 @@
 [
   {
-    "listing": "/projects.html",
-    "items": [
-      "/projects/spatial-population-genetics/index.html",
-      "/projects/global-genetic-diversity/index.html"
-    ]
-  },
-  {
     "listing": "/posts.html",
     "items": [
       "/posts/2021-04-19-sonification_ttt_post/index.html",
@@ -21,6 +14,13 @@
     "listing": "/slides.html",
     "items": [
       "/slides/2024-06-04_dissertation/index.html"
+    ]
+  },
+  {
+    "listing": "/projects.html",
+    "items": [
+      "/projects/spatial-population-genetics/index.html",
+      "/projects/global-genetic-diversity/index.html"
     ]
   }
 ]
