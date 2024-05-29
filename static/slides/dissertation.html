@@ -31,6 +31,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="dissertation_files/libs/revealjs/dist/theme/quarto.css">
   <link href="dissertation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -356,6 +421,19 @@ Connor M. French
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>The Earth is constantly changing, over short and long time scales. Here I’m showing a gif of temperature change over the last 21,000 years. The line plot shows the mean temperature over time. New York has gotten a lot hotter since the last ice age! Glaciers covered New York until 10,000 years ago. The squirrels and pigeons couldn’t survive on ice, so they moved south, then came back in better climates. How do populations respond to these changes?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -364,7 +442,7 @@ Connor M. French
 <h3 id="populations-shrink-or-expand">Populations shrink or expand…</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/pop_size_change.svg" class="quarto-figure quarto-figure-center"></p>
+<p><img data-src="images/pop_size_change.svg" class="quarto-figure quarto-figure-center" height="900"></p>
 </figure>
 </div>
 </div><div class="column fragment" style="width:33%;">
@@ -372,15 +450,28 @@ Connor M. French
 <h3 id="fragment-and-reconnect">Fragment and reconnect…</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="images/pop_split.svg" class="quarto-figure quarto-figure-center" height="1000"></p>
+<p><img data-src="images/pop_split.svg" class="quarto-figure quarto-figure-center" height="900"></p>
 </figure>
 </div>
 </div><div class="column fragment" style="width:33%;">
 <!-- -->
 <h3 id="adapt-or-go-extinct">Adapt or go extinct</h3>
-<p><img data-src="images/adaptation.svg" class="absolute" style="top: 170px; right: 200px; height: 1000px; "></p>
+<p><img data-src="images/adaptation.svg" class="absolute" style="top: 170px; right: 200px; height: 900px; "></p>
 </div>
 </div>
+<aside class="notes">
+<p>They shrink or expand, fluctuating in size from the past to the present. Here, I’m representing populations as amorphous blobs that correspond with their range boundaries. Populations can fragment and reconnect, leading to isolation and/or gene flow between populations. Populations can adapt to new environments or go extinct. The background environment in this figure changes from green to orange, and the portion of the population that can’t adapt goes extinct!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="genetic-diversity-contains-signatures-of-that-change" class="slide level2">
 <h2>Genetic diversity contains signatures of that change</h2>
@@ -391,7 +482,8 @@ Connor M. French
 <p>Video from: https://bedford.io/projects/coaltrace/</p>
 </div>
 <aside class="notes">
-<p>Genetic diversity is the variation in DNA sequences within a population. It records the history of a population’s past, including changes in population size, connectivity, and adaptation to the environment. In this visualization, we see each individual, represented as circles, in a population with their genealogy traced back in time. The length of those lineages represent how much genetic diversity has accumulated over time. When I play the video, you’ll see the population change over time, with individuals being born and dying. The colors represent different genetic lineages. This is a simplified example, but it illustrates how genetic diversity can change over time.</p>
+<p>Genetic diversity is the variation in DNA sequences within a population. It records the history of a population’s past. In this visualization, we see each individual, represented as circles, in a population with their genealogy traced back in time. The length of those lineages represent how much genetic diversity has accumulated over time. When I play the video, you’ll see the population change over time, with individuals being born and dying. The colors represent different genetic lineages. This is a simplified example, but it illustrates how genetic diversity can change over time.</p>
+<p>In general, the higher the genetic diversity the better, as it can provide a population with the raw material to adapt to changing environments.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -417,7 +509,7 @@ Connor M. French
 </div>
 </div>
 <aside class="notes">
-<p>In general, the higher the genetic diversity the better, as it can provide a population with the raw material to adapt to changing environments.</p>
+<p>The story of a species can be told through the genetic diversity of its populations. The plot on the left shows the “effective population size” of a species of frog over time, which is a measure of genetic diversity. The x-axis is time before present, and although the pattern is noisy, we can see that the population experienced a recent expansion in the last 20,000 or so years. The story of the community can be told as well. Each of the red lines in this plot represents a lizard species in the northeastern United States. We can see that some common event led to the expansion of this community of lizards around 100,000 years ago!</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -440,7 +532,7 @@ Connor M. French
 </div>
 </div>
 <aside class="notes">
-<p>They may be sensitive to fluctuations in their environment over time.</p>
+<p>Ectotherms, which are animals that cannot regulate their own body temperature, may be sensitive to fluctuations in their environment over time. This collared lizard on the left needs regular sun to keep warm and the dragonfly on the right needs a stable water source to lay its eggs.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -471,7 +563,7 @@ Connor M. French
 </div>
 </div>
 <aside class="notes">
-<p>With the climate shifting rapidly, it’s important to understand how these changes are impacting the genetic diversity of species and communities.</p>
+<p>With the climate shifting rapidly, it’s important to understand how these changes are impacting the genetic diversity of species and communities that are most vulnerable to shifts in their environment.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -492,7 +584,7 @@ Connor M. French
 </section>
 <section id="my-questions" class="slide level2">
 <h2>My questions</h2>
-<h4 id="what-is-the-relationship-between-assemblage-wide-genetic-diversity-and-environmental-change-in-insects">1. What is the relationship between assemblage-wide genetic diversity and environmental change in insects?</h4>
+<h4 id="what-is-the-relationship-between-genetic-diversity-and-environmental-change-in-insects">1. What is the relationship between genetic diversity and environmental change in insects?</h4>
 <p><br></p>
 <h4 class="fragment" id="what-can-genetic-diversity-convey-about-the-processes-underlying-species-responses-to-environmental-change">2. What can genetic diversity convey about the processes underlying species responses to environmental change?</h4>
 <p><br></p>
@@ -502,7 +594,7 @@ Connor M. French
 <h2>Chapter 1: Global determinants of insect mitochondrial genetic diversity</h2>
 
 <aside><div>
-<p>What is the relationship between assemblage-wide genetic diversity and environmental change in insects?</p>
+<p>What is the relationship between genetic diversity and environmental change in insects?</p>
 </div></aside></section>
 <section id="a-global-perspective-is-necessary" class="slide level2">
 <h2>A global perspective is necessary</h2>
@@ -511,7 +603,7 @@ Connor M. French
 <p>Ceballos and Ehrlich 2006 PNAS 10.1073/pnas.0609334103</p>
 </div>
 <aside class="notes">
-<p>A global perspective is necessary for understanding broad biodiversity patterns and at-risk regions</p>
+<p>A global perspective is necessary for understanding broad biodiversity patterns and at-risk regions. What I mean by biodiversity is the variety of life on Earth, including the diversity of species, genes, and ecosystems. This figure shows the distribution of mammal species richness across the globe. The darker the color, the more species are present in that region. We can see that the tropics are the most diverse regions on Earth for mammals, and contain the most threatened species.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -553,9 +645,12 @@ Connor M. French
 <h2>Genetic diversity is a promising biodiversity metric</h2>
 <ul>
 <li class="fragment">It does not rely on species identity for calculation</li>
-<li class="fragment">It is robust to certain sampling biases</li>
+<li class="fragment">It conveys historical information</li>
 <li class="fragment"><em>macrogenetics</em> is an emerging field</li>
 </ul>
+<div class="footer">
+<p>Leigh et al.&nbsp;2022. Nat. Rev.&nbsp;Genet. 10.1038/s41576-021-00394-0</p>
+</div>
 </section>
 <section id="predictions-follow-those-from-vertebrates" class="slide level2">
 <h2>Predictions follow those from vertebrates</h2>
@@ -573,6 +668,7 @@ Connor M. French
 </div>
 </div>
 </div>
+</div><div class="column" style="width:50%;">
 <div class="fragment">
 <p>Human disturbance <sup>2</sup></p>
 <div class="cell">
@@ -585,7 +681,6 @@ Connor M. French
 </div>
 </div>
 </div>
-</div><div class="column" style="width:50%;">
 <div class="fragment">
 <p>Climate stability <sup>3</sup></p>
 <div class="cell">
@@ -649,24 +744,15 @@ Connor M. French
 <p>For each OTU, I calculated the mean number of pairwise differences between sequences</p>
 <p><img data-src="images/seq-align.svg" class="absolute" style="top: 100px; left: 480px; width: 1000px; height: 1000px; "></p>
 </div>
-<div class="fragment fade-in-then-out">
-<p><img data-src="images/genetic_diversity.svg" class="absolute" style="top: 0px; left: 480px; width: 1000px; height: 1000px; "></p>
-</div>
-<div class="fragment fade-in-then-out">
-<p><img data-src="images/gendiv_cells.svg" class="absolute" style="top: 0px; left: 400px; width: 1200px; height: 1400px; "></p>
-</div>
+<p><img data-src="images/genetic_diversity.svg" class="absolute fragment fade-in-then-out" style="top: 0px; left: 480px; width: 1000px; height: 1000px; "> <img data-src="images/gendiv_cells.svg" class="absolute fragment fade-in-then-out" style="top: 0px; left: 400px; width: 1200px; height: 1400px; "></p>
 <div class="fragment fade-in-then-out">
 <p><br></p>
 <p><strong>Genetic diversity mean (GDM)</strong> = the average genetic diversity among all OTUs</p>
 <p><br></p>
 <p><strong>Genetic diversity evenness (GDE)</strong> = the evenness of the shape of the genetic diversity distribution</p>
 </div>
-<div class="fragment fade-in-then-out">
-<p><img data-src="images/gendiv_cells_labelled.svg" class="absolute" style="top: 0px; left: 400px; width: 1200px; height: 1400px; "></p>
-</div>
-<div class="fragment fade-in">
-<p><img data-src="images/gendiv_full.svg" class="absolute" style="top: 0px; left: 400px; width: 1200px; height: 1800px; "></p>
-</div>
+<p><img data-src="images/gendiv_cells_labelled.svg" class="absolute fragment fade-in-then-out" style="top: 0px; left: 400px; width: 1200px; height: 1400px; "></p>
+<p><img data-src="images/gendiv_full.svg" class="absolute fragment fade-in-then-out" style="top: 0px; left: 400px; width: 1200px; height: 1800px; "></p>
 </div>
 <aside class="notes">
 <p>Many pairwise differences equals higher genetic diversity for that OTU. But then we summarize them across all OTUs in a grid cell to get a measure of genetic diversity for that grid cell’s insect assemblage.</p>
@@ -688,7 +774,7 @@ Connor M. French
 <p><strong>GDE/GDM ~ latitude + climate + climate stability + human influence + habitat + topography</strong></p>
 </div>
 <aside class="notes">
-<p>While I’m not going to go into the details of the model, I used a Bayesian hierarchical model to estimate the relationship between genetic diversity and these predictors. I used a spatially-explicit model to account for spatial autocorrelation in the data. In addition, for the sake of time I am focusing on the results for GDE, which was correlated with genetic diversity GDM, but seemed more robust to sampling variation and was more interpretable.</p>
+<p>While I’m not going to go into the details of the model, I used a Bayesian hierarchical model to estimate the relationship between genetic diversity and these predictors. I used a spatially-explicit model to account for spatial autocorrelation in the data. In addition, for the sake of time I am focusing on the results for GDE, which was correlated with GDM, but seemed more robust to sampling variation and was more interpretable.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -806,7 +892,7 @@ Connor M. French
 </ul>
 
 <aside><div>
-<p>What is the relationship between assemblage-wide genetic diversity and environmental change in insects?</p>
+<p>What is the relationship between genetic diversity and environmental change in insects?</p>
 </div></aside></section>
 <section id="ch.-2-demographic-responses-to-past-climate-change-in-brazilian-enyalius-lizards-using-spatially-explicit-coalescent-modeling" class="slide level2">
 <h2>Ch. 2: Demographic responses to past climate change in Brazilian Enyalius lizards using spatially-explicit coalescent modeling</h2>
@@ -820,7 +906,7 @@ Connor M. French
 <div class="column" style="width:50%;">
 <h3 id="macro-scale-patterns-are-interesting">Macro-scale patterns are interesting…</h3>
 <div class="fragment fade-out">
-<p><img data-src="images/gd_env_1.svg" class="absolute" style="left: 100px; height: 1000px; "></p>
+<p><img data-src="images/gd_env_1.svg" class="absolute" style="left: 100px; height: 900px; "></p>
 </div>
 <div class="fragment fade-in">
 <div class="quarto-figure quarto-figure-center">
@@ -893,7 +979,7 @@ Connor M. French
 <section id="sdm-suitabilities-may-have-a-non-linear-relationship-with-abundance-in-high-elevation-species" class="slide level2">
 <h2>SDM suitabilities may have a non-linear relationship with abundance in high-elevation species</h2>
 
-<img data-src="images/abund-sdm.svg" class="fragment quarto-figure quarto-figure-center r-stretch"></section>
+<img data-src="images/abund-sdm.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section id="i-investigate-this-relationship-in-two-lizard-species" class="slide level2">
 <h2>I investigate this relationship in two lizard species</h2>
 <div class="columns">
@@ -970,6 +1056,252 @@ Coalescent modeling is a type of population genetics model that simulates the ge
 <p><img data-src="images/workflow_5.svg" class="fragment"></p>
 <p><img data-src="images/workflow_6.svg" class="fragment"></p>
 </div>
+</section>
+<section id="a-threshold-transformation-is-more-likely-for-the-high-elevation-species" class="slide level2">
+<h2>A threshold transformation is more likely for the high-elevation species</h2>
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/high_low_hypo.svg" class="fragment fade-out quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/mod_class.svg" class="fragment quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div>
+</section>
+<section id="migration-is-estimated-to-be-higher-for-the-high-elevation-species" class="slide level2">
+<h2>Migration is estimated to be higher for the high-elevation species</h2>
+<div class="r-stack">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/mig_hypo.svg" class="fragment fade-out quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/param_est.svg" class="fragment quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div>
+<aside class="notes">
+<p>Janzen’s mountain pass hypothesis</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="maps-of-genetic-diversity-correspond-with-environmental-stability-in-e.-iheringii" class="slide level2">
+<h2>Maps of genetic diversity correspond with environmental stability in <em>E. iheringii</em></h2>
+</section>
+<section class="slide level2">
+
+
+<img data-src="images/gendiv_map_eny.svg" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>The low-elevation species, E. catenatus, may be sensitive to seasonal or other environmental fluctuations not captured by our models, maintaining higher genetic diversity at their range core.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="to-sum-it-up" class="slide level2">
+<h2>To sum it up</h2>
+<ul>
+<li class="fragment">Considering the relationship between predicted SDM suitability and local deme size/abundance is important in iDDC models</li>
+<li class="fragment">High-elevation species are more strongly associated with a threshold transformation compared to low-elevation species and they have higher migration</li>
+<li class="fragment">This indicates a higher tolerance to environmental change</li>
+</ul>
+
+<aside><div>
+<p>What can genetic diversity convey about the processes underlying species responses to environmental change?</p>
+</div></aside></section>
+<section id="ch.-3-spaceprime-a-python-package-to-facilitate-spatially-explicit-coalescent-models-in-msprime" class="slide level2">
+<h2>Ch. 3: <code>spaceprime</code>: a Python package to facilitate spatially-explicit coalescent models in <code>msprime</code></h2>
+
+<aside><div>
+<p>How can I make integrative modeling of species responses to environmental change more accessible?</p>
+</div></aside></section>
+<section id="simulating-these-complex-scenarios-is-difficult" class="slide level2">
+<h2>Simulating these complex scenarios is difficult</h2>
+<p><img data-src="images/conceptual-fig.png" class="absolute" style="left: 480px; "></p>
+<aside class="notes">
+<p>Completing these simulations for my last chapter involved a TON of code and many hours of debugging code that wasn’t doing quite what I expected. In conversations with other scientists who are interested in similar types of analyses and trying out other software that got close to what I wanted, but not quite, I decided to put together my own software package, called spaceprime. Why’s it called spaceprime?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="space"><em>space</em></h3>
+<p>Take spatial models of habitat suitability (i.e.&nbsp;SDMs) projected through time</p>
+<p><img data-src="images/sdm_through_time.svg" class="absolute" style="top: 300px; width: 1000px; "></p>
+</div><div class="column fragment" style="width:50%;">
+<!-- -->
+<h3 id="prime"><em>prime</em></h3>
+<p>Simulate the genealogy of a sample of DNA sequences backwards in time with</p>
+<p><img data-src="images/msprime_logo.svg" class="absolute" style="top: 300px; right: 100px; width: 700px; "></p>
+</div>
+</div>
+<div class="footer">
+<p>Baumdicker et al.&nbsp;2022. Genetics. 10.1093/genetics/iyab229</p>
+</div>
+<aside class="notes">
+<p>msprime is a Python package that is extremely efficient at performing coalescent simulations. The user interface for msprime is very flexible, but it can be daunting for users to set up the extremely large simulations that are required for iDDC modeling. spaceprime is a package that wraps around msprime and provides a more user-friendly interface for spatially-explicit coalescent simulations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="spaceprime-limits-coding-errors-and-streamlines-analysis" class="slide level2">
+<h2><code>spaceprime</code> limits coding errors and streamlines analysis</h2>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="spaceprime"><code>spaceprime</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a>projections <span class="op">=</span> rasterio.<span class="bu">open</span>(<span class="st">"data/projections_agg.tif"</span>)</span>
+<span id="cb1-2"><a href=""></a>locs <span class="op">=</span> gpd.read_file(<span class="st">"data/distincta_localities_ex.geojson"</span>)</span>
+<span id="cb1-3"><a href=""></a>demes <span class="op">=</span> sp.raster_to_demes(projections, transformation<span class="op">=</span><span class="st">"linear"</span>, max_local_size<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb1-4"><a href=""></a>d <span class="op">=</span> sp.spDemography()</span>
+<span id="cb1-5"><a href=""></a>d.stepping_stone_2d(demes, rate<span class="op">=</span><span class="fl">0.001</span>, scale<span class="op">=</span><span class="va">True</span>, timesteps<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb1-6"><a href=""></a>d.add_ancestral_populations(anc_sizes <span class="op">=</span> [<span class="dv">100000</span>], merge_time <span class="op">=</span> <span class="dv">23000</span>)</span>
+<span id="cb1-7"><a href=""></a>sample_dict, _, _ <span class="op">=</span> sp.coords_to_sample_dict(projections, locs)</span>
+<span id="cb1-8"><a href=""></a>ts <span class="op">=</span> msprime.sim_ancestry(demography<span class="op">=</span>d, samples<span class="op">=</span>sample_dict, sequence_length<span class="op">=</span><span class="fl">1e6</span>, recombination_rate<span class="op">=</span><span class="fl">1e-9</span>, random_seed<span class="op">=</span><span class="dv">43</span>, record_provenance<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb1-9"><a href=""></a>ts <span class="op">=</span> msprime.sim_mutations(ts, rate<span class="op">=</span><span class="fl">1e-8</span>, random_seed<span class="op">=</span><span class="dv">99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:50%;">
+<h3 id="msprime"><code>msprime</code></h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>demography <span class="op">=</span> msprime.Demography()</span>
+<span id="cb2-2"><a href=""></a>demography.add_population(name<span class="op">=</span><span class="st">"A"</span>, initial_size<span class="op">=</span><span class="dv">10_000</span>)</span>
+<span id="cb2-3"><a href=""></a>demography.add_population(name<span class="op">=</span><span class="st">"B"</span>, initial_size<span class="op">=</span><span class="dv">5_000</span>)</span>
+<span id="cb2-4"><a href=""></a>demography.add_population(name<span class="op">=</span><span class="st">"C"</span>, initial_size<span class="op">=</span><span class="dv">1_000</span>)</span>
+<span id="cb2-5"><a href=""></a>demography.add_population_split(time<span class="op">=</span><span class="dv">1000</span>, derived<span class="op">=</span>[<span class="st">"A"</span>, <span class="st">"B"</span>], ancestral<span class="op">=</span><span class="st">"C"</span>)</span>
+<span id="cb2-6"><a href=""></a>demography.set_symmetric_migration_rate(populations<span class="op">=</span>[<span class="st">"A"</span>, <span class="st">"B"</span>], rate<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb2-7"><a href=""></a>ts <span class="op">=</span> msprime.sim_ancestry(samples<span class="op">=</span>{<span class="st">"A"</span>: <span class="dv">2</span>, <span class="st">"B"</span>: <span class="dv">2</span>}, demography<span class="op">=</span>demography, random_seed<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb2-8"><a href=""></a>ts <span class="op">=</span> msprime.sim_mutations(ts, rate<span class="op">=</span><span class="fl">3e-4</span>, random_seed <span class="op">=</span> <span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+
+<aside><div>
+<p>Simulate thousands of populations in the same amount of code that it takes to simulate three.</p>
+</div></aside></section>
+<section id="with-spaceprime-you-can" class="slide level2">
+<h2>With <code>spaceprime</code> you can</h2>
+<ul>
+<li class="fragment">Set up simulations</li>
+<li class="fragment">Visualize your models</li>
+<li class="fragment">Analyze your simulation <em>and</em> empirical data</li>
+<li class="fragment">Run simulations in parallel on a cluster</li>
+<li class="fragment">Execute these simulations <em>fast</em>
+<ul>
+<li class="fragment">&lt; 1 hour instead of days</li>
+</ul></li>
+</ul>
+</section>
+<section id="the-spaceprime-website-contains" class="slide level2">
+<h2>The <a href="https://connor-french.github.io/spaceprime/"><code>spaceprime</code> website</a> contains</h2>
+<div class="fragment">
+<ul>
+<li class="fragment">Documentation of all functions</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li class="fragment">A quickstart guide and worked example(s)<br>
+<img data-src="images/pdistincta.jpg" style="height:10cm"></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li class="fragment">A guide for R users</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li class="fragment">FAQ and other resources</li>
+</ul>
+</div>
+
+<aside class="notes">
+<p>More examples and tutorials are in the works, and I’m always looking for feedback on how to make the package more user-friendly and useful for the community.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>https://connor-french.github.io/spaceprime/</p>
+</div></aside></section>
+<section id="in-conclusion" class="slide level2">
+<h2>In conclusion</h2>
+<ul>
+<li class="fragment"><code>spaceprime</code> is <em>convenient</em></li>
+<li class="fragment"><code>spaceprime</code> is <em>fast</em></li>
+<li class="fragment"><code>spaceprime</code> is <em>accessible</em></li>
+</ul>
+
+<aside><div>
+<p>How can I make integrative modeling of species responses to environmental change more accessible?</p>
+</div></aside></section>
+<section id="my-questions-1" class="slide level2">
+<h2>My questions</h2>
+<h4 id="what-is-the-relationship-between-genetic-diversity-and-environmental-change-in-insects-1">1. What is the relationship between genetic diversity and environmental change in insects?</h4>
+<ul>
+<li class="fragment">GDE peaks in the subtropics and is distinct from vertebrate patterns</li>
+</ul>
+<h4 class="fragment" id="what-can-genetic-diversity-convey-about-the-processes-underlying-species-responses-to-environmental-change-1">2. What can genetic diversity convey about the processes underlying species responses to environmental change?</h4>
+<ul>
+<li class="fragment">High-elevation lizard species may have broader environmental tolerances than low-elevation species</li>
+</ul>
+<h4 class="fragment" id="how-can-i-make-integrative-modeling-of-species-responses-to-environmental-change-more-accessible-1">3. How can I make integrative modeling of species responses to environmental change more accessible?</h4>
+<ul>
+<li class="fragment">With <code>spaceprime</code></li>
+</ul>
+</section>
+<section id="thank-you" class="slide level2">
+<h2>Thank you!</h2>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
