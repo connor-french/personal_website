@@ -1,0 +1,21 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 414.74526164588104 931.2442640722084" width="829.4905232917621" height="1862.4885281444167">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style class="style-fonts">
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+      @font-face {
+        font-family: "Assistant";
+        src: url("https://excalidraw.com/Assistant-Regular.woff2");
+      }
+    </style>
+    
+  </defs>
+  <g stroke-linecap="round" transform="translate(21.133191708981997 10) rotate(0 191.80603496844952 91.904296875)"><path d="M0 0 C87.3 0, 174.6 0, 383.61 0 M0 0 C81.42 0, 162.84 0, 383.61 0 M383.61 0 C383.61 42.27, 383.61 84.54, 383.61 183.81 M383.61 0 C383.61 60.71, 383.61 121.42, 383.61 183.81 M383.61 183.81 C256.22 183.81, 128.82 183.81, 0 183.81 M383.61 183.81 C306.85 183.81, 230.09 183.81, 0 183.81 M0 183.81 C0 123.07, 0 62.33, 0 0 M0 183.81 C0 136.21, 0 88.61, 0 0" stroke="#1e1e1e" stroke-width="1" fill="none"></path></g><g transform="translate(47.58092549375192 70.8171634883671) rotate(0 170.9729215181791 26.015985576923075)"><text x="0" y="41.62646061823918" font-family="Helvetica, Segoe UI Emoji" font-size="45.24519230769231px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Genetic Diversity</text></g><g stroke-linecap="round" transform="translate(10 737.4356703222084) rotate(0 191.8060349684495 91.904296875)"><path d="M0 0 C142.01 0, 284.02 0, 383.61 0 M0 0 C116.66 0, 233.32 0, 383.61 0 M383.61 0 C383.61 47.96, 383.61 95.92, 383.61 183.81 M383.61 0 C383.61 44.8, 383.61 89.6, 383.61 183.81 M383.61 183.81 C230.91 183.81, 78.2 183.81, 0 183.81 M383.61 183.81 C282.25 183.81, 180.89 183.81, 0 183.81 M0 183.81 C0 130.21, 0 76.62, 0 0 M0 183.81 C0 134.4, 0 85, 0 0" stroke="#1e1e1e" stroke-width="1" fill="none"></path></g><g transform="translate(81.06755074744746 798.2401270422534) rotate(0 126.98342895507812 26.01598557692307)"><text x="0" y="41.62646061823918" font-family="Helvetica, Segoe UI Emoji" font-size="45.24519230769231px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;" direction="ltr" dominant-baseline="alphabetic">Environment</text></g><g stroke-linecap="round"><g transform="translate(200.48453106296216 212.00704180983473) rotate(0 0.55274442200664 253.70333631690715)"><path d="M0 0 C0.32 144.81, 0.63 289.62, 1.11 507.41" stroke="#868e96" stroke-width="4.5" fill="none" stroke-dasharray="8 12"></path></g></g><mask></mask></svg>

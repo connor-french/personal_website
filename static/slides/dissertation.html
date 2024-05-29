@@ -500,7 +500,10 @@ Connor M. French
 </section>
 <section id="chapter-1-global-determinants-of-insect-mitochondrial-genetic-diversity" class="slide level2">
 <h2>Chapter 1: Global determinants of insect mitochondrial genetic diversity</h2>
-</section>
+
+<aside><div>
+<p>What is the relationship between assemblage-wide genetic diversity and environmental change in insects?</p>
+</div></aside></section>
 <section id="a-global-perspective-is-necessary" class="slide level2">
 <h2>A global perspective is necessary</h2>
 
@@ -559,7 +562,7 @@ Connor M. French
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
-<p>Latitudinal diversity gradient</p>
+<p>Latitudinal diversity gradient <sup>1</sup></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -571,7 +574,7 @@ Connor M. French
 </div>
 </div>
 <div class="fragment">
-<p>Human disturbance</p>
+<p>Human disturbance <sup>2</sup></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -584,7 +587,7 @@ Connor M. French
 </div>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
-<p>Climate stability</p>
+<p>Climate stability <sup>3</sup></p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -597,7 +600,7 @@ Connor M. French
 </div>
 </div>
 </div>
-</section>
+<aside><ol class="aside-footnotes"><li id="fn3"><p>Hillebrand 2004. Am. Nat. 10.1086/381004</p></li><li id="fn4"><p>Chapin et al.&nbsp;2000. Nature. 10.1038/35012241</p></li><li id="fn5"><p>Hewitt 2000. Nature. 10.1038/35016000</p></li></ol></aside></section>
 <section id="i-compiled-the-largest-animal-macrogenetic-dataset-to-date" class="slide level2">
 <h2>I compiled the largest animal macrogenetic dataset to date</h2>
 <ul>
@@ -617,7 +620,7 @@ Connor M. French
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<aside><ol class="aside-footnotes"><li id="fn3"><p>OTUs are a proxy for species</p></li></ol></aside></section>
+<aside><ol class="aside-footnotes"><li id="fn6"><p>OTUs are a proxy for species</p></li></ol></aside></section>
 <section id="i-compiled-the-largest-animal-macrogenetic-dataset-to-date-1" class="slide level2">
 <h2>I compiled the largest animal macrogenetic dataset to date</h2>
 
@@ -684,6 +687,19 @@ Connor M. French
 <div class="v-center-container">
 <p><strong>GDE/GDM ~ latitude + climate + climate stability + human influence + habitat + topography</strong></p>
 </div>
+<aside class="notes">
+<p>While I’m not going to go into the details of the model, I used a Bayesian hierarchical model to estimate the relationship between genetic diversity and these predictors. I used a spatially-explicit model to account for spatial autocorrelation in the data. In addition, for the sake of time I am focusing on the results for GDE, which was correlated with genetic diversity GDM, but seemed more robust to sampling variation and was more interpretable.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="global-maps-of-insect-genetic-diversity" class="slide level2">
 <h2>Global maps of insect genetic diversity</h2>
@@ -713,6 +729,246 @@ Connor M. French
 <div class="fragment">
 <p><img data-src="images/latitude_scatter_gde.svg" class="absolute" style="top: 50px; left: 480px; width: 1000px; height: 1000px; "></p>
 </div>
+</div>
+</section>
+<section id="gde-peaks-in-the-subtropics-1" class="slide level2">
+<h2>GDE peaks in the subtropics</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><strong>Rapoport’s rule</strong>: species ranges are larger at higher latitudes <sup>1</sup></li>
+<li class="fragment">Genetic diversity tends to increase with range size <sup>2</sup></li>
+<li class="fragment">Pattern breaks down in previously glaciated regions</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/latitude_scatter_gde.svg" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside><ol class="aside-footnotes"><li id="fn7"><p>Stevens 1989. Am. Nat. https://doi.org/10.1086/284913</p></li><li id="fn8"><p>Exposito-Alonso et al.&nbsp;2022. Science. 10.1126/science.abn5642</p></li></ol></aside></section>
+<section id="gde-is-correlated-with-current-climate-and-climate-stability" class="slide level2">
+<h2>GDE is correlated with current climate and climate stability</h2>
+
+<img data-src="images/posterior_fig.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>Mention the lack of human influence and habitat heterogeneity</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="gde-is-correlated-with-current-climate-and-climate-stability-1" class="slide level2">
+<h2>GDE is correlated with current climate and climate stability</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><strong>Climate stability hypothesis</strong>: genetic diversity increases with climate stability <sup>1</sup></li>
+<li class="fragment"><strong>Evolutionary speed hypothesis</strong>: genetic diversity increases with temperature <sup>2</sup></li>
+<li class="fragment">Insect diapause provides an adaptive tolerance to seasonal temperature variation <sup>3</sup></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/posterior_fig.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Evolutionary speed hypothesis- similar patterns in fish, animals, and plants</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><ol class="aside-footnotes"><li id="fn9"><p>Hewitt 2000. Nature. 10.1038/35016000</p></li><li id="fn10"><p>Oppold et al.&nbsp;2016. Proc. Biol. Sci. 10.1098/rspb.2015.2413</p></li><li id="fn11"><p>Addo-Bediako et al.&nbsp;2000. Proc. Biol. Sci. 10.1098/rspb.2000.1065</p></li></ol></aside></section>
+<section id="to-sum-up" class="slide level2">
+<h2>To sum up</h2>
+<ul>
+<li class="fragment">GDE peaks in the subtropics and is distinct from vertebrate patterns</li>
+<li class="fragment">Environmental stability leads to higher levels of genetic diversity</li>
+<li class="fragment">Seasonally warm temperatures suggest the evolutionary speed hypothesis may be at play</li>
+</ul>
+
+<aside><div>
+<p>What is the relationship between assemblage-wide genetic diversity and environmental change in insects?</p>
+</div></aside></section>
+<section id="ch.-2-demographic-responses-to-past-climate-change-in-brazilian-enyalius-lizards-using-spatially-explicit-coalescent-modeling" class="slide level2">
+<h2>Ch. 2: Demographic responses to past climate change in Brazilian Enyalius lizards using spatially-explicit coalescent modeling</h2>
+
+<aside><div>
+<p>What can genetic diversity convey about the processes underlying species responses to environmental change?</p>
+</div></aside></section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="macro-scale-patterns-are-interesting">Macro-scale patterns are interesting…</h3>
+<div class="fragment fade-out">
+<p><img data-src="images/gd_env_1.svg" class="absolute" style="left: 100px; height: 1000px; "></p>
+</div>
+<div class="fragment fade-in">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/gd_env_2.svg" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div>
+</div><div class="column fragment" style="width:50%;">
+<!-- -->
+<h3 id="but-what-about-processes">but what about processes?</h3>
+<p><img data-src="images/gd_env_process.svg" class="absolute" style="top: 200px; height: 900px; "></p>
+</div>
+</div>
+<aside class="notes">
+<p>The processes change over time and space.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="species-are-expected-to-respond-differently-to-environmental-change" class="slide level2">
+<h2>Species are expected to respond differently to environmental change</h2>
+<p><img data-src="images/vonmay.png" class="quarto-figure quarto-figure-center" height="700"> <sup>1</sup></p>
+<aside class="notes">
+<p>Emerging evidence indicating that ectotherms from higher elevations could be more resilient due to exhibiting wider environmental tolerances than their lowland counterparts.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><ol class="aside-footnotes"><li id="fn12"><p>von May et al.&nbsp;2017. Eco. Evo. 10.1002/ece3.2929</p></li></ol></aside></section>
+<section id="species-distribution-models-sdms-are-useful-tools" class="slide level2">
+<h2>Species distribution models (SDMs) are useful tools</h2>
+
+<img data-src="images/sdm_ameerega.svg" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>Species distribution models (SDMs) are useful tools to investigate the mechanisms underlying these expectations - quick illustration of SDMs and what they predict - State that the probability is often translated into other ecological variables, like abundance</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-relationship-between-sdm-suitabilities-and-abundance" class="slide level2">
+<h2>The relationship between SDM suitabilities and abundance</h2>
+<ul>
+<li class="fragment">While a probability may reliably predict presence, it may not predict abundance</li>
+<li class="fragment">Wider environmental tolerances may lead to higher abundances in marginal habitats</li>
+</ul>
+</section>
+<section id="sdm-suitabilities-may-have-a-non-linear-relationship-with-abundance-in-high-elevation-species" class="slide level2">
+<h2>SDM suitabilities may have a non-linear relationship with abundance in high-elevation species</h2>
+
+<img data-src="images/abund-sdm.svg" class="fragment quarto-figure quarto-figure-center r-stretch"></section>
+<section id="i-investigate-this-relationship-in-two-lizard-species" class="slide level2">
+<h2>I investigate this relationship in two lizard species</h2>
+<div class="columns">
+<div class="column" style="width:80%;">
+<p><img data-src="images/range_map.png"></p>
+</div><div class="column" style="width:20%;">
+<p><img data-src="images/lizard_photos.png" class="absolute" style="top: 300px; right: 300px; width: 300px; height: 500px; "></p>
+</div>
+</div>
+</section>
+<section id="integrative-distributional-demographic-and-coalescent-iddc-modeling" class="slide level2">
+<h2>Integrative distributional, demographic, and coalescent (iDDC) modeling</h2>
+<h3 class="fragment" id="distributional">Distributional</h3>
+<ul>
+<li class="fragment">SDMs predict the distribution of suitable habitat</li>
+</ul>
+<h3 class="fragment" id="demographic">Demographic</h3>
+<ul>
+<li class="fragment">SDMs are transformed into demographic models
+<ul>
+<li class="fragment">local deme size and dispersal</li>
+</ul></li>
+</ul>
+<h3 class="fragment" id="coalescent">Coalescent</h3>
+<ul>
+<li class="fragment">Coalescent modeling simulates the genealogy of a sample of DNA sequences backwards in time</li>
+</ul>
+<aside class="notes">
+<p>A deme is like a local population.<br>
+Coalescent modeling is a type of population genetics model that simulates the genealogy of a sample of DNA sequences backwards in time to infer the demographic history of a population.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+
+<img data-src="images/conceptual-fig-1.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section class="slide level2">
+
+
+<img data-src="images/conceptual-fig-2.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section class="slide level2">
+
+
+<img data-src="images/conceptual-fig-3.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="predictions" class="slide level2">
+<h2>Predictions</h2>
+
+<img data-src="images/high_low_hypo.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="predictions-1" class="slide level2">
+<h2>Predictions</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/mig_hypo.svg" class="quarto-figure quarto-figure-center" height="900"></p>
+</figure>
+</div>
+</section>
+<section id="i-used-simulations-and-machine-learning-to-test-these-hypotheses" class="slide level2">
+<h2>I used simulations and machine learning to test these hypotheses</h2>
+<div class="r-stack">
+<p><img data-src="images/workflow_1.svg" class="fragment"></p>
+<p><img data-src="images/workflow_2.svg" class="fragment"></p>
+<p><img data-src="images/workflow_3.svg" class="fragment"></p>
+<p><img data-src="images/workflow_4.svg" class="fragment"></p>
+<p><img data-src="images/workflow_5.svg" class="fragment"></p>
+<p><img data-src="images/workflow_6.svg" class="fragment"></p>
 </div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
