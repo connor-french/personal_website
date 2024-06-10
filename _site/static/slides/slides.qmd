@@ -18,6 +18,7 @@ resources:
 ---
 
 ## Slides
+
 ```{r, echo=FALSE,warning=FALSE}
 
 # sourced from https://github.com/jthomasmock/themockup-blog/blob/master/static/resources/resources.qmd
@@ -28,7 +29,7 @@ suppressPackageStartupMessages({
 
 data_in <- tibble::tribble(
   ~Project, ~url, ~Type, ~Description,
-  "Dissertation pre-defense seminar", "https://connor-french.com//static/slides/dissertation.html", "Slides", "An overview of my PhD dissertation research",
+  "Dissertation pre-defense seminar", "https://connor-french.com//static/slides/predefense.html", "Slides", "An overview of my PhD dissertation research",
   
 ) %>% 
   filter(Type == "Slides") %>% 
@@ -65,5 +66,6 @@ data_in %>%
 ```
 
 ## Other
+
 ::: {#slides}
 :::
