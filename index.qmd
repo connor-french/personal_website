@@ -47,8 +47,10 @@ writeLines(redirects, here::here("_site", "_redirects"))
 
 ```
 
-I am a PhD candidate in the [Mike Hickerson](https://hickerlab.wordpress.com/) and [Ana Carnaval](https://carnavallab.org/) labs at the City University of New York, City College campus.
+I am a research scientist and recently (June 4th, 2024) earned my Biology PhD in the [Mike Hickerson](https://hickerlab.wordpress.com/) and [Ana Carnaval](https://carnavallab.org/) labs at The Graduate Center, City University of New York.
 
-My research focuses on understanding how populations, species, and communities evolve in response to changing environments.
+I'm currently on the job market! My ideal role would involve taking advantage of my strong computational and scientific background to solve difficult data problems in science and business. I love each stage of the process- planning, execution, and communication to stakeholders. I am particularly drawn to mission-driven companies that can take advantage of my domain-specific knowledge in genomics, climate, and/or geospatial analytics, but I am open to taking my passion for data science and analytics into unexpected directions. As a data scientist, I particularly enjoy creating reproducible data analytics and machine learning pipelines, creating engaging data visualizations and dashboards, and distilling complex results for a diversity of stakeholder audiences.
+
+My academic research focuses on understanding how populations, species, and communities evolve in response to changing environments. I integrate species distribution modeling using earth observation data with population genomics to address these questions and [develop open-source software](https://github.com/connor-french) to solve these difficult problems.
 
 I'm passionate about [data science](posts.qmd), [photography](https://www.instagram.com/connorfrenchphotography/), music, and my dog Buckley!
