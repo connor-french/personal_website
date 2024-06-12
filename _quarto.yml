@@ -20,8 +20,8 @@ website:
         file: posts.qmd
       - text: "Projects"
         file: projects.qmd
-      - text: "Slides"
-        file: static/slides/slides.qmd
+      - text: "Presentations"
+        file: presentations.qmd
 
   page-footer:
     left: |
@@ -37,10 +37,15 @@ website:
 format:
   html:
     theme: 
-      light: minty
+      light: 
+        - minty
+        - styles.scss
       dark: cyborg
+      
     css: styles.css
     toc: true
 
 editor: visual
 
+resources:
+  - "static/"

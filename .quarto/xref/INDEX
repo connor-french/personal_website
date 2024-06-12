@@ -53,5 +53,11 @@
   },
   "static/slides/index.qmd": {
     "index.html": "01085f26"
+  },
+  "presentations/2024-06-04_predefense/index.qmd": {
+    "index.html": "a6ff28a9"
+  },
+  "presentations.qmd": {
+    "presentations.html": "f0bc96d8"
   }
 }

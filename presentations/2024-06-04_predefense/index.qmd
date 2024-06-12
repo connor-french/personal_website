@@ -1,0 +1,10 @@
+---
+title: "Predefense Talk"
+description: The talk I gave prior to defending my dissertation.
+date: '2024-06-04'
+aliases:   
+  - ../predefense/
+image: featured.png
+---
+
+{{< revealjs "../../static/presentations/2024-06-04_predefense/predefense.html" >}}
