@@ -9,8 +9,8 @@ about:
     - icon: github
       text: Github
       href: https://github.com/connor-french
-    - icon: twitter
-      text: Twitter
+    - icon: X
+      text: X
       href: https://twitter.com/frog_phylo
     - icon: linkedin
       text: LinkedIn
