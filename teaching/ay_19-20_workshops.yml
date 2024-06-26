@@ -1,0 +1,40 @@
+- title: Data Visualization in R
+  description: "2.5 hour workshop on using ggplot2 for data visualization."
+  university: The Graduate Center, CUNY
+  role: Instructor
+  url: https://github.com/GC-DRI/R_data_vis
+  logo: logos/gcdf.svg
+  semester:
+  - name: Spring 2020
+    url: https://github.com/GC-DRI/R_data_vis
+    
+- title: Reproducible Data Analysis in R
+  description: "2.5 hour workshop on using RMarkdown and GitHub for reproducible data analysis."
+  university: The Graduate Center, CUNY
+  role: Instructor
+  url: https://github.com/connor-french/workr
+  logo: logos/gcdf.svg
+  semester:
+  - name: Spring 2020
+    url: https://github.com/connor-french/workr
+    
+- title: Data Wrangling in R
+  description: "2.5 hour workshop on using the tidyverse for data manipulation."
+  university: The Graduate Center, CUNY
+  role: Instructor
+  url: https://github.com/connor-french/workr
+  logo: logos/gcdf.svg
+  semester:
+  - name: Fall 2019
+    url: https://github.com/connor-french/workr
+
+- title: Introductory R and RStudio
+  description: "1.5 hour invited workshop for graduate students in the Quantitative Zoogeography graduate course"
+  university: The Graduate Center, CUNY
+  role: Instructor
+  url: https://github.com/connor-french/intro-r
+  logo: logos/gcdf.svg
+  semester:
+  - name: Fall 2019
+    url: https://github.com/connor-french/intro-r
+  

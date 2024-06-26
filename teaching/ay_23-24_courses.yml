@@ -1,0 +1,19 @@
+- title: Data, Science, Scientists
+  description: "Introduce new Biology students to the research and stories of faculty, while developing core research foundational and technological skills in Microsoft Excel and R."
+  university: City College of New York
+  role: TA, as PhD student. Developed the curriculum.
+  number: BIO 10006
+  url: https://www.connor-french.github.io/dss_2024/
+  logo: logos/ccny.svg
+  semester:
+  - name: Spring 2024
+    url: https://www.connor-french.github.io/dss_2024/
+
+- title: Ecology and Evolution
+  description: "Introduction to the basic principles of ecology and evolutionary biology emphasizing quantitative approaches and hypothesis testing."
+  university: City College of New York
+  role: TA, as PhD student
+  number: BIO 22800
+  logo: logos/ccny.svg
+  semester:
+  - name: Fall 2023

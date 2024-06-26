@@ -13,6 +13,10 @@
     ]
   },
   {
+    "listing": "/teaching.html",
+    "items": []
+  },
+  {
     "listing": "/posts.html",
     "items": [
       "/posts/2021-04-19-sonification_ttt_post/index.html",
@@ -22,5 +26,9 @@
       "/posts/2019-11-20-leaflet_tutorial/index.html",
       "/posts/2019-10-05-pdig-training-grant-spotlight-connor-french/index.html"
     ]
+  },
+  {
+    "listing": "/teaching/index.html",
+    "items": []
   }
 ]

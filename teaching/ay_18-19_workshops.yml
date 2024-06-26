@@ -1,0 +1,18 @@
+- title: Introduction to population structure inference in R
+  description: "Two hour invited workshop for Zoology graduate and undergraduate students."
+  university: SIU Carbondale
+  role: Instructor
+  url: https://github.com/connor-french/intro-pop-structure-r?tab=readme-ov-file
+  logo: logos/siuc.png
+  semester:
+  - name: Spring 2019
+    url: https://github.com/connor-french/intro-pop-structure-r?tab=readme-ov-file
+
+- title: Bioinformatic processing of ultraconserved elements for phylogenetic analysis
+  description: "Two hour workshop to introduce graduate students to a bioinformatics pipeline."
+  university: SIU Carbondale
+  role: Instructor
+  logo: logos/siuc.png
+  semester:
+  - name: Spring 2019
+

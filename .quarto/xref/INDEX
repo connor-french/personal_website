@@ -59,5 +59,11 @@
   },
   "presentations.qmd": {
     "presentations.html": "f0bc96d8"
+  },
+  "teaching/index.qmd": {
+    "index.html": "01f01dbe"
+  },
+  "teaching.qmd": {
+    "teaching.html": "1265b662"
   }
 }

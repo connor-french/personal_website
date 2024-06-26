@@ -1,0 +1,26 @@
+- title: Vertebrate Anatomy Lab
+  description: "Led and prepared labs."
+  university: SIU Carbondale
+  role: TA, as Master's student
+  number: ZOOL 418
+  logo: logos/siuc.png
+  semester:
+  - name: Spring 2017
+
+- title: Introductory Biology for Non-Majors Lab
+  description: "Led and prepared labs."
+  university: SIU Carbondale
+  role: TA, as Master's student
+  number: ZOOL 115
+  logo: logos/siuc.png
+  semester:
+  - name: Fall 2016
+
+- title: Camp Einstein Afterschool STEM Program
+  description: "Led summer after school program for early elementary school students."
+  role: Instructor
+  logo: logos/einstein.png
+  semester:
+  - name: Summer 2016
+  
+  

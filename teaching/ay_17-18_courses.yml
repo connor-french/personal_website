@@ -1,0 +1,26 @@
+- title: BioSkills- Developmental biology
+  description: "Co-developed material for new writing and discussion-based course section."
+  university: SIU Carbondale
+  role: TA, as Master's student
+  number: BIO 212
+  logo: logos/siuc.png
+  semester:
+  - name: Spring 2018
+
+- title: BioSkills- Ecology
+  description: "Co-developed material for new writing and discussion-based course section."
+  university: SIU Carbondale
+  role: TA, as Master's student
+  number: BIO 212
+  logo: logos/siuc.png
+  semester:
+  - name: Fall 2017
+  
+- title: Introduction to Evolution and Ecology Lab
+  description: "Introductory lab course for majors."
+  university: SIU Carbondale
+  role: TA, as Master's student
+  number: BIO 212
+  logo: logos/siuc.png
+  semester:
+  - name: Fall 2017

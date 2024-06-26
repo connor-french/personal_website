@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://connor-french.com/presentations.html</loc>
-    <lastmod>2024-06-12T19:18:42.196Z</lastmod>
+    <lastmod>2024-06-20T13:46:07.047Z</lastmod>
   </url>
   <url>
     <loc>https://connor-french.com/presentations/2024-06-04_predefense/index.html</loc>
-    <lastmod>2024-06-12T19:51:21.983Z</lastmod>
+    <lastmod>2024-06-19T19:02:11.943Z</lastmod>
   </url>
   <url>
     <loc>https://connor-french.com/readme.html</loc>
@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://connor-french.com/projects.html</loc>
-    <lastmod>2022-12-26T13:15:54.540Z</lastmod>
+    <lastmod>2024-06-20T13:45:53.455Z</lastmod>
   </url>
   <url>
     <loc>https://connor-french.com/projects/global-genetic-diversity/index.html</loc>
@@ -31,6 +31,10 @@
   <url>
     <loc>https://connor-french.com/posts/2019-11-20-leaflet_tutorial/index.html</loc>
     <lastmod>2022-12-19T15:13:44.522Z</lastmod>
+  </url>
+  <url>
+    <loc>https://connor-french.com/teaching.html</loc>
+    <lastmod>2024-06-19T23:09:10.999Z</lastmod>
   </url>
   <url>
     <loc>https://connor-french.com/posts/2020-11-20_gis-at-scale/index.html</loc>
@@ -50,7 +54,7 @@
   </url>
   <url>
     <loc>https://connor-french.com/index.html</loc>
-    <lastmod>2024-06-10T18:41:12.183Z</lastmod>
+    <lastmod>2024-06-20T19:32:58.772Z</lastmod>
   </url>
   <url>
     <loc>https://connor-french.com/about.html</loc>
@@ -58,6 +62,10 @@
   </url>
   <url>
     <loc>https://connor-french.com/posts.html</loc>
-    <lastmod>2022-12-16T12:03:36.927Z</lastmod>
+    <lastmod>2024-06-20T13:46:00.922Z</lastmod>
+  </url>
+  <url>
+    <loc>https://connor-french.com/teaching/index.html</loc>
+    <lastmod>2024-06-21T21:46:00.100Z</lastmod>
   </url>
 </urlset>

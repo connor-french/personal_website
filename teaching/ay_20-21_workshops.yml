@@ -1,0 +1,59 @@
+
+- title: R for Reproducible Scientific Analysis
+  description: "Invited half-day Software Carpentries workshop as part of the Pre‐Statistics Course Bootcamp."
+  university: Columbia University
+  role: Instructor
+  logo: logos/columbia.svg
+  semester:
+  - name: Spring 2021
+
+- title: Introduction to Text Analysis in R
+  description: "1.5 hour online workshop for CUNY Graduate Center faculty and students."
+  university: The Graduate Center, CUNY
+  role: Instructor
+  url: https://rpubs.com/confrench33/text_analysis_R
+  logo: logos/gcdf.svg
+  semester:
+  - name: Spring 2021
+    url: https://rpubs.com/confrench33/text_analysis_R
+
+- title: Digital Research Institute
+  description: "Five day series of workshops introducing CUNY faculty and students to digital tools for research."
+  university: The Graduate Center, CUNY
+  role: Instructor, led the R track
+  url: https://github.com/GC-DRI/R_data_vis/tree/master
+  logo: logos/gcdf.svg
+  semester:
+  - name: Spring 2021
+    url: https://github.com/GC-DRI/R_data_vis/tree/master
+  
+- title: Digital Humanities Research Institute
+  description: "Led the Git and GitHub workshop for a national cohort of students and faculty."
+  university: The Graduate Center, CUNY; National
+  role: Instructor
+  url: https://github.com/DHRI-Curriculum/git
+  logo: logos/dhri.svg
+  semester:
+  - name: Spring 2021
+    url: https://github.com/DHRI-Curriculum/git
+
+- title: Exploring population structure in R with adegenet and sNMF
+  description: "1.5 hour online workshop, part of the four day Bioinformatics Bootcamp for Ecology and Evolution."
+  university: The Graduate Center, CUNY; International
+  role: Instructor
+  url: https://github.com/connor-french/intro-pop-structure-r?tab=readme-ov-file
+  logo: logos/gradcenter.svg
+  semester:
+  - name: Fall 2020
+    url: https://github.com/connor-french/intro-pop-structure-r?tab=readme-ov-file
+    
+- title: Introduction to R and RStudio
+  description: "Two hour online workshop for CUNY Graduate Center faculty and students."
+  university: The Graduate Center, CUNY
+  role: Instructor
+  url: https://github.com/connor-french/intro-r-fall2020
+  logo: logos/gradcenter.svg
+  semester:
+  - name: Fall 2020
+    url: https://github.com/connor-french/intro-r-fall2020
+

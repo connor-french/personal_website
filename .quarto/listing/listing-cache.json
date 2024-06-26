@@ -1,5 +1,8 @@
 {
   "listingMap": {
+    "teaching.qmd": [
+      "ay_23-24.yml"
+    ],
     "projects.qmd": [
       "projects"
     ],
@@ -8,6 +11,15 @@
     ],
     "presentations.qmd": [
       "presentations"
+    ],
+    "teaching/index.qmd": [
+      "ay_23-24.yml",
+      "ay_22-23.yml",
+      "ay_23-24_courses.yml",
+      "ay_23-24_workshops.yml",
+      "ay_22-23_workshops.yml",
+      "ay_21-22_courses.yml",
+      "ay_20-21_workshops.yml"
     ]
   }
 }
