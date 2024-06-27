@@ -86,13 +86,19 @@ toc-title: Academic year
 ::: {#ay_20-21_workshops}
 :::
 
-## 2019-2020
+## 2019-20
 
 ### Workshops
 ::: {#ay_19-20_workshops}
 :::
 
-## 2017-2018
+## 2018-19
+
+### Workshops
+::: {#ay_18-19_workshops}
+:::
+
+## 2017-18
 
 ### Courses
 ::: {#ay_17-18_courses}
@@ -103,13 +109,13 @@ toc-title: Academic year
 :::
 
 
-## 2016-2017
+## 2016-17
 
 ### Courses
 ::: {#ay_16-17_courses}
 :::
 
-## 2014-2015
+## 2014-15
 
 ### Courses
 ::: {#ay_14-15_courses}
