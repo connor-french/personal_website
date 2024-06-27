@@ -6,15 +6,15 @@
     ]
   },
   {
+    "listing": "/teaching/index.html",
+    "items": []
+  },
+  {
     "listing": "/projects.html",
     "items": [
       "/projects/spatial-population-genetics/index.html",
       "/projects/global-genetic-diversity/index.html"
     ]
-  },
-  {
-    "listing": "/teaching.html",
-    "items": []
   },
   {
     "listing": "/posts.html",
@@ -26,9 +26,5 @@
       "/posts/2019-11-20-leaflet_tutorial/index.html",
       "/posts/2019-10-05-pdig-training-grant-spotlight-connor-french/index.html"
     ]
-  },
-  {
-    "listing": "/teaching/index.html",
-    "items": []
   }
 ]

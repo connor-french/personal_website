@@ -194,13 +194,181 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
+      valueNames: ['listing-title','listing-description','listing-university','listing-role','listing-logo','listing-semester','listing-url',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-title","listing-description","listing-university","listing-role","listing-logo","listing-semester","listing-url"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-ay_20-21_workshops'] = new List('listing-ay_20-21_workshops', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-ay_19-20_workshops .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-university','listing-role','listing-url','listing-logo','listing-semester',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-title","listing-description","listing-university","listing-role","listing-url","listing-logo","listing-semester"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-ay_19-20_workshops'] = new List('listing-ay_19-20_workshops', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-ay_18-19_workshops .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-university','listing-role','listing-url','listing-logo','listing-semester',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-title","listing-description","listing-university","listing-role","listing-url","listing-logo","listing-semester"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-ay_18-19_workshops'] = new List('listing-ay_18-19_workshops', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-ay_17-18_courses .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-university','listing-role','listing-number','listing-logo','listing-semester',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-title","listing-description","listing-university","listing-role","listing-number","listing-logo","listing-semester"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-ay_17-18_courses'] = new List('listing-ay_17-18_courses', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-ay_17-18_workshops .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
       valueNames: ['listing-title','listing-description','listing-university','listing-role','listing-logo','listing-semester',{ data: ['index'] },{ data: ['categories'] }],
       
       searchColumns: ["listing-title","listing-description","listing-university","listing-role","listing-logo","listing-semester"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-ay_20-21_workshops'] = new List('listing-ay_20-21_workshops', options);
+    window['quarto-listings']['listing-ay_17-18_workshops'] = new List('listing-ay_17-18_workshops', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-ay_16-17_courses .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-university','listing-role','listing-number','listing-logo','listing-semester',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-title","listing-description","listing-university","listing-role","listing-number","listing-logo","listing-semester"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-ay_16-17_courses'] = new List('listing-ay_16-17_courses', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-ay_14-15_courses .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-university','listing-role','listing-number','listing-logo','listing-semester',{ data: ['index'] },{ data: ['categories'] }],
+      
+      searchColumns: ["listing-title","listing-description","listing-university","listing-role","listing-number","listing-logo","listing-semester"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-ay_14-15_courses'] = new List('listing-ay_14-15_courses', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -351,6 +519,23 @@ window.Quarto = {
   <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">2020-21</a>
   <ul class="collapse">
   <li><a href="#workshops-2" id="toc-workshops-2" class="nav-link" data-scroll-target="#workshops-2">Workshops</a></li>
+  </ul></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">2019-2020</a>
+  <ul class="collapse">
+  <li><a href="#workshops-3" id="toc-workshops-3" class="nav-link" data-scroll-target="#workshops-3">Workshops</a></li>
+  </ul></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">2017-2018</a>
+  <ul class="collapse">
+  <li><a href="#courses-2" id="toc-courses-2" class="nav-link" data-scroll-target="#courses-2">Courses</a></li>
+  <li><a href="#workshops-4" id="toc-workshops-4" class="nav-link" data-scroll-target="#workshops-4">Workshops</a></li>
+  </ul></li>
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6">2016-2017</a>
+  <ul class="collapse">
+  <li><a href="#courses-3" id="toc-courses-3" class="nav-link" data-scroll-target="#courses-3">Courses</a></li>
+  </ul></li>
+  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7">2014-2015</a>
+  <ul class="collapse">
+  <li><a href="#courses-4" id="toc-courses-4" class="nav-link" data-scroll-target="#courses-4">Courses</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -591,7 +776,7 @@ No matching items
             </p>
             <p class="course-details">
                 <span class="course-number"></span> | 
-                <span class="course-university">Columbia</span>
+                <span class="course-university">Columbia University</span>
                 
                 | <span class="course-role">Instructor</span>
                 
@@ -611,13 +796,13 @@ No matching items
     <div class="course-entry">
         <div class="logo">
             
-            <img src="logos/gcdf.svg" alt="Introduction to Text Analysis in R" title="Introduction to Text Analysis in R">
+            <a href="https://rpubs.com/confrench33/text_analysis_R" target="_blank"><img src="logos/gcdf.svg" alt="Introduction to Text Analysis in R" title="Introduction to Text Analysis in R"></a>
             
         </div>
         <div class="body">
             <p class="course-title">
                 
-                Introduction to Text Analysis in R 
+                <a href="https://rpubs.com/confrench33/text_analysis_R" target="_blank">Introduction to Text Analysis in R</a> 
                 
             </p>
             <p class="course-details">
@@ -631,8 +816,602 @@ No matching items
 
             <ul class="course-semesters">
                 
+                
+                <li><a href="https://rpubs.com/confrench33/text_analysis_R"><i class="fa-solid fa-building-columns"></i> Spring 2021</a></li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <a href="https://github.com/GC-DRI/R_data_vis/tree/master" target="_blank"><img src="logos/gcdf.svg" alt="Digital Research Institute" title="Digital Research Institute"></a>
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                <a href="https://github.com/GC-DRI/R_data_vis/tree/master" target="_blank">Digital Research Institute</a> 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university">The Graduate Center, CUNY</span>
+                
+                | <span class="course-role">Instructor, led the R track</span>
+                
+            </p>
+            <p class="course-description">Five day series of workshops introducing CUNY faculty and students to digital tools for research.</p>
+
+            <ul class="course-semesters">
+                
+                
+                <li><a href="https://github.com/GC-DRI/R_data_vis/tree/master"><i class="fa-solid fa-building-columns"></i> Spring 2021</a></li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <a href="https://github.com/DHRI-Curriculum/git" target="_blank"><img src="logos/dhri.svg" alt="Digital Humanities Research Institute" title="Digital Humanities Research Institute"></a>
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                <a href="https://github.com/DHRI-Curriculum/git" target="_blank">Digital Humanities Research Institute</a> 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university">The Graduate Center, CUNY; National</span>
+                
+                | <span class="course-role">Instructor</span>
+                
+            </p>
+            <p class="course-description">Led the Git and GitHub workshop for a national cohort of students and faculty.</p>
+
+            <ul class="course-semesters">
+                
+                
+                <li><a href="https://github.com/DHRI-Curriculum/git"><i class="fa-solid fa-building-columns"></i> Spring 2021</a></li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <a href="https://github.com/connor-french/intro-pop-structure-r?tab=readme-ov-file" target="_blank"><img src="logos/gradcenter.svg" alt="Exploring population structure in R with adegenet and sNMF" title="Exploring population structure in R with adegenet and sNMF"></a>
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                <a href="https://github.com/connor-french/intro-pop-structure-r?tab=readme-ov-file" target="_blank">Exploring population structure in R with adegenet and sNMF</a> 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university">The Graduate Center, CUNY; International</span>
+                
+                | <span class="course-role">Instructor</span>
+                
+            </p>
+            <p class="course-description">1.5 hour online workshop, part of the four day Bioinformatics Bootcamp for Ecology and Evolution.</p>
+
+            <ul class="course-semesters">
+                
+                
+                <li><a href="https://github.com/connor-french/intro-pop-structure-r?tab=readme-ov-file"><i class="fa-solid fa-building-columns"></i> Fall 2020</a></li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <a href="https://github.com/connor-french/intro-r-fall2020" target="_blank"><img src="logos/gradcenter.svg" alt="Introduction to R and RStudio" title="Introduction to R and RStudio"></a>
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                <a href="https://github.com/connor-french/intro-r-fall2020" target="_blank">Introduction to R and RStudio</a> 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university">The Graduate Center, CUNY</span>
+                
+                | <span class="course-role">Instructor</span>
+                
+            </p>
+            <p class="course-description">Two hour online workshop for CUNY Graduate Center faculty and students.</p>
+
+            <ul class="course-semesters">
+                
+                
+                <li><a href="https://github.com/connor-french/intro-r-fall2020"><i class="fa-solid fa-building-columns"></i> Fall 2020</a></li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+</section>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4">2019-2020</h2>
+<section id="workshops-3" class="level3">
+<h3 class="anchored" data-anchor-id="workshops-3">Workshops</h3>
+<div id="listing-ay_19-20_workshops" class="quarto-listing quarto-listing-container-custom">
+<div class="teaching">
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <a href="https://github.com/GC-DRI/R_data_vis" target="_blank"><img src="logos/gcdf.svg" alt="Data Visualization in R" title="Data Visualization in R"></a>
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                <a href="https://github.com/GC-DRI/R_data_vis" target="_blank">Data Visualization in R</a> 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university">The Graduate Center, CUNY</span>
+                
+                | <span class="course-role">Instructor</span>
+                
+            </p>
+            <p class="course-description">2.5 hour workshop on using ggplot2 for data visualization.</p>
+
+            <ul class="course-semesters">
+                
+                
+                <li><a href="https://github.com/GC-DRI/R_data_vis"><i class="fa-solid fa-building-columns"></i> Spring 2020</a></li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <a href="https://github.com/connor-french/workr" target="_blank"><img src="logos/gcdf.svg" alt="Reproducible Data Analysis in R" title="Reproducible Data Analysis in R"></a>
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                <a href="https://github.com/connor-french/workr" target="_blank">Reproducible Data Analysis in R</a> 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university">The Graduate Center, CUNY</span>
+                
+                | <span class="course-role">Instructor</span>
+                
+            </p>
+            <p class="course-description">2.5 hour workshop on using RMarkdown and GitHub for reproducible data analysis.</p>
+
+            <ul class="course-semesters">
+                
+                
+                <li><a href="https://github.com/connor-french/workr"><i class="fa-solid fa-building-columns"></i> Spring 2020</a></li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <a href="https://github.com/connor-french/workr" target="_blank"><img src="logos/gcdf.svg" alt="Data Wrangling in R" title="Data Wrangling in R"></a>
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                <a href="https://github.com/connor-french/workr" target="_blank">Data Wrangling in R</a> 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university">The Graduate Center, CUNY</span>
+                
+                | <span class="course-role">Instructor</span>
+                
+            </p>
+            <p class="course-description">2.5 hour workshop on using the tidyverse for data manipulation.</p>
+
+            <ul class="course-semesters">
+                
+                
+                <li><a href="https://github.com/connor-french/workr"><i class="fa-solid fa-building-columns"></i> Fall 2019</a></li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <a href="https://github.com/connor-french/intro-r" target="_blank"><img src="logos/gcdf.svg" alt="Introductory R and RStudio" title="Introductory R and RStudio"></a>
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                <a href="https://github.com/connor-french/intro-r" target="_blank">Introductory R and RStudio</a> 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university">The Graduate Center, CUNY</span>
+                
+                | <span class="course-role">Instructor</span>
+                
+            </p>
+            <p class="course-description">1.5 hour invited workshop for graduate students in the Quantitative Zoogeography graduate course</p>
+
+            <ul class="course-semesters">
+                
+                
+                <li><a href="https://github.com/connor-french/intro-r"><i class="fa-solid fa-building-columns"></i> Fall 2019</a></li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+</section>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5">2017-2018</h2>
+<section id="courses-2" class="level3">
+<h3 class="anchored" data-anchor-id="courses-2">Courses</h3>
+<div id="listing-ay_17-18_courses" class="quarto-listing quarto-listing-container-custom">
+<div class="teaching">
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <img src="logos/siuc.png" alt="BioSkills- Developmental biology" title="BioSkills- Developmental biology">
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                BioSkills- Developmental biology 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number">BIO 212</span> | 
+                <span class="course-university">SIU Carbondale</span>
+                
+                | <span class="course-role">TA, as Master's student</span>
+                
+            </p>
+            <p class="course-description">Co-developed material for new writing and discussion-based course section.</p>
+
+            <ul class="course-semesters">
+                
                  
-                <li class="no-link"><i class="fa-solid fa-building-columns"></i> Spring 2021</li>
+                <li class="no-link"><i class="fa-solid fa-building-columns"></i> Spring 2018</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <img src="logos/siuc.png" alt="BioSkills- Ecology" title="BioSkills- Ecology">
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                BioSkills- Ecology 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number">BIO 212</span> | 
+                <span class="course-university">SIU Carbondale</span>
+                
+                | <span class="course-role">TA, as Master's student</span>
+                
+            </p>
+            <p class="course-description">Co-developed material for new writing and discussion-based course section.</p>
+
+            <ul class="course-semesters">
+                
+                 
+                <li class="no-link"><i class="fa-solid fa-building-columns"></i> Fall 2017</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <img src="logos/siuc.png" alt="Introduction to Evolution and Ecology Lab" title="Introduction to Evolution and Ecology Lab">
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                Introduction to Evolution and Ecology Lab 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number">BIO 212</span> | 
+                <span class="course-university">SIU Carbondale</span>
+                
+                | <span class="course-role">TA, as Master's student</span>
+                
+            </p>
+            <p class="course-description">Introductory lab course for majors.</p>
+
+            <ul class="course-semesters">
+                
+                 
+                <li class="no-link"><i class="fa-solid fa-building-columns"></i> Fall 2017</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="workshops-4" class="level3">
+<h3 class="anchored" data-anchor-id="workshops-4">Workshops</h3>
+<div id="listing-ay_17-18_workshops" class="quarto-listing quarto-listing-container-custom">
+<div class="teaching">
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <img src="logos/siuc.png" alt="Reptile and amphibian survey and capture techniques" title="Reptile and amphibian survey and capture techniques">
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                Reptile and amphibian survey and capture techniques 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university">SIU Carbondale</span>
+                
+                | <span class="course-role">Instructor</span>
+                
+            </p>
+            <p class="course-description">Two invited lectures for Curation of Collections (PLB 401) and SIUC Wildlife Techniques (ZOOL 469).</p>
+
+            <ul class="course-semesters">
+                
+                 
+                <li class="no-link"><i class="fa-solid fa-building-columns"></i> Fall 2017</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+</section>
+<section id="section-6" class="level2">
+<h2 class="anchored" data-anchor-id="section-6">2016-2017</h2>
+<section id="courses-3" class="level3">
+<h3 class="anchored" data-anchor-id="courses-3">Courses</h3>
+<div id="listing-ay_16-17_courses" class="quarto-listing quarto-listing-container-custom">
+<div class="teaching">
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <img src="logos/siuc.png" alt="Vertebrate Anatomy Lab" title="Vertebrate Anatomy Lab">
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                Vertebrate Anatomy Lab 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number">ZOOL 418</span> | 
+                <span class="course-university">SIU Carbondale</span>
+                
+                | <span class="course-role">TA, as Master's student</span>
+                
+            </p>
+            <p class="course-description">Led and prepared labs.</p>
+
+            <ul class="course-semesters">
+                
+                 
+                <li class="no-link"><i class="fa-solid fa-building-columns"></i> Spring 2017</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <img src="logos/siuc.png" alt="Introductory Biology for Non-Majors Lab" title="Introductory Biology for Non-Majors Lab">
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                Introductory Biology for Non-Majors Lab 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number">ZOOL 115</span> | 
+                <span class="course-university">SIU Carbondale</span>
+                
+                | <span class="course-role">TA, as Master's student</span>
+                
+            </p>
+            <p class="course-description">Led and prepared labs.</p>
+
+            <ul class="course-semesters">
+                
+                 
+                <li class="no-link"><i class="fa-solid fa-building-columns"></i> Fall 2016</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <img src="logos/einstein.png" alt="Camp Einstein Afterschool STEM Program" title="Camp Einstein Afterschool STEM Program">
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                Camp Einstein Afterschool STEM Program 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university"></span>
+                
+                | <span class="course-role">Instructor</span>
+                
+            </p>
+            <p class="course-description">Led summer after school program for early elementary school students.</p>
+
+            <ul class="course-semesters">
+                
+                 
+                <li class="no-link"><i class="fa-solid fa-building-columns"></i> Summer 2016</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+</section>
+<section id="section-7" class="level2">
+<h2 class="anchored" data-anchor-id="section-7">2014-2015</h2>
+<section id="courses-4" class="level3">
+<h3 class="anchored" data-anchor-id="courses-4">Courses</h3>
+<div id="listing-ay_14-15_courses" class="quarto-listing quarto-listing-container-custom">
+<div class="teaching">
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <img src="logos/uta.png" alt="Biostatistics" title="Biostatistics">
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                Biostatistics 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number">SDS 328M</span> | 
+                <span class="course-university">UT Austin</span>
+                
+                | <span class="course-role">TA, as Undergraduate</span>
+                
+            </p>
+            <p class="course-description">Assisted graduate TA with leading and grading R programming labs, and facilitating course discussion.</p>
+
+            <ul class="course-semesters">
+                
+                 
+                <li class="no-link"><i class="fa-solid fa-building-columns"></i> Spring 2015</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <img src="logos/uta.png" alt="Biostatistics" title="Biostatistics">
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                Biostatistics 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number">SDS 328M</span> | 
+                <span class="course-university">UT Austin</span>
+                
+                | <span class="course-role">TA, as Undergraduate</span>
+                
+            </p>
+            <p class="course-description">Assisted graduate TA with leading and grading R programming labs, and facilitating course discussion.</p>
+
+            <ul class="course-semesters">
+                
+                 
+                <li class="no-link"><i class="fa-solid fa-building-columns"></i> Fall 2014</li>
                 
                 
             </ul>
@@ -650,7 +1429,76 @@ No matching items
 </section>
 </section>
 
-</main> <!-- /main -->
+<div class="quarto-listing quarto-listing-container-custom" id="listing-ay_18-19_workshops">
+<div class="teaching">
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <a href="https://github.com/connor-french/intro-pop-structure-r?tab=readme-ov-file" target="_blank"><img src="logos/siuc.png" alt="Introduction to population structure inference in R" title="Introduction to population structure inference in R"></a>
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                <a href="https://github.com/connor-french/intro-pop-structure-r?tab=readme-ov-file" target="_blank">Introduction to population structure inference in R</a> 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university">SIU Carbondale</span>
+                
+                | <span class="course-role">Instructor</span>
+                
+            </p>
+            <p class="course-description">Two hour invited workshop for Zoology graduate and undergraduate students.</p>
+
+            <ul class="course-semesters">
+                
+                
+                <li><a href="https://github.com/connor-french/intro-pop-structure-r?tab=readme-ov-file"><i class="fa-solid fa-building-columns"></i> Spring 2019</a></li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+    <div class="course-entry">
+        <div class="logo">
+            
+            <img src="logos/siuc.png" alt="Bioinformatic processing of ultraconserved elements for phylogenetic analysis" title="Bioinformatic processing of ultraconserved elements for phylogenetic analysis">
+            
+        </div>
+        <div class="body">
+            <p class="course-title">
+                
+                Bioinformatic processing of ultraconserved elements for phylogenetic analysis 
+                
+            </p>
+            <p class="course-details">
+                <span class="course-number"></span> | 
+                <span class="course-university">SIU Carbondale</span>
+                
+                | <span class="course-role">Instructor</span>
+                
+            </p>
+            <p class="course-description">Two hour workshop to introduce graduate students to a bioinformatics pipeline.</p>
+
+            <ul class="course-semesters">
+                
+                 
+                <li class="no-link"><i class="fa-solid fa-building-columns"></i> Spring 2019</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -38,11 +38,11 @@ listing:
     sort: "date desc" 
     template: ../static/html/teaching/listing.ejs
   - id: ay_16-17_courses
-    contents: ay_16-17_workshops.yml 
+    contents: ay_16-17_courses.yml 
     sort: "date desc" 
     template: ../static/html/teaching/listing.ejs
-  - id: ay_14-15_workshops
-    contents: ay_14-15_workshops.yml 
+  - id: ay_14-15_courses
+    contents: ay_14-15_courses.yml 
     sort: "date desc" 
     template: ../static/html/teaching/listing.ejs
 

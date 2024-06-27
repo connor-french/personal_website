@@ -1,25 +1,26 @@
 {
   "listingMap": {
-    "teaching.qmd": [
-      "ay_23-24.yml"
-    ],
     "projects.qmd": [
       "projects"
+    ],
+    "teaching/index.qmd": [
+      "ay_23-24_courses.yml",
+      "ay_23-24_workshops.yml",
+      "ay_22-23_workshops.yml",
+      "ay_21-22_courses.yml",
+      "ay_20-21_workshops.yml",
+      "ay_19-20_workshops.yml",
+      "ay_18-19_workshops.yml",
+      "ay_17-18_courses.yml",
+      "ay_17-18_workshops.yml",
+      "ay_16-17_courses.yml",
+      "ay_14-15_courses.yml"
     ],
     "posts.qmd": [
       "posts"
     ],
     "presentations.qmd": [
       "presentations"
-    ],
-    "teaching/index.qmd": [
-      "ay_23-24.yml",
-      "ay_22-23.yml",
-      "ay_23-24_courses.yml",
-      "ay_23-24_workshops.yml",
-      "ay_22-23_workshops.yml",
-      "ay_21-22_courses.yml",
-      "ay_20-21_workshops.yml"
     ]
   }
 }
