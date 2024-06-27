@@ -10,7 +10,7 @@ about:
       text: Github
       href: https://github.com/connor-french
     - icon: twitter-x
-      text: X
+      text: frog_phylo
       href: https://twitter.com/frog_phylo
     - icon: linkedin
       text: LinkedIn
