@@ -8,6 +8,6 @@ listing:
   sort-ui: true
   filter-ui: true
 page-layout: full
-title-block-banner: "#C34E17"
+title-block-banner: "#CE6337"
 comments: false
 ---

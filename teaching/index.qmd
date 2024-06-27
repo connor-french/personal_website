@@ -46,7 +46,7 @@ listing:
     sort: "date desc" 
     template: ../static/html/teaching/listing.ejs
 
-title-block-banner: "#C34E17"
+title-block-banner: "#CE6337"
 page-layout: full
 toc: true
 toc-location: right

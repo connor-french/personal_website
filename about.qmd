@@ -4,13 +4,11 @@ title: ""
 
 ## Current position
 
-I am a PhD candidate in the [Mike Hickerson](https://hickerlab.wordpress.com/) and [Ana Carnaval](https://carnavallab.org/) labs at the City University of New York, City College campus. I am currently supported as a software engineer, developing the [roleShiny application](https://github.com/role-model/roleShiny) and contributing to the [roleR R package](https://github.com/role-model/roleR). Both of which provide students and researchers access to the [Rules of Life Engine (RoLE) model](https://role-model.github.io/about), which is
-
-> a mechanistic, simulation-based hypothesis-testing and data synthesis framework enabling scientists with multi-dimensional biodiversity data to generate and test parameterized hypotheses about the processes driving biodiversity patterns
+I recently earned my PhD in Biology- Ecology, Evolution, and Behavior in the [Mike Hickerson](https://hickerlab.wordpress.com/) and (unofficially) [Ana Carnaval](https://carnavallab.org/) labs at City University of New York, City College campus (although my degree is officially from the Graduate Center- confusing). I am currently a Research Scientist at City College, wrapping up publications and software packaging from my PhD work. I'm on the job market!
 
 ## Research focus
 
-My research focuses on understanding how populations, species, and communities evolve across space in response to changing environments. The spatial, temporal, and taxonomic scales I work with vary, ranging from single-species landscape genetics to global-scale macrogenetics. In addition to empirical work, I am also wading into the waters of simulation-based testing of spatial population genetic theory and software development to facilitate these types of analyses.
+My research focuses on understanding how populations, species, and communities evolve across space in response to changing environments. The spatial, temporal, and taxonomic scales I work with vary, ranging from single-species landscape genetics to global-scale macrogenetics. In addition to empirical work, I also wade into the waters of simulation-based [testing of spatial population genetic theory](https://github.com/connor-french/spaceprime) and [software development](https://github.com/connor-french) to facilitate these types of analyses.
 
 ## Previous positions
 

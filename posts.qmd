@@ -9,6 +9,6 @@ listing:
   filter-ui: true
   feed: true
 page-layout: full
-title-block-banner: "#C34E17"
+title-block-banner: "#CE6337"
 comments: false
 ---
