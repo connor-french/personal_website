@@ -9,13 +9,14 @@
 <link>https://connor-french.com/posts.html</link>
 <atom:link href="https://connor-french.com/posts.xml" rel="self" type="application/rss+xml"/>
 <description>Website of Connor French</description>
-<generator>quarto-1.4.549</generator>
+<generator>quarto-1.8.27</generator>
 <lastBuildDate>Mon, 19 Apr 2021 04:00:00 GMT</lastBuildDate>
 <item>
   <title>Sonification for data communication</title>
   <dc:creator>Connor French</dc:creator>
   <link>https://connor-french.com/posts/2021-04-19-sonification_ttt_post/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -42,7 +43,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://connor-french.com/posts/2021-04-19-sonification_ttt_post/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="480"></p>
+<p><img src="https://connor-french.com/posts/2021-04-19-sonification_ttt_post/index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="480"></p>
 <figcaption>A histogram representing the distribution of mood score values.</figcaption>
 </figure>
 </div>
@@ -61,7 +62,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://connor-french.com/posts/2021-04-19-sonification_ttt_post/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="480"></p>
+<p><img src="https://connor-french.com/posts/2021-04-19-sonification_ttt_post/index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="480"></p>
 <figcaption>A scatterplot representing a linear relationship between two variables. Hunger level on the x axis and burger craving strength on the y axis</figcaption>
 </figure>
 </div>
@@ -82,7 +83,7 @@
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://connor-french.com/posts/2021-04-19-sonification_ttt_post/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="480"></p>
+<p><img src="https://connor-french.com/posts/2021-04-19-sonification_ttt_post/index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="480"></p>
 <figcaption>A scatterplot representing an exponential relationship between two variables. Hunger level on the x axis and burger craving strength on the y axis</figcaption>
 </figure>
 </div>
@@ -107,12 +108,12 @@
   author = {French, Connor},
   title = {Sonification for Data Communication},
   date = {2021-04-19},
-  url = {https://connor-french.com/posts/2021-04-19-sonification_ttt_post},
+  url = {https://connor-french.com/posts/2021-04-19-sonification_ttt_post/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2021" class="csl-entry quarto-appendix-citeas">
 French, Connor. 2021. <span>“Sonification for Data
-Communication.”</span> April 19, 2021. <a href="https://connor-french.com/posts/2021-04-19-sonification_ttt_post">https://connor-french.com/posts/2021-04-19-sonification_ttt_post</a>.
+Communication.”</span> April 19, 2021. <a href="https://connor-french.com/posts/2021-04-19-sonification_ttt_post/">https://connor-french.com/posts/2021-04-19-sonification_ttt_post/</a>.
 </div></div></section></div> ]]></description>
   <category>R</category>
   <category>Research</category>
@@ -127,6 +128,7 @@ Communication.”</span> April 19, 2021. <a href="https://connor-french.com/post
   <dc:creator>Connor French</dc:creator>
   <link>https://connor-french.com/posts/2020-11-20_gis-at-scale/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -169,12 +171,12 @@ Make substantive progress on global challenges that involve large geospatial dat
   author = {French, Connor},
   title = {GIS at {Scale} with {Google} {Earth} {Engine}},
   date = {2020-11-20},
-  url = {https://connor-french.com/posts/2020-11-20_gis-at-scale},
+  url = {https://connor-french.com/posts/2020-11-20_gis-at-scale/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2020" class="csl-entry quarto-appendix-citeas">
 French, Connor. 2020. <span>“GIS at Scale with Google Earth
-Engine.”</span> November 20, 2020. <a href="https://connor-french.com/posts/2020-11-20_gis-at-scale">https://connor-french.com/posts/2020-11-20_gis-at-scale</a>.
+Engine.”</span> November 20, 2020. <a href="https://connor-french.com/posts/2020-11-20_gis-at-scale/">https://connor-french.com/posts/2020-11-20_gis-at-scale/</a>.
 </div></div></section></div> ]]></description>
   <category>GIS</category>
   <category>Research</category>
@@ -189,6 +191,7 @@ Engine.”</span> November 20, 2020. <a href="https://connor-french.com/posts/20
   <dc:creator>Connor French</dc:creator>
   <link>https://connor-french.com/posts/2020-06-24-funding-for-undergrads/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -261,12 +264,12 @@ Engine.”</span> November 20, 2020. <a href="https://connor-french.com/posts/20
   title = {Funding Sources for Undergraduate Research in Ecology and
     Evolution},
   date = {2020-06-24},
-  url = {https://connor-french.com/posts/2020-06-24-funding-for-undergrads},
+  url = {https://connor-french.com/posts/2020-06-24-funding-for-undergrads/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2020" class="csl-entry quarto-appendix-citeas">
 French, Connor. 2020. <span>“Funding Sources for Undergraduate Research
-in Ecology and Evolution.”</span> June 24, 2020. <a href="https://connor-french.com/posts/2020-06-24-funding-for-undergrads">https://connor-french.com/posts/2020-06-24-funding-for-undergrads</a>.
+in Ecology and Evolution.”</span> June 24, 2020. <a href="https://connor-french.com/posts/2020-06-24-funding-for-undergrads/">https://connor-french.com/posts/2020-06-24-funding-for-undergrads/</a>.
 </div></div></section></div> ]]></description>
   <category>Research</category>
   <category>Resource</category>
@@ -278,6 +281,7 @@ in Ecology and Evolution.”</span> June 24, 2020. <a href="https://connor-frenc
   <dc:creator>Connor French</dc:creator>
   <link>https://connor-french.com/posts/2020-05-07-rstudio-cloud-for-education/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -305,12 +309,12 @@ in Ecology and Evolution.”</span> June 24, 2020. <a href="https://connor-frenc
   author = {French, Connor},
   title = {RStudio {Cloud} for {Education}},
   date = {2020-05-07},
-  url = {https://connor-french.com/posts/2020-05-07-rstudio-cloud-for-education},
+  url = {https://connor-french.com/posts/2020-05-07-rstudio-cloud-for-education/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2020" class="csl-entry quarto-appendix-citeas">
 French, Connor. 2020. <span>“RStudio Cloud for Education.”</span> May 7,
-2020. <a href="https://connor-french.com/posts/2020-05-07-rstudio-cloud-for-education">https://connor-french.com/posts/2020-05-07-rstudio-cloud-for-education</a>.
+2020. <a href="https://connor-french.com/posts/2020-05-07-rstudio-cloud-for-education/">https://connor-french.com/posts/2020-05-07-rstudio-cloud-for-education/</a>.
 </div></div></section></div> ]]></description>
   <category>GCDI</category>
   <category>R</category>
@@ -324,6 +328,7 @@ French, Connor. 2020. <span>“RStudio Cloud for Education.”</span> May 7,
   <dc:creator>Connor French</dc:creator>
   <link>https://connor-french.com/posts/2019-11-20-leaflet_tutorial/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -349,7 +354,7 @@ French, Connor. 2020. <span>“RStudio Cloud for Education.”</span> May 7,
 <h3 class="anchored" data-anchor-id="installation">Installation</h3>
 <p>You will need to install four packages for this tutorial. The <span style="color:red">dplyr</span> package for data manipulation, the <span style="color:red">sf</span> package for handling spatial data, the <span style="color:red">rgbif</span> package for acquiring the data, and finally the <span style="color:red">leaflet</span> package for mapping. All packages are available on CRAN.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">packages <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">packages <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -368,11 +373,11 @@ font-style: inherit;">install.packages</span>(packages, <span class="at" style="
 background-color: null;
 font-style: inherit;">dependencies =</span> <span class="cn" style="color: #8f5902;
 background-color: null;
-font-style: inherit;">TRUE</span>)</span></code></pre></div>
+font-style: inherit;">TRUE</span>)</span></code></pre></div></div>
 </div>
 <p>Now that the packages are installed, you need to load them into your environment.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">library</span>(dplyr)</span>
 <span id="cb2-2"><span class="fu" style="color: #4758AB;
@@ -383,7 +388,7 @@ background-color: null;
 font-style: inherit;">library</span>(rgbif)</span>
 <span id="cb2-4"><span class="fu" style="color: #4758AB;
 background-color: null;
-font-style: inherit;">library</span>(leaflet)</span></code></pre></div>
+font-style: inherit;">library</span>(leaflet)</span></code></pre></div></div>
 </div>
 </section>
 <section id="read-in-and-pre-process-data" class="level3">
@@ -397,7 +402,7 @@ font-style: inherit;">library</span>(leaflet)</span></code></pre></div>
 </figure>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">frog_gbif <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">frog_gbif <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
 background-color: null;
@@ -454,7 +459,7 @@ background-color: null;
 font-style: inherit;">crs =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"</span></span>
-<span id="cb3-18">    )</span></code></pre></div>
+<span id="cb3-18">    )</span></code></pre></div></div>
 </div>
 </section>
 <section id="plot-a-basic-map" class="level3">
@@ -467,7 +472,7 @@ font-style: inherit;">"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"</span><
 </ol>
 <p>The <strong>%&gt;%</strong> (pipe) operator is used to make code easier to read and help the mapmaking process flow organically. It pipes the output of one function into the input of the next. Intuitively, you can think of the following code as “I initialize the map widget <em>and then</em> add the basemap tiles <em>and then</em> add the locality markers.”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">leaflet</span>() <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -483,7 +488,7 @@ font-style: inherit;"># Add default OpenStreetMap map tiles</span></span>
 background-color: null;
 font-style: inherit;">addMarkers</span>(<span class="at" style="color: #657422;
 background-color: null;
-font-style: inherit;">data =</span> frog_gbif)</span></code></pre></div>
+font-style: inherit;">data =</span> frog_gbif)</span></code></pre></div></div>
 <div class="cell-output-display">
 <div id="htmlwidget-a918dda3be8882ba9dbe" style="width:100%;height:464px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-a918dda3be8882ba9dbe">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[-33.819138,-33.334053,-34.39227,-21.091778,-29.040835,-21.080971,-33.939719,-33.976855,-33.85058,-30.730894,-25.227552,-33.969492,-29.527697,-33.954212,-33.983837,-15.783165,-33.945498,-28.677082,-34.094362,-13.862857,-33.951747,-33.984109,-33.984977,-33.984971,-33.984952,-33.984963,-33.984937,-33.983983,-27.770816,-34.069528,-34.03723,-24.393639,-34.060554,-33.73917,-24.392948,-34.408865,-34.227842,-34.422,-34.200127,-34.017613,-33.941008,-34.014037,-34.528526,-34.017629,-33.95551,-33.99857,-33.766734,-27.758275,-33.964609,-34.357918,-34.055812,-27.767681,-16.49387,-27.767681,-16.4979,-34.0599,-27.770738,-33.688177,-27.75845,-34.06018,-33.766317,-34.112518,-27.762189,-27.769773,-27.760381,-33.782978,-34.059247,-32.781278,-33.783127,-33.72848,-34.102808,-33.778932,-33.782325,-34.102801,-33.978554,-33.783147,-34.059743,-32.780107,-34.415787,-34.390234,-33.78265,-34.05923,-33.241514,-34.0588,-34.059983,-33.608558,-24.559805,-33.934553,-29.802275,-34.288545,-33.963447,-34.055172,-34.288312,-34.292705,-32.090367,-33.3276,-34.048763,-34.261963,-34.049319,-33.877424],[23.154692,26.567878,19.272742,31.836615,29.340938,31.821667,22.504172,18.420045,23.187273,28.142622,28.553756,18.445814,30.517855,18.454193,18.43968,34.996262,22.463935,28.916072,18.977285,33.947076,18.47657,20.82391,20.82374,20.823748,20.823702,20.823784,20.823764,20.824317,32.05266,18.630047,18.433047,31.779459,18.41511,21.922237,31.780147,20.617392,18.86474,20.6536,18.868796,18.917857,20.277967,18.924975,19.490165,18.917822,18.400871,18.408728,18.44683,32.039761,18.413651,21.041272,18.408172,32.041592,39.67575,32.041592,39.66919,18.413831,32.052422,19.099193,32.039778,18.422316,18.445834,18.402178,32.039872,32.042381,32.0414,19.048566,18.415147,18.163511,19.04858,18.957238,18.407178,19.046996,19.048522,18.406936,18.484521,19.048678,18.414163,18.163885,20.632675,20.615704,19.048492,18.415447,19.086251,18.415355,18.418927,19.110014,30.808955,18.87357,30.703913,18.852857,18.41068,18.437217,18.857843,18.858547,19.052703,26.493161,19.009075,19.135571,19.004464,18.59803],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-34.528526,-13.862857],"lng":[18.163511,39.67575]}},"evals":[],"jsHooks":[]}</script>
@@ -496,7 +501,7 @@ font-style: inherit;">data =</span> frog_gbif)</span></code></pre></div>
 <p>Now you’re going to add some pizazz to the map. You’re going to color the labels according to the species and add some popup text with information about the family the individual belongs to, its species name, and the date it was collected. In addition, you’re going to use addCircleMarkers instead of addMarkers to use circles instead of flags. Finally, you’re adding a legend so the colors make sense.</p>
 <p>Detailed explanations of what each function is doing are provided as code comments.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;"># First, a color palette needs to be set. We're using the viridis palette, but feel free to explore the options available! I set the domain to NULL because I think it's more flexible to have a general color palette that can be attributed to factors later.</span></span>
 <span id="cb5-2">pal <span class="ot" style="color: #003B4F;
@@ -603,7 +608,7 @@ background-color: null;
 font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Species"</span></span>
-<span id="cb5-26">  )</span></code></pre></div>
+<span id="cb5-26">  )</span></code></pre></div></div>
 <div class="cell-output-display">
 <div id="htmlwidget-3a8da5b2a065f696aef8" style="width:100%;height:464px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-3a8da5b2a065f696aef8">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[-33.819138,-33.334053,-34.39227,-21.091778,-29.040835,-21.080971,-33.939719,-33.976855,-33.85058,-30.730894,-25.227552,-33.969492,-29.527697,-33.954212,-33.983837,-15.783165,-33.945498,-28.677082,-34.094362,-13.862857,-33.951747,-33.984109,-33.984977,-33.984971,-33.984952,-33.984963,-33.984937,-33.983983,-27.770816,-34.069528,-34.03723,-24.393639,-34.060554,-33.73917,-24.392948,-34.408865,-34.227842,-34.422,-34.200127,-34.017613,-33.941008,-34.014037,-34.528526,-34.017629,-33.95551,-33.99857,-33.766734,-27.758275,-33.964609,-34.357918,-34.055812,-27.767681,-16.49387,-27.767681,-16.4979,-34.0599,-27.770738,-33.688177,-27.75845,-34.06018,-33.766317,-34.112518,-27.762189,-27.769773,-27.760381,-33.782978,-34.059247,-32.781278,-33.783127,-33.72848,-34.102808,-33.778932,-33.782325,-34.102801,-33.978554,-33.783147,-34.059743,-32.780107,-34.415787,-34.390234,-33.78265,-34.05923,-33.241514,-34.0588,-34.059983,-33.608558,-24.559805,-33.934553,-29.802275,-34.288545,-33.963447,-34.055172,-34.288312,-34.292705,-32.090367,-33.3276,-34.048763,-34.261963,-34.049319,-33.877424],[23.154692,26.567878,19.272742,31.836615,29.340938,31.821667,22.504172,18.420045,23.187273,28.142622,28.553756,18.445814,30.517855,18.454193,18.43968,34.996262,22.463935,28.916072,18.977285,33.947076,18.47657,20.82391,20.82374,20.823748,20.823702,20.823784,20.823764,20.824317,32.05266,18.630047,18.433047,31.779459,18.41511,21.922237,31.780147,20.617392,18.86474,20.6536,18.868796,18.917857,20.277967,18.924975,19.490165,18.917822,18.400871,18.408728,18.44683,32.039761,18.413651,21.041272,18.408172,32.041592,39.67575,32.041592,39.66919,18.413831,32.052422,19.099193,32.039778,18.422316,18.445834,18.402178,32.039872,32.042381,32.0414,19.048566,18.415147,18.163511,19.04858,18.957238,18.407178,19.046996,19.048522,18.406936,18.484521,19.048678,18.414163,18.163885,20.632675,20.615704,19.048492,18.415447,19.086251,18.415355,18.418927,19.110014,30.808955,18.87357,30.703913,18.852857,18.41068,18.437217,18.857843,18.858547,19.052703,26.493161,19.009075,19.135571,19.004464,18.59803],10,null,null,{"interactive":true,"className":"","stroke":true,"color":["#38598C","#85D54A","#25858E","#482173","#FDE725","#482173","#38598C","#25858E","#38598C","#FDE725","#482173","#25858E","#482173","#2D708E","#2D708E","#1E9B8A","#38598C","#FDE725","#440154","#1E9B8A","#2D708E","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#482173","#C2DF23","#2D708E","#51C46A","#2D708E","#25858E","#51C46A","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#440154","#25858E","#25858E","#25858E","#C2DF23","#1E9B8A","#25858E","#C2DF23","#25858E","#433E85","#1E9B8A","#433E85","#1E9B8A","#2D708E","#433E85","#25858E","#1E9B8A","#2D708E","#C2DF23","#C2DF23","#482173","#1E9B8A","#433E85","#25858E","#2D708E","#2BB07F","#25858E","#2D708E","#25858E","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2BB07F","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2D708E","#25858E","#51C46A","#2D708E","#482173","#25858E","#25858E","#2D708E","#25858E","#25858E","#2BB07F","#85D54A","#440154","#25858E","#25858E","#2D708E"],"weight":5,"opacity":0.5,"fill":true,"fillColor":["#38598C","#85D54A","#25858E","#482173","#FDE725","#482173","#38598C","#25858E","#38598C","#FDE725","#482173","#25858E","#482173","#2D708E","#2D708E","#1E9B8A","#38598C","#FDE725","#440154","#1E9B8A","#2D708E","#440154","#440154","#440154","#440154","#440154","#440154","#440154","#482173","#C2DF23","#2D708E","#51C46A","#2D708E","#25858E","#51C46A","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#25858E","#440154","#25858E","#25858E","#25858E","#C2DF23","#1E9B8A","#25858E","#C2DF23","#25858E","#433E85","#1E9B8A","#433E85","#1E9B8A","#2D708E","#433E85","#25858E","#1E9B8A","#2D708E","#C2DF23","#C2DF23","#482173","#1E9B8A","#433E85","#25858E","#2D708E","#2BB07F","#25858E","#2D708E","#25858E","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2BB07F","#25858E","#25858E","#25858E","#2D708E","#25858E","#2D708E","#2D708E","#25858E","#51C46A","#2D708E","#482173","#25858E","#25858E","#2D708E","#25858E","#25858E","#2BB07F","#85D54A","#440154","#25858E","#25858E","#2D708E"],"fillOpacity":0.2},null,null,["Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-01-11T16:35:09","Family: Brevicipitidae <br> Species: Breviceps pentheri <br> Date Collected: 2022-01-12T19:10:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-01-24T09:00:10","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-01-23T08:24:17","Family: Brevicipitidae <br> Species: Breviceps verrucosus <br> Date Collected: 2022-01-29T15:05:41","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-01-25T15:20:05","Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-01-29T11:20:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-01-24T10:17:52","Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-01-18T16:18:49","Family: Brevicipitidae <br> Species: Breviceps verrucosus <br> Date Collected: 2022-01-01T08:34:00","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-01-14T23:58:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-02-02T00:00:00","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-02-21T07:11:06","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-02-07T18:35:48","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-02-12T14:45:18","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-02-01T05:20:00","Family: Brevicipitidae <br> Species: Breviceps fuscus <br> Date Collected: 2022-03-02T11:20:00","Family: Brevicipitidae <br> Species: Breviceps verrucosus <br> Date Collected: 2022-03-08T09:43:00","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-21T13:39:00","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-03-19T16:05:31","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-03-12T09:55:00","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-23T19:37:25","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-25T07:51:26","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-24T08:45:51","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-24T09:00:24","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-24T09:03:18","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-25T07:49:09","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-03-25T06:07:33","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-03-16T19:49:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-04-11T09:11:07","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-04-13T09:51:10","Family: Brevicipitidae <br> Species: Breviceps passmorei <br> Date Collected: 2022-04-16T21:03:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-04-06T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-12T22:53:08","Family: Brevicipitidae <br> Species: Breviceps passmorei <br> Date Collected: 2022-04-18T22:11:02","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-26T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-29T12:42:25","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-26T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-04-29T12:41:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-01T12:51:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-10T10:55:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-01T17:55:00","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-05-06T14:26:27","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-01T12:51:43","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-12T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-13T00:00:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-14T15:19:00","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-17T11:45:30","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-19T14:18:28","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-19T08:21:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-19T00:00:00","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-05-18T17:24:00","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-16T08:34:00","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-05-26T10:31:10","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-13T09:35:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-05-24T11:17:00","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-05-18T17:15:36","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-05-22T11:53:58","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-17T11:53:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-05-24T00:00:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-14T16:30:00","Family: Brevicipitidae <br> Species: Breviceps rosei <br> Date Collected: 2022-05-28T00:00:00","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-05-28T12:14:41","Family: Brevicipitidae <br> Species: Breviceps mossambicus <br> Date Collected: 2022-05-27T11:14:13","Family: Brevicipitidae <br> Species: Breviceps carruthersi <br> Date Collected: 2022-06-07T12:52:28","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T10:21:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-10T13:05:00","Family: Brevicipitidae <br> Species: Breviceps namaquensis <br> Date Collected: 2022-06-20T12:29:44","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T10:21:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-16T09:04:46","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-22T12:51:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T13:31:44","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-22T11:49:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-23T14:07:19","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T13:00:36","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-27T00:00:00","Family: Brevicipitidae <br> Species: Breviceps namaquensis <br> Date Collected: 2022-06-20T12:25:50","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-15T09:38:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-14T13:13:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-16T13:14:26","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-10T13:05:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-06-18T00:00:00","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-10T13:05:34","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-06-18T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-01T12:23:45","Family: Brevicipitidae <br> Species: Breviceps passmorei <br> Date Collected: 2022-07-03T11:28:22","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-07-07T15:39:09","Family: Brevicipitidae <br> Species: Breviceps adspersus <br> Date Collected: 2022-07-10T15:01:41","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-09T12:04:01","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-15T11:08:17","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-07-07T12:58:47","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-12T21:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-07-09T14:35:17","Family: Brevicipitidae <br> Species: Breviceps namaquensis <br> Date Collected: 2022-07-29T23:29:29","Family: Brevicipitidae <br> Species: Breviceps pentheri <br> Date Collected: 2022-07-30T16:29:11","Family: Brevicipitidae <br> Species: Breviceps acutirostris <br> Date Collected: 2022-08-06T00:00:00","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-08-03T12:07:59","Family: Brevicipitidae <br> Species: Breviceps montanus <br> Date Collected: 2022-08-05T14:41:20","Family: Brevicipitidae <br> Species: Breviceps gibbosus <br> Date Collected: 2022-08-12T13:31:38"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#440154","#482173","#433E85","#38598C","#2D708E","#25858E","#1E9B8A","#2BB07F","#51C46A","#85D54A","#C2DF23","#FDE725"],"labels":["Breviceps acutirostris","Breviceps adspersus","Breviceps carruthersi","Breviceps fuscus","Breviceps gibbosus","Breviceps montanus","Breviceps mossambicus","Breviceps namaquensis","Breviceps passmorei","Breviceps pentheri","Breviceps rosei","Breviceps verrucosus"],"na_color":null,"na_label":"NA","opacity":0.9,"position":"bottomleft","type":"factor","title":"Species","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[-34.528526,-13.862857],"lng":[18.163511,39.67575]}},"evals":[],"jsHooks":[]}</script>
@@ -626,12 +631,12 @@ font-style: inherit;">"Species"</span></span>
   author = {French, Connor},
   title = {Interactively Explore Geographic Data in {R} Using Leaflet},
   date = {2019-11-20},
-  url = {https://connor-french.com/posts/2019-11-20-leaflet_tutorial},
+  url = {https://connor-french.com/posts/2019-11-20-leaflet_tutorial/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2019" class="csl-entry quarto-appendix-citeas">
 French, Connor. 2019. <span>“Interactively Explore Geographic Data in R
-Using Leaflet.”</span> November 20, 2019. <a href="https://connor-french.com/posts/2019-11-20-leaflet_tutorial">https://connor-french.com/posts/2019-11-20-leaflet_tutorial</a>.
+Using Leaflet.”</span> November 20, 2019. <a href="https://connor-french.com/posts/2019-11-20-leaflet_tutorial/">https://connor-french.com/posts/2019-11-20-leaflet_tutorial/</a>.
 </div></div></section></div> ]]></description>
   <category>Research</category>
   <category>Tutorial</category>
@@ -651,12 +656,13 @@ Using Leaflet.”</span> November 20, 2019. <a href="https://connor-french.com/p
 
 
 
+
 <p><a href="https://gcdi.commons.gc.cuny.edu/2019/09/11/pdig-training-grant-spotlight-connor-french/">Originally published on GC Digital Initiatives</a></p>
 <p>There are a lot of insects in the world. Like a lot a lot. Recent estimates put <a href="https://www.pnas.org/content/112/24/7519.short">the number of insect species</a> at a whopping 5.5 million. Only about a million have names, leaving the other 4.5 million or so species undescribed. To put this into context, there are <a href="https://amphibiaweb.org/amphibian/speciesnums.html">8,053 described amphibian species</a> and the projected number of undescribed species remains in the thousands. While I consider all life to be equally important (and I’m particularly fond of amphibians- I mean, just <a href="https://www.google.com/search?rlz=1C5CHFA_enUS832US832&amp;biw=1343&amp;bih=650&amp;tbm=isch&amp;sa=1&amp;ei=6XpJXc7tOayv_Qac8oGQBA&amp;q=ranitomeya&amp;oq=ranitomeya&amp;gs_l=img.3..35i39l2j0i67l2j0l6.53933.55501..55948...0.0..1.371.943.9j3-1......0....1..gws-wiz-img.ujvBzQEfoC8&amp;ved=0ahUKEwiOhpG-p-7jAhWsV98KHRx5AEIQ4dUDCAY&amp;uact=5">look at these</a>), the gap in our understanding of insect diversity is especially concerning. They’re important for <a href="https://www.nrcs.usda.gov/wps/portal/nrcs/main/national/plantsanimals/pollinate/">agriculture</a>, <a href="https://www.youtube.com/watch?v=S0qm_L_HPdM">flowering plants</a>, <a href="https://www.fws.gov/midwest/endangered/insects/ambb/abb_fact.html">decomposition</a>, and a host of other functions. Without a firm understanding of existing insect diversity, scientists can’t accurately determine the causes of <a href="https://www.nationalgeographic.com/animals/2019/02/why-insect-populations-are-plummeting-and-why-it-matters/">rapid declines</a> in insect populations across the globe.</p>
 <p>Needless to say, describing 4.5 million species of insect is an onerous task. That’s why, as part of my PhD dissertation, I’m devising a new metric of diversity that skirts around this problem. Although I would love to go into excruciating detail about what it is, I’ll leave that up to my dissertation chapter. Briefly, I use <a href="https://www.genome.gov/about-genomics/fact-sheets/DNA-Sequencing-Fact-Sheet">DNA sequences</a> from insects collected by researchers from <a href="http://www.boldsystems.org/">across the globe</a> to summarize the <a href="http://b4fa.org/bioscience-in-brief/plantbreeding/genetic-diversity/">genetic diversity</a> of insect communities, rather than their species diversity. This makes data collection much more feasible across a broad scale. However, exactly what it tells us about insect communities is still uncertain.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://gcdi.commons.gc.cuny.edu/wp-content/blogs.dir/885/files/2019/09/bold_insects-300x150.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Global map of insect DNA sampling."></p>
+<p><img src="https://gcdi.commons.gc.cuny.edu/wp-content/blogs.dir/885/files/2019/09/bold_insects-300x150.png" class="img-fluid figure-img" alt="Global map of insect DNA sampling."></p>
 <figcaption>A map of insect DNA sequences deposited in the Barcode of Life Data System. Warmer colors indicate densely sampled areas.</figcaption>
 </figure>
 </div>
@@ -671,12 +677,12 @@ Using Leaflet.”</span> November 20, 2019. <a href="https://connor-french.com/p
   author = {French, Connor},
   title = {PDIG {Training} {Grant} {Spotlight:} {Connor} {French}},
   date = {2019-10-12},
-  url = {https://connor-french.com/posts/2019-10-05-pdig-training-grant-spotlight-connor-french},
+  url = {https://connor-french.com/posts/2019-10-05-pdig-training-grant-spotlight-connor-french/},
   langid = {en}
 }
 </code></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2019" class="csl-entry quarto-appendix-citeas">
 French, Connor. 2019. <span>“PDIG Training Grant Spotlight: Connor
-French.”</span> October 12, 2019. <a href="https://connor-french.com/posts/2019-10-05-pdig-training-grant-spotlight-connor-french">https://connor-french.com/posts/2019-10-05-pdig-training-grant-spotlight-connor-french</a>.
+French.”</span> October 12, 2019. <a href="https://connor-french.com/posts/2019-10-05-pdig-training-grant-spotlight-connor-french/">https://connor-french.com/posts/2019-10-05-pdig-training-grant-spotlight-connor-french/</a>.
 </div></div></section></div> ]]></description>
   <category>Research</category>
   <category>GCDI</category>

@@ -52,3 +52,5 @@ rsconnect/
 # data folder for dissertation slides
 static/slides/data/*
 
+
+**/*.quarto_ipynb

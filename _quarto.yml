@@ -27,7 +27,7 @@ website:
 
   page-footer:
     left: |
-      {{< fa regular copyright >}} Connor French, 2022-24<br>
+      {{< fa regular copyright >}} Connor French, 2022-26<br>
       All content licensed under {{< fa brands creative-commons >}}
       {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-sa >}} {{< fa brands creative-commons-nc >}} [(CC BY-NC-SA 4.0)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
     right: |

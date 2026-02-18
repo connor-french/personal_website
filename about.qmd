@@ -4,13 +4,11 @@ title: ""
 
 ## Current position
 
-I recently earned my PhD in Biology- Ecology, Evolution, and Behavior in the [Mike Hickerson](https://hickerlab.wordpress.com/) and (unofficially) [Ana Carnaval](https://carnavallab.org/) labs at City University of New York, City College campus (although my degree is officially from the Graduate Center- confusing). I am currently a Research Scientist at City College, wrapping up publications and software packaging from my PhD work. I'm on the job market!
+I am a research scientist who enjoys building pipelines, developing computational tools, and conducting analyses to make science move faster. As a Research Scientist I at [Sarepta Therapeutics](https://www.sarepta.com), I work across pre-clinical and clinical domains to connect bench scientists to their data and harness that data to make clearer, quicker decisions.
 
-## Research focus
+## Academic positions
 
-My research focuses on understanding how populations, species, and communities evolve across space in response to changing environments. The spatial, temporal, and taxonomic scales I work with vary, ranging from single-species landscape genetics to global-scale macrogenetics. In addition to empirical work, I also wade into the waters of simulation-based [testing of spatial population genetic theory](https://github.com/connor-french/spaceprime) and [software development](https://github.com/connor-french) to facilitate these types of analyses.
-
-## Previous positions
+I completed my PhD in Biology at the Graduate Center, City University of New York in June 2024 under the advisement of [Dr. Michael J. Hickerson](https://hickerlab.wordpress.com). My research focused on understanding how populations, species, and communities evolve across space in response to changing environments. The spatial, temporal, and taxonomic scales I work with vary, ranging from single-species landscape genetics to global-scale macrogenetics. In addition to empirical work, I also wade into the waters of simulation-based [testing of spatial population genetic theory](https://github.com/connor-french/spaceprime) and [software development](https://github.com/connor-french) to facilitate these types of analyses.
 
 From 2016 to 2018 I completed a M.S. in [Zoology](https://zoology.siu.edu/) at [Southern Illinois University at Carbondale](https://siu.edu/). I worked with [Jason Brown](https://www.jasonleebrown.org/) on the systematics and phylogeography of a genus of poison frogs in Peru and helped develop the second version of [SDMtoolbox](http://www.sdmtoolbox.org/), a python-based ArcGIS toolbox for spatial studies of ecology, evolution and genetics.
 
