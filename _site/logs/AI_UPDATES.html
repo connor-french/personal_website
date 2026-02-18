@@ -6,11 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Connor French">
-<meta name="dcterms.date" content="2020-11-20">
-<meta name="description" content="An introduction to using Google Earth Engine for computationally expensive spatial analysis tasks.">
 
-<title>GIS at Scale with Google Earth Engine – Connor French</title>
+<title>ai_updates – Connor French</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,30 +23,30 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-36dd1cfdc68b10f1342c6beb097bf40a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-de0ed3b9a49d5daa615839eefb10c6a7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-36dd1cfdc68b10f1342c6beb097bf40a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-36dd1cfdc68b10f1342c6beb097bf40a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-de0ed3b9a49d5daa615839eefb10c6a7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-36dd1cfdc68b10f1342c6beb097bf40a.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -88,17 +85,13 @@ gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
 </script>
 
 
-<link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="GIS at Scale with Google Earth Engine – Connor French">
-<meta name="twitter:description" content="An introduction to using Google Earth Engine for computationally expensive spatial analysis tasks.">
-<meta name="twitter:image" content="https://connor-french.com/posts/2020-11-20_gis-at-scale/featured.png">
+<link rel="stylesheet" href="../styles.css">
+<meta name="twitter:title" content="Connor French">
 <meta name="twitter:creator" content="@frog_phylo">
-<meta name="twitter:image-height" content="492">
-<meta name="twitter:image-width" content="492">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
-<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -263,11 +256,11 @@ gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
   </script>
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Connor French</span>
     </a>
   </div>
@@ -278,27 +271,27 @@ gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../posts.html"> 
+    <a class="nav-link" href="../posts.html"> 
 <span class="menu-text">Posts</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../projects.html"> 
+    <a class="nav-link" href="../projects.html"> 
 <span class="menu-text">Projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../birdweather/index.html"> 
+    <a class="nav-link" href="../birdweather/index.html"> 
 <span class="menu-text">BirdWeather</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../teaching/index.html"> 
+    <a class="nav-link" href="../teaching/index.html"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../presentations.html"> 
+    <a class="nav-link" href="../presentations.html"> 
 <span class="menu-text">Presentations</span></a>
   </li>  
 </ul>
@@ -310,106 +303,123 @@ gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">GIS at Scale with Google Earth Engine</h1>
-                  <div>
-        <div class="description">
-          An introduction to using Google Earth Engine for computationally expensive spatial analysis tasks.
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">GIS</div>
-                <div class="quarto-category">Research</div>
-                <div class="quarto-category">Data Visualization</div>
-                <div class="quarto-category">GCDI</div>
-              </div>
-                  </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Connor French </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">November 20, 2020</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#ai-updates" id="toc-ai-updates" class="nav-link active" data-scroll-target="#ai-updates">AI Updates</a>
+  <ul class="collapse">
+  <li><a href="#move-pixi-environment-to-birdweather" id="toc-move-pixi-environment-to-birdweather" class="nav-link" data-scroll-target="#move-pixi-environment-to-birdweather">2026-02-18 — Move pixi environment to birdweather/</a></li>
+  <li><a href="#fix-overview-counts-using-local-cached-detections" id="toc-fix-overview-counts-using-local-cached-detections" class="nav-link" data-scroll-target="#fix-overview-counts-using-local-cached-detections">2026-02-18 — Fix overview counts using local cached detections</a></li>
+  <li><a href="#incremental-parquet-cache-for-birdweather" id="toc-incremental-parquet-cache-for-birdweather" class="nav-link" data-scroll-target="#incremental-parquet-cache-for-birdweather">2026-02-18 — Incremental Parquet Cache for BirdWeather</a>
+  <ul class="collapse">
+  <li><a href="#what-changed" id="toc-what-changed" class="nav-link" data-scroll-target="#what-changed">What changed</a></li>
+  </ul></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">2026-02-18</a></li>
+  <li><a href="#birdweather-dashboard-page" id="toc-birdweather-dashboard-page" class="nav-link" data-scroll-target="#birdweather-dashboard-page">2026-02-18 — BirdWeather Dashboard Page</a>
+  <ul class="collapse">
+  <li><a href="#what-changed-1" id="toc-what-changed-1" class="nav-link" data-scroll-target="#what-changed-1">What changed</a></li>
+  <li><a href="#dashboard-sections" id="toc-dashboard-sections" class="nav-link" data-scroll-target="#dashboard-sections">Dashboard sections</a></li>
+  <li><a href="#why" id="toc-why" class="nav-link" data-scroll-target="#why">Why</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
 
 
-
-<p><a href="https://wp.me/p846lD-1x6">Originally published on GC Digital Initiatives</a></p>
-<p>Sometimes your GIS project needs some extra oomph. Maybe finding the data you need to understand deforestation in Brazil is giving you a headache. Or, you need to run a machine learning algorithm on 50 gigabytes of weather station data and your poor laptop is melting the finish off of your dining room table. <a href="https://earthengine.google.com/" target="_blank" rel="noopener noreferrer">Google Earth Engine</a> (GEE) is here to help.</p>
-<p>From <a href="https://earthengine.google.com/" target="_blank" rel="noopener noreferrer">the website</a>, GEE’s purpose is to:</p>
+<section id="ai-updates" class="level1">
+<h1>AI Updates</h1>
+<section id="move-pixi-environment-to-birdweather" class="level2">
+<h2 class="anchored" data-anchor-id="move-pixi-environment-to-birdweather">2026-02-18 — Move pixi environment to birdweather/</h2>
 <ul>
-<li>
-Provide an interactive platform for geospatial algorithm development at scale
-</li>
-<li>
-Enable high-impact, data-driven science
-</li>
-<li>
-Make substantive progress on global challenges that involve large geospatial datasets
-</li>
+<li>Created <code>birdweather/pixi.toml</code> as a standalone pixi workspace with all previously root-level dependencies (polars, altair, seaborn, matplotlib, requests, python-dotenv, jupyter, vl-convert-python, Python 3.14).</li>
+<li>Ran <code>pixi install</code> in <code>birdweather/</code> to generate <code>birdweather/pixi.lock</code>.</li>
+<li>Removed <code>[tool.pixi.*]</code> sections from root <code>pyproject.toml</code> (kept project/build-system metadata).</li>
+<li>Deleted root <code>pixi.lock</code>.</li>
+<li>Updated <code>.gitattributes</code> to track <code>birdweather/pixi.lock</code> instead of root <code>pixi.lock</code>.</li>
+<li>Render birdweather from within its directory: <code>cd birdweather &amp;&amp; pixi run quarto render index.qmd</code></li>
 </ul>
-<p>GEE is designed to make large-scale GIS projects feasible, but is also suitable for smaller projects. My main use-case is to pull environmental data from their <a href="https://developers.google.com/earth-engine/datasets" target="_blank" rel="noopener noreferrer">petabyte scale database</a> to model the potential distribution of species through time, e.g.&nbsp;this set of maps projecting the distribution of a species of Peruvian poison dart frog as it’s changed since the mid-Pleistocene.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="projections.png" class="img-fluid figure-img"></p>
-<figcaption>The first five panels show models of a frog species’ potential range from the present-day back to the mid-Pleistocene. The sixth panel shows areas of stability in the frog’s range over this time period. These models were constructed using publicly available environmental data related to the frog’s ecological tolerances</figcaption>
-</figure>
-</div>
-<p>Large amounts of data can be pulled down with a single line of code! An “Earth Engine Snippet” is provided for each dataset that you can copy into your GEE <a href="https://developers.google.com/earth-engine/guides/playground" target="_blank" rel="noopener noreferrer">code editor</a>.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="terraclim.png" class="img-fluid figure-img"></p>
-<figcaption>Example dataset highlighting the type of data available on Google Earth Engine and the ease of acquiring it through the Earth Engine Snippet.</figcaption>
-</figure>
-</div>
-<p>In addition to acquiring data, a myriad of data processing and analytical tools are available. From cropping an image to <a href="https://developers.google.com/earth-engine/guides/machine-learning" target="_blank" rel="noopener noreferrer">machine learning</a>, these tasks are performed on the <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer">Google Cloud platform</a>, saving your computer from unnecessary RAM overload. There is a bit of a learning curve to using these tools, especially for those unfamiliar with coding. Thankfully, <a href="https://developers.google.com/earth-engine/guides" target="_blank" rel="noopener noreferrer">learning resources are plentiful</a>. And for those with a preferred coding language, GEE code has been translated to <a href="https://developers.google.com/earth-engine/guides/getstarted" target="_blank" rel="noopener noreferrer">JavaScript</a> (the native language), <a href="https://www.earthdatascience.org/tutorials/intro-google-earth-engine-python-api/" target="_blank" rel="noopener noreferrer">python</a>, and <a href="https://r-spatial.github.io/rgee/" target="_blank" rel="noopener noreferrer">R</a>! My preferred language is R, and there are <a href="https://r-spatial.github.io/rgee/" target="_blank" rel="noopener noreferrer">a ton of examples</a> to base your own ideas off of. For your next big GIS project, I recommend giving Google Earth Engine a shot!</p>
-<p>Should you need help with your GIS project, we have some great resources through the GC Digital Fellows. For coding help and camaraderie, check out the <a href="http://cuny.is/pug">Python User Group (PUG)</a> and the <a href="http://cuny.is/rug">R User Group (RUG)</a>. To hang out with folks interested in everything GIS, check out the <a href="http://cuny.is/gis">GIS Working Group</a>!</p>
+</section>
+<section id="fix-overview-counts-using-local-cached-detections" class="level2">
+<h2 class="anchored" data-anchor-id="fix-overview-counts-using-local-cached-detections">2026-02-18 — Fix overview counts using local cached detections</h2>
+<ul>
+<li>The “Species Detected” and “Total Detections” cards in the BirdWeather overview were using <code>overview["counts"]</code> from the GraphQL API, which returned stale/incomplete numbers (19 species, 607 detections). Changed <code>birdweather/index.qmd</code> to compute these counts from the locally synced <code>detections</code> DataFrame instead, which has the full data (96K+ detections, 136 species).</li>
+</ul>
+</section>
+<section id="incremental-parquet-cache-for-birdweather" class="level2">
+<h2 class="anchored" data-anchor-id="incremental-parquet-cache-for-birdweather">2026-02-18 — Incremental Parquet Cache for BirdWeather</h2>
+<section id="what-changed" class="level3">
+<h3 class="anchored" data-anchor-id="what-changed">What changed</h3>
+<ul>
+<li><strong>New module</strong>: Added <code>birdweather/data_store.py</code> — local Parquet caching layer with incremental sync and local aggregation functions</li>
+<li><strong>Incremental sync</strong>: Raw detections and environment sensor data are stored in <code>birdweather/data/</code> as Parquet files. On each render, only new data since the last sync is fetched from the BirdWeather API.</li>
+<li><strong>Local aggregations</strong>: Top species, daily detection counts, and time-of-day counts are now computed locally from cached raw detections using Polars instead of calling the API for server-side aggregations.</li>
+<li><strong>Species metadata</strong>: Cached in <code>species_meta.parquet</code>, re-fetched only when new species appear in detections.</li>
+<li><strong>Species probabilities</strong>: Cached in <code>species_probabilities.parquet</code>, re-fetched if older than 7 days (BirdWeather model data).</li>
+<li><strong>Station overview</strong>: Still fetched live from the API on each render (contains current weather).</li>
+<li><strong><code>.gitignore</code></strong>: Added <code>birdweather/data/</code> to exclude cached Parquet files from git.</li>
+<li><strong><code>fetch_data.py</code></strong>: Increased default <code>max_pages</code> for <code>get_detections()</code> from 100 to 500 for initial seed load.</li>
+<li><strong><code>index.qmd</code></strong>: Rewrote setup and fetch-data cells to use <code>data_store</code> sync/compute functions instead of direct API calls. All downstream visualization cells unchanged (same DataFrame schemas).</li>
+</ul>
+</section>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section">2026-02-18</h2>
+<ul>
+<li>Fixed <code>TypeError: 'DataFrame' object is not callable</code> in <code>birdweather/index.qmd</code>: removed spurious <code>()</code> after <code>env_hist.with_columns(...)</code> (line ~785) and changed <code>pdf = combined()</code> to <code>pdf = combined</code> (line ~694). Log</li>
+<li>Fixed “Not enough overlapping data” in env-correlations cell: changed inner join to full outer join with explicit <code>pl.Date</code> casting, used <code>daily_counts</code> (365-day) instead of only <code>daily_counts_30d</code> for more overlap with env sensor data, and filled missing detections with 0.</li>
+<li>Root-caused env correlation issue: PUC sensor reports every ~40 seconds, so the old pagination defaults (100 rows × 50 pages = 5,000 rows) only covered ~2.3 days. Increased <code>page_size</code> from 100→1000 and <code>max_pages</code> from 50→100 in <code>get_environment_history()</code>, now fetching ~65K rows covering the full 30-day period. Updated both the default parameters in <code>fetch_data.py</code> and the call in <code>index.qmd</code>.</li>
+<li>Removed station name/number from the overview footer to avoid exposing the station ID on the public page (location is still shown).</li>
+<li>Fixed “Unavailable” weather: when the BirdWeather weather API returns null, the page now falls back to the PUC environment sensor’s temperature and humidity readings.</li>
+<li>Downsampled env-timeseries chart from ~65K raw sensor readings to hourly averages (~720 points) to stay within Altair’s 5,000-row limit.</li>
+<li>Extended env history fetch from 30 to 180 days (max_pages 100→400) to cover the full detection history for environmental correlations.</li>
+<li>Added <code>scale=alt.Scale(zero=False)</code> to x-axes on all three env correlation scatter plots so the axis range fits the data rather than starting from zero.</li>
+</ul>
+</section>
+<section id="birdweather-dashboard-page" class="level2">
+<h2 class="anchored" data-anchor-id="birdweather-dashboard-page">2026-02-18 — BirdWeather Dashboard Page</h2>
+<section id="what-changed-1" class="level3">
+<h3 class="anchored" data-anchor-id="what-changed-1">What changed</h3>
+<ul>
+<li><strong>New page</strong>: Added <code>birdweather/index.qmd</code> — a full bird detection dashboard page with interactive Altair visualizations</li>
+<li><strong>New module</strong>: Added <code>birdweather/fetch_data.py</code> — Python module that wraps the BirdWeather GraphQL API, returning Polars DataFrames for station overview, top species, daily/hourly detection counts, environment sensor history, and species probability data</li>
+<li><strong>Navigation</strong>: Added “BirdWeather” tab to the navbar in <code>_quarto.yml</code> (between Projects and Teaching)</li>
+<li><strong>Python environment</strong>: Initialized Pixi (<code>pyproject.toml</code>) with dependencies: polars, altair, seaborn, matplotlib, requests, python-dotenv, jupyter, vl-convert-python</li>
+<li><strong>Config</strong>: Created <code>.env</code> (for <code>BIRDWEATHER_STATION_ID</code>) and added <code>.env</code> and <code>.pixi/</code> to <code>.gitignore</code></li>
+</ul>
+</section>
+<section id="dashboard-sections" class="level3">
+<h3 class="anchored" data-anchor-id="dashboard-sections">Dashboard sections</h3>
+<ol type="1">
+<li><strong>Station Overview</strong> — metric cards showing total species, detections, date range, current weather &amp; sensor readings</li>
+<li><strong>Recent Activity</strong> — top 10 species in the last 7 days, new arrivals this week, 30-day detection trend, daily species richness</li>
+<li><strong>All-Time Highlights</strong> — top 15 species with certainty breakdown (stacked bar), rarest visitors table</li>
+<li><strong>When Do Birds Sing?</strong> — hourly detection bar chart + species × hour heatmap</li>
+<li><strong>Seasonal Trends</strong> — monthly detection volume with species richness overlay, species probability heatmap (week of year × species)</li>
+<li><strong>Environmental Correlations</strong> — scatter plots with trend lines for temperature, humidity, and barometric pressure vs.&nbsp;detection count; sensor time series</li>
+<li><strong>Species Gallery</strong> — grid of top 20 species with images, names, detection counts, and Wikipedia summaries</li>
+</ol>
+</section>
+<section id="why" class="level3">
+<h3 class="anchored" data-anchor-id="why">Why</h3>
+<p>User requested a fun bird detection summary page for their BirdWeather PUC station, with short-term and long-term trends and environmental correlations.</p>
 
 
+</section>
+</section>
+</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{french2020,
-  author = {French, Connor},
-  title = {GIS at {Scale} with {Google} {Earth} {Engine}},
-  date = {2020-11-20},
-  url = {https://connor-french.com/posts/2020-11-20_gis-at-scale/},
-  langid = {en}
-}
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-french2020" class="csl-entry quarto-appendix-citeas" role="listitem">
-French, Connor. 2020. <span>“GIS at Scale with Google Earth
-Engine.”</span> November 20, 2020. <a href="https://connor-french.com/posts/2020-11-20_gis-at-scale/">https://connor-french.com/posts/2020-11-20_gis-at-scale/</a>.
-</div></div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
@@ -823,8 +833,6 @@ Engine.”</span> November 20, 2020. <a href="https://connor-french.com/posts/20
     }
   });
   </script>
-<script src="https://utteranc.es/client.js" repo="connor-french/connorfrench" issue-term="pathname" theme="github-light" crossorigin="anonymous" async="">
-</script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

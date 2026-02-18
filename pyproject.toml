@@ -1,0 +1,10 @@
+[project]
+authors = [{name = "Connor French", email = "confrench33@gmail.com"}]
+dependencies = []
+name = "personal_website"
+requires-python = ">= 3.11"
+version = "0.1.0"
+
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]

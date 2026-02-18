@@ -49,8 +49,21 @@ po/*~
 rsconnect/
 /.quarto/
 
+# Environment variables
+.env
+
+# Pixi
+.pixi/
+
 # data folder for dissertation slides
 static/slides/data/*
 
 
 **/*.quarto_ipynb
+
+# pixi environments
+.pixi
+*.egg-info
+
+# BirdWeather cached data
+birdweather/data/

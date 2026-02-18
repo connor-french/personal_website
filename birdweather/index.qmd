@@ -1,0 +1,908 @@
+---
+title: "BirdWeather"
+subtitle: "Live bird detections from my backyard PUC station"
+title-block-banner: "#CE6337"
+toc: true
+toc-title: "Sections"
+toc-location: left
+toc-depth: 2
+page-layout: article
+freeze: auto
+comments: false
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{python}
+#| label: setup
+#| include: false
+
+import sys
+import os
+
+# Add the birdweather/ directory to the path so fetch_data can be imported directly
+sys.path.insert(0, os.path.join(os.getcwd(), "birdweather"))
+
+from fetch_data import (
+    get_station_id,
+    get_station_overview,
+    kelvin_to_fahrenheit,
+    kelvin_to_celsius,
+)
+from data_store import (
+    sync_detections,
+    sync_environment,
+    sync_species_meta,
+    sync_species_probabilities,
+    compute_top_species,
+    compute_daily_detection_counts,
+    compute_time_of_day_counts,
+)
+import polars as pl
+import altair as alt
+import numpy as np
+from datetime import datetime, timedelta
+from IPython.display import Markdown, HTML
+
+# Website color palette
+DARK_BLUE = "#224146"
+ORANGE = "#CE6337"
+YELLOW = "#E3BA31"
+MUSTARD = "#9D8622"
+PALETTE = [DARK_BLUE, ORANGE, YELLOW, MUSTARD, "#5B9A8B", "#8B5E3C", "#7A6CC1", "#C75DAB"]
+
+station_id = get_station_id()
+```
+
+```{python}
+#| label: fetch-data
+#| include: false
+
+# --- Always-fresh API call (live weather & station info) ---
+overview = get_station_overview(station_id)
+
+# --- Sync cached data (incremental — only fetches new data) ---
+detections = sync_detections(
+    station_id,
+    earliest_detection_at=overview.get("earliestDetectionAt"),
+)
+env_hist = sync_environment(station_id)
+species_meta = sync_species_meta(station_id, detections)
+species_probs = sync_species_probabilities(station_id)
+
+# --- Compute aggregations locally from cached detections ---
+top_species_all = compute_top_species(detections, species_meta, limit=100)
+all_species = compute_top_species(detections, species_meta, limit=1000)
+top_species_week = compute_top_species(detections, species_meta, period_days=7, limit=50)
+top_species_month = compute_top_species(detections, species_meta, period_days=30, limit=50)
+daily_counts = compute_daily_detection_counts(detections, period_days=365)
+daily_counts_30d = compute_daily_detection_counts(detections, period_days=30)
+tod_counts = compute_time_of_day_counts(detections)
+```
+
+## Station Overview {#overview}
+
+```{python}
+#| label: station-overview
+
+station_name = overview["name"]
+location = overview.get("location", "Unknown")
+
+# Use local cached detections for accurate counts (API counts can be stale/incomplete)
+total_detections = detections.height if detections.height > 0 else overview["counts"]["detections"]
+total_species = detections["speciesId"].n_unique() if detections.height > 0 else overview["counts"]["species"]
+
+earliest = overview.get("earliestDetectionAt", "N/A")
+latest = overview.get("latestDetectionAt", "N/A")
+
+# Format dates nicely
+if earliest != "N/A":
+    earliest_dt = datetime.fromisoformat(earliest.replace("Z", "+00:00"))
+    earliest_str = earliest_dt.strftime("%B %d, %Y")
+else:
+    earliest_str = "N/A"
+
+if latest != "N/A":
+    latest_dt = datetime.fromisoformat(latest.replace("Z", "+00:00"))
+    latest_str = latest_dt.strftime("%B %d, %Y")
+else:
+    latest_str = "N/A"
+
+# Current environment sensor
+env_sensor = overview.get("sensors", {}).get("environment")
+env_temp_c = None
+env_humidity = None
+if env_sensor and env_sensor.get("temperature") is not None:
+    env_temp_c = env_sensor["temperature"]
+    env_temp_f = env_temp_c * 9 / 5 + 32
+    env_humidity = env_sensor.get("humidity")
+
+# Current weather — fall back to PUC sensor if API weather is unavailable
+weather = overview.get("weather")
+if weather and weather.get("temp") is not None:
+    temp_f = kelvin_to_fahrenheit(weather["temp"])
+    temp_c = kelvin_to_celsius(weather["temp"])
+    weather_desc = weather["description"].title()
+    humidity_pct = weather["humidity"]
+    weather_str = f"{temp_f:.0f}°F ({temp_c:.0f}°C) · {weather_desc} · {humidity_pct}% humidity"
+elif env_temp_c is not None:
+    weather_str = f"{env_temp_f:.0f}°F ({env_temp_c:.0f}°C)"
+    if env_humidity is not None:
+        weather_str += f" · {env_humidity:.0f}% humidity"
+    weather_str += " (from PUC sensor)"
+else:
+    weather_str = "Unavailable"
+
+# Sensor line (only show separately if weather API was available, to avoid redundancy)
+if env_temp_c is not None and weather and weather.get("temp") is not None:
+    env_str = f"{env_temp_f:.1f}°F ({env_temp_c:.1f}°C) · {env_humidity}% humidity at sensor"
+else:
+    env_str = None
+
+card_html = f"""
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+  <div style="background: var(--bs-card-bg, #f8f9fa); border-radius: 8px; padding: 1.2rem; text-align: center; border-left: 4px solid {ORANGE};">
+    <div style="font-size: 2rem; font-weight: bold; color: {ORANGE};">{total_species:,}</div>
+    <div style="font-size: 0.9rem; opacity: 0.8;">Species Detected</div>
+  </div>
+  <div style="background: var(--bs-card-bg, #f8f9fa); border-radius: 8px; padding: 1.2rem; text-align: center; border-left: 4px solid {DARK_BLUE};">
+    <div style="font-size: 2rem; font-weight: bold; color: {DARK_BLUE};">{total_detections:,}</div>
+    <div style="font-size: 0.9rem; opacity: 0.8;">Total Detections</div>
+  </div>
+  <div style="background: var(--bs-card-bg, #f8f9fa); border-radius: 8px; padding: 1.2rem; text-align: center; border-left: 4px solid {YELLOW};">
+    <div style="font-size: 2rem; font-weight: bold; color: {YELLOW};">{earliest_str}</div>
+    <div style="font-size: 0.9rem; opacity: 0.8;">First Detection</div>
+  </div>
+  <div style="background: var(--bs-card-bg, #f8f9fa); border-radius: 8px; padding: 1.2rem; text-align: center; border-left: 4px solid {MUSTARD};">
+    <div style="font-size: 2rem; font-weight: bold; color: {MUSTARD};">{latest_str}</div>
+    <div style="font-size: 0.9rem; opacity: 0.8;">Latest Detection</div>
+  </div>
+</div>
+
+<p style="text-align: center; opacity: 0.7; margin-top: 0.5rem;">
+  📍 Hudson Valley, NY<br>
+  🌤️ Current weather: {weather_str}
+  {"<br>🌡️ PUC sensor: " + env_str if env_str else ""}
+</p>
+"""
+
+display(HTML(card_html))
+```
+
+## Recent Activity {#recent}
+
+### This Week's Top Birds
+
+```{python}
+#| label: top-species-week
+
+if top_species_week.height > 0:
+    top_week = top_species_week.head(10)
+
+    chart = (
+        alt.Chart(top_week)
+        .mark_bar(cornerRadiusEnd=4)
+        .encode(
+            x=alt.X("count:Q", title="Detections"),
+            y=alt.Y("commonName:N", sort="-x", title=None),
+            color=alt.value(ORANGE),
+            tooltip=[
+                alt.Tooltip("commonName:N", title="Species"),
+                alt.Tooltip("count:Q", title="Detections"),
+                alt.Tooltip("scientificName:N", title="Scientific Name"),
+            ],
+        )
+        .properties(
+            title="Top 10 Species — Last 7 Days",
+            width="container",
+            height=alt.Step(28),
+        )
+    )
+    chart.display()
+else:
+    display(Markdown("*No detections in the last 7 days.*"))
+```
+
+### New Arrivals This Week
+
+Species detected in the last 7 days that weren't seen the previous 30 days.
+
+```{python}
+#| label: new-arrivals
+
+if top_species_week.height > 0 and top_species_month.height > 0:
+    week_ids = set(top_species_week["speciesId"].to_list())
+    month_ids = set(top_species_month["speciesId"].to_list())
+    # Species in last 7 days but not in prior month data
+    # (month includes the week, so we compare to the full month set minus week)
+    new_ids = week_ids - (month_ids - week_ids)
+    
+    # Actually: species in week that have very few detections in the month
+    # Better approach: species whose month count == week count (i.e. all detections are recent)
+    week_df = top_species_week.select("speciesId", "commonName", "scientificName", pl.col("count").alias("weekCount"))
+    month_df = top_species_month.select("speciesId", pl.col("count").alias("monthCount"))
+    
+    merged = week_df.join(month_df, on="speciesId", how="left").with_columns(
+        pl.col("monthCount").fill_null(0)
+    )
+    
+    # New arrivals: month count equals week count (they only appeared this week)
+    new_arrivals = merged.filter(pl.col("weekCount") == pl.col("monthCount"))
+    
+    if new_arrivals.height > 0:
+        new_list = new_arrivals.sort("weekCount", descending=True)
+        items = []
+        for row in new_list.iter_rows(named=True):
+            items.append(f"- **{row['commonName']}** (*{row['scientificName']}*) — {row['weekCount']} detection{'s' if row['weekCount'] != 1 else ''}")
+        display(Markdown("\n".join(items)))
+    else:
+        display(Markdown("*No new species this week — all detected species were also seen in the prior month.*"))
+else:
+    display(Markdown("*Not enough data to determine new arrivals.*"))
+```
+
+### Daily Detection Trend
+
+```{python}
+#| label: daily-trend-30d
+
+if daily_counts_30d.height > 0:
+    daily_totals = (
+        daily_counts_30d
+        .group_by("date")
+        .agg(pl.col("count").sum().alias("detections"))
+        .sort("date")
+    )
+
+    chart = (
+        alt.Chart(daily_totals)
+        .mark_area(
+            line={"color": DARK_BLUE},
+            color=alt.Gradient(
+                gradient="linear",
+                stops=[
+                    alt.GradientStop(color=DARK_BLUE, offset=1),
+                    alt.GradientStop(color="transparent", offset=0),
+                ],
+                x1=0, x2=0, y1=1, y2=0,
+            ),
+            interpolate="monotone",
+        )
+        .encode(
+            x=alt.X("date:T", title="Date"),
+            y=alt.Y("detections:Q", title="Total Detections"),
+            tooltip=[
+                alt.Tooltip("date:T", title="Date"),
+                alt.Tooltip("detections:Q", title="Detections"),
+            ],
+        )
+        .properties(
+            title="Daily Detections — Last 30 Days",
+            width="container",
+            height=250,
+        )
+    )
+    chart.display()
+else:
+    display(Markdown("*No detection data available for the last 30 days.*"))
+```
+
+### Daily Species Richness
+
+```{python}
+#| label: daily-richness-30d
+
+if daily_counts_30d.height > 0:
+    daily_richness = (
+        daily_counts_30d
+        .group_by("date")
+        .agg(pl.col("speciesId").n_unique().alias("species"))
+        .sort("date")
+    )
+
+    chart = (
+        alt.Chart(daily_richness)
+        .mark_line(point=True, color=ORANGE, strokeWidth=2)
+        .encode(
+            x=alt.X("date:T", title="Date"),
+            y=alt.Y("species:Q", title="Unique Species"),
+            tooltip=[
+                alt.Tooltip("date:T", title="Date"),
+                alt.Tooltip("species:Q", title="Species"),
+            ],
+        )
+        .properties(
+            title="Daily Species Richness — Last 30 Days",
+            width="container",
+            height=220,
+        )
+    )
+    chart.display()
+else:
+    display(Markdown("*No data available.*"))
+```
+
+## All-Time Highlights {#highlights}
+
+### Most Common Species
+
+```{python}
+#| label: top-species-alltime
+
+if top_species_all.height > 0:
+    top15 = top_species_all.head(15)
+
+    # Reshape for stacked bar
+    stacked_data = []
+    for row in top15.iter_rows(named=True):
+        for certainty in ["almostCertain", "veryLikely", "uncertain", "unlikely"]:
+            stacked_data.append({
+                "commonName": row["commonName"],
+                "certainty": certainty,
+                "count": row[certainty],
+                "total": row["count"],
+            })
+
+    stacked_df = pl.DataFrame(stacked_data)
+
+    certainty_colors = {
+        "almostCertain": DARK_BLUE,
+        "veryLikely": ORANGE,
+        "uncertain": YELLOW,
+        "unlikely": "#cccccc",
+    }
+    certainty_labels = {
+        "almostCertain": "Almost Certain",
+        "veryLikely": "Very Likely",
+        "uncertain": "Uncertain",
+        "unlikely": "Unlikely",
+    }
+
+    stacked_df = stacked_df.with_columns(
+        pl.col("certainty").replace_strict(certainty_labels).alias("certaintyLabel")
+    )
+
+    sort_order = top15["commonName"].to_list()
+
+    chart = (
+        alt.Chart(stacked_df)
+        .mark_bar(cornerRadiusEnd=2)
+        .encode(
+            x=alt.X("count:Q", title="Detections", stack="zero"),
+            y=alt.Y("commonName:N", sort=sort_order, title=None),
+            color=alt.Color(
+                "certaintyLabel:N",
+                title="Certainty",
+                scale=alt.Scale(
+                    domain=list(certainty_labels.values()),
+                    range=list(certainty_colors.values()),
+                ),
+                sort=list(certainty_labels.values()),
+            ),
+            tooltip=[
+                alt.Tooltip("commonName:N", title="Species"),
+                alt.Tooltip("certaintyLabel:N", title="Certainty"),
+                alt.Tooltip("count:Q", title="Count"),
+            ],
+        )
+        .properties(
+            title="Top 15 Species — All Time (by Detection Certainty)",
+            width="container",
+            height=alt.Step(28),
+        )
+    )
+    chart.display()
+else:
+    display(Markdown("*No species data available.*"))
+```
+
+### Rarest Visitors
+
+Species detected the fewest times overall.
+
+```{python}
+#| label: rarest-species
+
+if all_species.height > 0:
+    rarest = all_species.sort("count").head(10)
+
+    rare_html = """
+    <div style="margin: 1rem 0;">
+    <table style="width: 100%; border-collapse: collapse;">
+    <thead>
+      <tr style="border-bottom: 2px solid var(--bs-border-color, #dee2e6);">
+        <th style="padding: 0.5rem; text-align: left;">Species</th>
+        <th style="padding: 0.5rem; text-align: right;">Detections</th>
+      </tr>
+    </thead>
+    <tbody>
+    """
+    for row in rarest.iter_rows(named=True):
+        thumb = row.get("thumbnailUrl") or ""
+        img_tag = f'<img src="{thumb}" alt="{row["commonName"]}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;margin-right:0.5rem;vertical-align:middle;">' if thumb else ""
+        rare_html += f"""
+        <tr style="border-bottom: 1px solid var(--bs-border-color, #dee2e6);">
+          <td style="padding: 0.5rem;">{img_tag}<strong>{row["commonName"]}</strong> <em style="opacity:0.7;">({row["scientificName"]})</em></td>
+          <td style="padding: 0.5rem; text-align: right;">{row["count"]}</td>
+        </tr>
+        """
+    rare_html += "</tbody></table></div>"
+
+    display(HTML(rare_html))
+else:
+    display(Markdown("*No species data available.*"))
+```
+
+## When Do Birds Sing? {#time-of-day}
+
+Detection counts by hour of day show when birds are most active — expect peaks at dawn and dusk.
+
+```{python}
+#| label: time-of-day-heatmap
+
+if tod_counts.height > 0:
+    # Aggregate across all species by hour
+    hourly_total = (
+        tod_counts
+        .group_by("hour")
+        .agg(pl.col("count").sum().alias("detections"))
+        .sort("hour")
+    )
+
+    # Label hours nicely
+    hourly_total = hourly_total.with_columns(
+        pl.col("hour").cast(pl.Int32).map_elements(
+            lambda h: f"{h % 12 or 12}{'AM' if h < 12 else 'PM'}",
+            return_dtype=pl.Utf8,
+        ).alias("hourLabel")
+    )
+
+    chart = (
+        alt.Chart(hourly_total)
+        .mark_bar(cornerRadiusEnd=4, color=DARK_BLUE)
+        .encode(
+            x=alt.X(
+                "hour:O",
+                title="Hour of Day",
+                axis=alt.Axis(
+                    labelExpr="datum.value % 12 == 0 ? (datum.value == 0 ? '12AM' : '12PM') : (datum.value < 12 ? datum.value + 'AM' : (datum.value - 12) + 'PM')"
+                ),
+            ),
+            y=alt.Y("detections:Q", title="Total Detections"),
+            tooltip=[
+                alt.Tooltip("hourLabel:N", title="Hour"),
+                alt.Tooltip("detections:Q", title="Detections"),
+            ],
+        )
+        .properties(
+            title="When Are Birds Most Active?",
+            width="container",
+            height=250,
+        )
+    )
+    chart.display()
+else:
+    display(Markdown("*No time-of-day data available.*"))
+```
+
+### Top Species by Time of Day
+
+```{python}
+#| label: tod-top-species-heatmap
+
+if tod_counts.height > 0:
+    # Get top 15 species by total count
+    top_tod_species = (
+        tod_counts
+        .group_by("commonName")
+        .agg(pl.col("count").sum().alias("total"))
+        .sort("total", descending=True)
+        .head(15)["commonName"]
+        .to_list()
+    )
+
+    tod_top = tod_counts.filter(pl.col("commonName").is_in(top_tod_species))
+
+    chart = (
+        alt.Chart(tod_top)
+        .mark_rect()
+        .encode(
+            x=alt.X(
+                "hour:O",
+                title="Hour of Day",
+                axis=alt.Axis(
+                    labelExpr="datum.value % 12 == 0 ? (datum.value == 0 ? '12AM' : '12PM') : (datum.value < 12 ? datum.value + 'AM' : (datum.value - 12) + 'PM')"
+                ),
+            ),
+            y=alt.Y("commonName:N", title=None, sort=top_tod_species),
+            color=alt.Color(
+                "count:Q",
+                title="Detections",
+                scale=alt.Scale(scheme="tealblues"),
+            ),
+            tooltip=[
+                alt.Tooltip("commonName:N", title="Species"),
+                alt.Tooltip("hour:O", title="Hour"),
+                alt.Tooltip("count:Q", title="Detections"),
+            ],
+        )
+        .properties(
+            title="Activity Heatmap — Top 15 Species by Hour of Day",
+            width="container",
+            height=alt.Step(22),
+        )
+    )
+    chart.display()
+else:
+    display(Markdown("*No time-of-day data available.*"))
+```
+
+## Seasonal Trends {#seasonal}
+
+### Monthly Detection Volume
+
+```{python}
+#| label: monthly-trend
+
+if daily_counts.height > 0:
+    monthly = (
+        daily_counts
+        .with_columns(
+            pl.col("date").dt.month().alias("month"),
+            pl.col("date").dt.year().alias("year"),
+            pl.col("date").dt.strftime("%Y-%m").alias("yearMonth"),
+        )
+        .group_by("yearMonth")
+        .agg(
+            pl.col("count").sum().alias("detections"),
+            pl.col("speciesId").n_unique().alias("species"),
+        )
+        .sort("yearMonth")
+    )
+
+    base = alt.Chart(monthly).encode(
+        x=alt.X("yearMonth:O", title="Month", axis=alt.Axis(labelAngle=-45)),
+    )
+
+    bars = base.mark_bar(color=DARK_BLUE, opacity=0.8).encode(
+        y=alt.Y("detections:Q", title="Detections"),
+        tooltip=[
+            alt.Tooltip("yearMonth:O", title="Month"),
+            alt.Tooltip("detections:Q", title="Detections"),
+            alt.Tooltip("species:Q", title="Species"),
+        ],
+    )
+
+    line = base.mark_line(color=ORANGE, strokeWidth=2.5, point=True).encode(
+        y=alt.Y("species:Q", title="Unique Species", axis=alt.Axis(titleColor=ORANGE)),
+    )
+
+    chart = (
+        alt.layer(bars, line)
+        .resolve_scale(y="independent")
+        .properties(
+            title="Monthly Detections & Species Richness",
+            width="container",
+            height=300,
+        )
+    )
+    chart.display()
+else:
+    display(Markdown("*No daily count data available.*"))
+```
+
+### Seasonal Species Probability
+
+When different species are expected throughout the year, based on BirdWeather's probability model.
+
+```{python}
+#| label: species-probability-heatmap
+
+if species_probs.height > 0:
+    # Filter to species with meaningful probability
+    sp_max_prob = (
+        species_probs
+        .group_by("commonName")
+        .agg(pl.col("probability").max().alias("maxProb"))
+        .sort("maxProb", descending=True)
+    )
+
+    top_prob_species = sp_max_prob.head(20)["commonName"].to_list()
+    probs_top = species_probs.filter(pl.col("commonName").is_in(top_prob_species))
+
+    # Map week numbers to approximate month labels
+    month_labels = {
+        0: "Jan", 4: "Feb", 8: "Mar", 13: "Apr", 17: "May", 21: "Jun",
+        26: "Jul", 30: "Aug", 34: "Sep", 39: "Oct", 43: "Nov", 47: "Dec",
+    }
+
+    chart = (
+        alt.Chart(probs_top)
+        .mark_rect()
+        .encode(
+            x=alt.X(
+                "week:O",
+                title="Week of Year",
+                axis=alt.Axis(
+                    values=list(month_labels.keys()),
+                    labelExpr="{'0':'Jan','4':'Feb','8':'Mar','13':'Apr','17':'May','21':'Jun','26':'Jul','30':'Aug','34':'Sep','39':'Oct','43':'Nov','47':'Dec'}[datum.value] || ''"
+                ),
+            ),
+            y=alt.Y("commonName:N", title=None, sort=top_prob_species),
+            color=alt.Color(
+                "probability:Q",
+                title="Probability",
+                scale=alt.Scale(scheme="yelloworangered"),
+            ),
+            tooltip=[
+                alt.Tooltip("commonName:N", title="Species"),
+                alt.Tooltip("week:O", title="Week"),
+                alt.Tooltip("probability:Q", title="Probability", format=".3f"),
+            ],
+        )
+        .properties(
+            title="Species Probability by Week of Year (Top 20)",
+            width="container",
+            height=alt.Step(22),
+        )
+    )
+    chart.display()
+else:
+    display(Markdown("*No probability data available for this station.*"))
+```
+
+## Environmental Correlations {#environment}
+
+How do environmental conditions relate to bird activity? These charts compare PUC sensor readings with detection counts.
+
+```{python}
+#| label: env-correlations
+#| output: asis
+
+if env_hist.height > 0 and (daily_counts_30d.height > 0 or daily_counts.height > 0):
+    # Aggregate environment readings to daily averages
+    env_daily = (
+        env_hist
+        .with_columns(pl.col("timestamp").dt.date().alias("date"))
+        .group_by("date")
+        .agg(
+            pl.col("temperature").mean().alias("avgTemperature"),
+            pl.col("humidity").mean().alias("avgHumidity"),
+            pl.col("barometricPressure").mean().alias("avgPressure"),
+            pl.col("soundPressureLevel").mean().alias("avgSPL"),
+        )
+        .with_columns(pl.col("date").cast(pl.Date))
+    )
+
+    # Use all available daily counts for better overlap, fall back to 30d
+    det_source = daily_counts if daily_counts.height > 0 else daily_counts_30d
+
+    # Daily detection totals
+    det_daily = (
+        det_source
+        .group_by("date")
+        .agg(pl.col("count").sum().alias("detections"))
+        .with_columns(pl.col("date").cast(pl.Date))
+    )
+
+    # Use left join from env data onto detections, then try reverse,
+    # and pick whichever has more rows. Fill missing detections with 0.
+    combined = (
+        env_daily
+        .join(det_daily, on="date", how="full", coalesce=True)
+        .with_columns(pl.col("detections").fill_null(0))
+        .drop_nulls(subset=["avgTemperature"])
+        .sort("date")
+    )
+
+    if combined.height > 2:
+        # Convert temperature to Fahrenheit for display
+        combined = combined.with_columns(
+            (pl.col("avgTemperature") * 9 / 5 + 32).alias("avgTempF")
+        )
+
+        pdf = combined
+
+        # Date range for subtitles
+        date_min = combined["date"].min().strftime("%b %d, %Y")
+        date_max = combined["date"].max().strftime("%b %d, %Y")
+        date_range_str = f"{date_min} – {date_max}"
+
+        # Temperature vs detections
+        temp_chart = (
+            alt.Chart(pdf)
+            .mark_circle(size=60, color=ORANGE, opacity=0.7)
+            .encode(
+                x=alt.X("avgTempF:Q", title="Avg Temperature (°F)", scale=alt.Scale(zero=False)),
+                y=alt.Y("detections:Q", title="Daily Detections"),
+                tooltip=[
+                    alt.Tooltip("date:T", title="Date"),
+                    alt.Tooltip("avgTempF:Q", title="Temp (°F)", format=".1f"),
+                    alt.Tooltip("detections:Q", title="Detections"),
+                ],
+            )
+        )
+
+        temp_trend = temp_chart.transform_regression(
+            "avgTempF", "detections"
+        ).mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+
+        temp_combined = (
+            (temp_chart + temp_trend)
+            .properties(
+                title=alt.TitleParams("Temperature vs. Detection Count", subtitle=date_range_str),
+                width="container",
+                height=250,
+            )
+        )
+        temp_combined.display()
+
+        # Humidity vs detections
+        hum_chart = (
+            alt.Chart(pdf)
+            .mark_circle(size=60, color=DARK_BLUE, opacity=0.7)
+            .encode(
+                x=alt.X("avgHumidity:Q", title="Avg Humidity (%)", scale=alt.Scale(zero=False)),
+                y=alt.Y("detections:Q", title="Daily Detections"),
+                tooltip=[
+                    alt.Tooltip("date:T", title="Date"),
+                    alt.Tooltip("avgHumidity:Q", title="Humidity (%)", format=".1f"),
+                    alt.Tooltip("detections:Q", title="Detections"),
+                ],
+            )
+        )
+
+        hum_trend = hum_chart.transform_regression(
+            "avgHumidity", "detections"
+        ).mark_line(color=ORANGE, strokeDash=[5, 3], strokeWidth=2)
+
+        hum_combined = (
+            (hum_chart + hum_trend)
+            .properties(
+                title=alt.TitleParams("Humidity vs. Detection Count", subtitle=date_range_str),
+                width="container",
+                height=250,
+            )
+        )
+        hum_combined.display()
+
+        # Barometric pressure vs detections
+        if combined.select(pl.col("avgPressure").is_not_null().sum()).item() > 2:
+            press_chart = (
+                alt.Chart(pdf)
+                .mark_circle(size=60, color=MUSTARD, opacity=0.7)
+                .encode(
+                    x=alt.X("avgPressure:Q", title="Avg Barometric Pressure (hPa)", scale=alt.Scale(zero=False)),
+                    y=alt.Y("detections:Q", title="Daily Detections"),
+                    tooltip=[
+                        alt.Tooltip("date:T", title="Date"),
+                        alt.Tooltip("avgPressure:Q", title="Pressure", format=".1f"),
+                        alt.Tooltip("detections:Q", title="Detections"),
+                    ],
+                )
+            )
+
+            press_trend = press_chart.transform_regression(
+                "avgPressure", "detections"
+            ).mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+
+            press_combined = (
+                (press_chart + press_trend)
+                .properties(
+                    title=alt.TitleParams("Barometric Pressure vs. Detection Count", subtitle=date_range_str),
+                    width="container",
+                    height=250,
+                )
+            )
+            press_combined.display()
+    else:
+        print("*Not enough overlapping data between environment readings and detections.*")
+else:
+    print("*Environmental sensor data or detection data not available for correlation analysis.*")
+```
+
+### Sensor Readings Over Time
+
+```{python}
+#| label: env-timeseries
+
+if env_hist.height > 0:
+    # Downsample to hourly averages to stay within Altair's 5000-row limit
+    # (~65K raw readings over 30 days → ~720 hourly points)
+    env_plot = (
+        env_hist
+        .with_columns(
+            pl.col("timestamp").dt.truncate("1h").alias("hour"),
+            (pl.col("temperature") * 9 / 5 + 32).alias("tempF"),
+        )
+        .group_by("hour")
+        .agg(
+            pl.col("tempF").mean().alias("tempF"),
+            pl.col("humidity").mean().alias("humidity"),
+        )
+        .sort("hour")
+        .rename({"hour": "timestamp"})
+    )
+
+    temp_ts = (
+        alt.Chart(env_plot)
+        .mark_line(color=ORANGE, strokeWidth=1.5)
+        .encode(
+            x=alt.X("timestamp:T", title=""),
+            y=alt.Y("tempF:Q", title="Temperature (°F)"),
+            tooltip=[
+                alt.Tooltip("timestamp:T", title="Time"),
+                alt.Tooltip("tempF:Q", title="Temp (°F)", format=".1f"),
+            ],
+        )
+        .properties(title="PUC Temperature", width="container", height=180)
+    )
+    temp_ts.display()
+
+    hum_ts = (
+        alt.Chart(env_plot)
+        .mark_line(color=DARK_BLUE, strokeWidth=1.5)
+        .encode(
+            x=alt.X("timestamp:T", title="Time"),
+            y=alt.Y("humidity:Q", title="Humidity (%)"),
+            tooltip=[
+                alt.Tooltip("timestamp:T", title="Time"),
+                alt.Tooltip("humidity:Q", title="Humidity (%)", format=".1f"),
+            ],
+        )
+        .properties(title="PUC Humidity", width="container", height=180)
+    )
+    hum_ts.display()
+else:
+    display(Markdown("*No environmental sensor data available.*"))
+```
+
+## Species Gallery {#gallery}
+
+```{python}
+#| label: species-gallery
+
+if top_species_all.height > 0:
+    gallery_species = top_species_all.head(20)
+
+    gallery_html = '<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">'
+
+    for row in gallery_species.iter_rows(named=True):
+        img_url = row.get("imageUrl") or row.get("thumbnailUrl") or ""
+        common = row["commonName"]
+        sci = row["scientificName"]
+        count = row["count"]
+        wiki = row.get("wikipediaSummary") or ""
+        # Truncate Wikipedia summary
+        if len(wiki) > 150:
+            wiki = wiki[:147] + "..."
+        ebird = row.get("ebirdUrl") or "#"
+
+        gallery_html += f"""
+        <div style="background: var(--bs-card-bg, #f8f9fa); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+          <img src="{img_url}" alt="{common}" style="width: 100%; height: 180px; object-fit: cover;" loading="lazy">
+          <div style="padding: 0.8rem;">
+            <div style="font-weight: bold; font-size: 1rem;">{common}</div>
+            <div style="font-style: italic; opacity: 0.7; font-size: 0.85rem;">{sci}</div>
+            <div style="margin-top: 0.4rem; font-size: 0.85rem; color: {ORANGE}; font-weight: 600;">{count:,} detections</div>
+            <p style="margin-top: 0.4rem; font-size: 0.8rem; line-height: 1.3; opacity: 0.8;">{wiki}</p>
+            <a href="{ebird}" target="_blank" rel="noopener" style="font-size: 0.8rem;">View on eBird →</a>
+          </div>
+        </div>
+        """
+
+    gallery_html += "</div>"
+    display(HTML(gallery_html))
+else:
+    display(Markdown("*No species data available.*"))
+```
+
+------------------------------------------------------------------------
+
+<p style="text-align: center; opacity: 0.6; font-size: 0.85rem;">
+
+Data from <a href="https://www.birdweather.com" target="_blank">BirdWeather</a>. Bird identification powered by <a href="https://birdnet.cornell.edu/" target="_blank">BirdNET</a>. Last updated at render time.
+
+</p>

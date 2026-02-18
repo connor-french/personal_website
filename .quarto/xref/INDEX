@@ -65,5 +65,11 @@
   },
   "teaching.qmd": {
     "teaching.html": "1265b662"
+  },
+  "birdweather/index.qmd": {
+    "index.html": "ed0e355a"
+  },
+  "logs/AI_UPDATES.md": {
+    "AI_UPDATES.html": "1b25954c"
   }
 }

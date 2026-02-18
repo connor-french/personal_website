@@ -3,6 +3,9 @@
 ## Project Overview
 This is a personal academic website built with Quarto. It showcases posts, projects, presentations, and teaching materials.
 
+## Logging
+Always log your changes in logs/AI_UPDATES.md with a brief description of what you changed and why.  
+
 ## Website Structure
 - **Root files**: Main `.qmd` files for top-level pages (about.qmd, index.qmd, posts.qmd, etc.)
 - **Content directories**: 

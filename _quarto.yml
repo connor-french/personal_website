@@ -20,6 +20,8 @@ website:
         file: posts.qmd
       - text: "Projects"
         file: projects.qmd
+      - text: "BirdWeather"
+        file: birdweather/index.qmd
       - text: "Teaching"
         file: teaching/index.qmd
       - text: "Presentations"

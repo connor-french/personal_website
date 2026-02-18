@@ -6,15 +6,15 @@
     ]
   },
   {
-    "listing": "/teaching/index.html",
-    "items": []
-  },
-  {
     "listing": "/projects.html",
     "items": [
       "/projects/spatial-population-genetics/index.html",
       "/projects/global-genetic-diversity/index.html"
     ]
+  },
+  {
+    "listing": "/teaching/index.html",
+    "items": []
   },
   {
     "listing": "/posts.html",
