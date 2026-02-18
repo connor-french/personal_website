@@ -1,5 +1,11 @@
 # AI Updates
 
+## 2026-02-18 — Automated daily birdweather render via launchd
+- Created `scripts/render-birdweather.sh`: renders `birdweather/index.qmd` (via `pixi run`), then renders the full site, commits `_freeze/` changes, and pushes to GitHub (triggering Netlify auto-deploy). Logs to `~/Library/Logs/render-birdweather.log` and sends a macOS notification on failure.
+- Created `~/Library/LaunchAgents/com.connorfrench.render-birdweather.plist`: runs the script daily at 12 PM local time via macOS launchd. Handles wake-from-sleep catch-up.
+- Parquet data (`birdweather/data/`) stays local and gitignored; only `_freeze/` and tracked file changes are committed.
+- To manage: `launchctl load|unload ~/Library/LaunchAgents/com.connorfrench.render-birdweather.plist`
+
 ## 2026-02-18 — Move pixi environment to birdweather/
 - Created `birdweather/pixi.toml` as a standalone pixi workspace with all previously root-level dependencies (polars, altair, seaborn, matplotlib, requests, python-dotenv, jupyter, vl-convert-python, Python 3.14).
 - Ran `pixi install` in `birdweather/` to generate `birdweather/pixi.lock`.

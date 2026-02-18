@@ -313,6 +313,7 @@ gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
   <ul>
   <li><a href="#ai-updates" id="toc-ai-updates" class="nav-link active" data-scroll-target="#ai-updates">AI Updates</a>
   <ul class="collapse">
+  <li><a href="#automated-daily-birdweather-render-via-launchd" id="toc-automated-daily-birdweather-render-via-launchd" class="nav-link" data-scroll-target="#automated-daily-birdweather-render-via-launchd">2026-02-18 — Automated daily birdweather render via launchd</a></li>
   <li><a href="#move-pixi-environment-to-birdweather" id="toc-move-pixi-environment-to-birdweather" class="nav-link" data-scroll-target="#move-pixi-environment-to-birdweather">2026-02-18 — Move pixi environment to birdweather/</a></li>
   <li><a href="#fix-overview-counts-using-local-cached-detections" id="toc-fix-overview-counts-using-local-cached-detections" class="nav-link" data-scroll-target="#fix-overview-counts-using-local-cached-detections">2026-02-18 — Fix overview counts using local cached detections</a></li>
   <li><a href="#incremental-parquet-cache-for-birdweather" id="toc-incremental-parquet-cache-for-birdweather" class="nav-link" data-scroll-target="#incremental-parquet-cache-for-birdweather">2026-02-18 — Incremental Parquet Cache for BirdWeather</a>
@@ -339,6 +340,15 @@ gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
 
 <section id="ai-updates" class="level1">
 <h1>AI Updates</h1>
+<section id="automated-daily-birdweather-render-via-launchd" class="level2">
+<h2 class="anchored" data-anchor-id="automated-daily-birdweather-render-via-launchd">2026-02-18 — Automated daily birdweather render via launchd</h2>
+<ul>
+<li>Created <code>scripts/render-birdweather.sh</code>: renders <code>birdweather/index.qmd</code> (via <code>pixi run</code>), then renders the full site, commits <code>_freeze/</code> changes, and pushes to GitHub (triggering Netlify auto-deploy). Logs to <code>~/Library/Logs/render-birdweather.log</code> and sends a macOS notification on failure.</li>
+<li>Created <code>~/Library/LaunchAgents/com.connorfrench.render-birdweather.plist</code>: runs the script daily at 12 PM local time via macOS launchd. Handles wake-from-sleep catch-up.</li>
+<li>Parquet data (<code>birdweather/data/</code>) stays local and gitignored; only <code>_freeze/</code> and tracked file changes are committed.</li>
+<li>To manage: <code>launchctl load|unload ~/Library/LaunchAgents/com.connorfrench.render-birdweather.plist</code></li>
+</ul>
+</section>
 <section id="move-pixi-environment-to-birdweather" class="level2">
 <h2 class="anchored" data-anchor-id="move-pixi-environment-to-birdweather">2026-02-18 — Move pixi environment to birdweather/</h2>
 <ul>
