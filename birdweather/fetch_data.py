@@ -153,6 +153,79 @@ def get_station_overview(station_id: str | None = None) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# Batch species lookup by IDs
+# ---------------------------------------------------------------------------
+
+def get_species_by_ids(species_ids: list[str], batch_size: int = 100) -> pl.DataFrame:
+    """
+    Fetch species metadata for a list of BirdWeather species IDs using the
+    `allSpecies(ids: [...])` root query.
+
+    This is the only reliable way to get full metadata (ebirdUrl, imageUrl,
+    etc.) for species that don't appear in a station's `topSpecies` list.
+
+    Parameters
+    ----------
+    species_ids : list[str]
+        BirdWeather species IDs to look up.
+    batch_size : int
+        Max IDs per GraphQL request (default 100).
+
+    Returns
+    -------
+    pl.DataFrame with columns matching sync_species_meta schema.
+    """
+    query = """
+    query AllSpecies($ids: [ID!]!) {
+      allSpecies(ids: $ids) {
+        nodes {
+          id
+          commonName
+          scientificName
+          ebirdUrl
+          imageUrl
+          thumbnailUrl
+          color
+          wikipediaSummary
+        }
+      }
+    }
+    """
+    all_nodes: list[dict] = []
+
+    for i in range(0, len(species_ids), batch_size):
+        batch = species_ids[i : i + batch_size]
+        data = query_graphql(query, {"ids": batch})
+        for node in data["allSpecies"]["nodes"]:
+            all_nodes.append({
+                "speciesId": str(node["id"]),
+                "commonName": node["commonName"],
+                "scientificName": node["scientificName"],
+                "ebirdUrl": node.get("ebirdUrl"),
+                "imageUrl": node.get("imageUrl"),
+                "thumbnailUrl": node.get("thumbnailUrl"),
+                "color": node.get("color"),
+                "wikipediaSummary": node.get("wikipediaSummary"),
+            })
+
+    if not all_nodes:
+        return pl.DataFrame(
+            schema={
+                "speciesId": pl.Utf8,
+                "commonName": pl.Utf8,
+                "scientificName": pl.Utf8,
+                "ebirdUrl": pl.Utf8,
+                "imageUrl": pl.Utf8,
+                "thumbnailUrl": pl.Utf8,
+                "color": pl.Utf8,
+                "wikipediaSummary": pl.Utf8,
+            }
+        )
+
+    return pl.DataFrame(all_nodes)
+
+
+# ---------------------------------------------------------------------------
 # Top species
 # ---------------------------------------------------------------------------
 
@@ -532,6 +605,11 @@ def get_detections(
             species {
               commonName
               scientificName
+              ebirdUrl
+              imageUrl
+              thumbnailUrl
+              color
+              wikipediaSummary
             }
             confidence
             probability
@@ -576,12 +654,18 @@ def get_detections(
                 hit_boundary = True
                 break
 
+            species = node["species"]
             all_nodes.append({
                 "id": node["id"],
                 "timestamp": node["timestamp"],
                 "speciesId": node["speciesId"],
-                "commonName": node["species"]["commonName"],
-                "scientificName": node["species"]["scientificName"],
+                "commonName": species["commonName"],
+                "scientificName": species["scientificName"],
+                "ebirdUrl": species.get("ebirdUrl"),
+                "imageUrl": species.get("imageUrl"),
+                "thumbnailUrl": species.get("thumbnailUrl"),
+                "color": species.get("color"),
+                "wikipediaSummary": species.get("wikipediaSummary"),
                 "confidence": node["confidence"],
                 "probability": node.get("probability"),
                 "score": node["score"],
@@ -603,6 +687,11 @@ def get_detections(
                 "speciesId": pl.Utf8,
                 "commonName": pl.Utf8,
                 "scientificName": pl.Utf8,
+                "ebirdUrl": pl.Utf8,
+                "imageUrl": pl.Utf8,
+                "thumbnailUrl": pl.Utf8,
+                "color": pl.Utf8,
+                "wikipediaSummary": pl.Utf8,
                 "confidence": pl.Float64,
                 "probability": pl.Float64,
                 "score": pl.Float64,

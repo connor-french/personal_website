@@ -15,6 +15,7 @@ from fetch_data import (
     get_detections,
     get_environment_history,
     get_top_species,
+    get_species_by_ids,
     get_species_probabilities,
 )
 
@@ -92,6 +93,16 @@ def sync_detections(
 
     if existing is not None and existing.height > 0:
         if new_data.height > 0:
+            # Align schemas: add any new columns (e.g. ebirdUrl) missing
+            # from the cached parquet as null so concat works.
+            for col in new_data.columns:
+                if col not in existing.columns:
+                    existing = existing.with_columns(pl.lit(None).cast(new_data[col].dtype).alias(col))
+            for col in existing.columns:
+                if col not in new_data.columns:
+                    new_data = new_data.with_columns(pl.lit(None).cast(existing[col].dtype).alias(col))
+            # Ensure identical column order before concat
+            new_data = new_data.select(existing.columns)
             combined = pl.concat([existing, new_data])
             # Deduplicate by detection id, keeping the latest
             combined = combined.unique(subset=["id"], keep="last").sort("timestamp")
@@ -163,12 +174,20 @@ def sync_species_meta(station_id: str, detections: pl.DataFrame) -> pl.DataFrame
     """
     Ensure species metadata is cached for all species in the detections.
 
-    If any speciesId in detections is missing from the cached metadata,
-    re-fetches the full species list from the API to capture new species.
+    Uses the station's topSpecies API for the bulk of metadata, then
+    fetches any remaining species via the allSpecies(ids: [...]) root
+    query — the only reliable way to get ebirdUrl, imageUrl, etc. for
+    species that topSpecies doesn't cover.
 
     Returns a DataFrame with species metadata columns.
     """
     _ensure_data_dir()
+
+    meta_cols = [
+        "speciesId", "commonName", "scientificName",
+        "imageUrl", "thumbnailUrl", "color",
+        "ebirdUrl", "wikipediaSummary",
+    ]
 
     existing: pl.DataFrame | None = None
     if SPECIES_META_PATH.exists():
@@ -180,19 +199,44 @@ def sync_species_meta(station_id: str, detections: pl.DataFrame) -> pl.DataFrame
 
     missing = detection_species_ids - cached_species_ids
 
+    # Also check for species in the cache that are missing ebirdUrl
+    if existing is not None and existing.height > 0 and "ebirdUrl" in existing.columns:
+        null_url_ids = set(
+            existing.filter(pl.col("ebirdUrl").is_null())
+            ["speciesId"].to_list()
+        )
+        missing = missing | null_url_ids
+
     if missing or existing is None or existing.height == 0:
-        # Re-fetch full species list from API
+        # Start with topSpecies (covers the station's most-detected species)
         api_species = get_top_species(station_id=station_id, limit=1000)
         if api_species.height > 0:
-            meta_cols = [
-                "speciesId", "commonName", "scientificName",
-                "imageUrl", "thumbnailUrl", "color",
-                "ebirdUrl", "wikipediaSummary",
-            ]
             meta = api_species.select([c for c in meta_cols if c in api_species.columns])
             meta = meta.unique(subset=["speciesId"])
-            meta.write_parquet(SPECIES_META_PATH)
-            return meta
+        elif existing is not None and existing.height > 0:
+            meta = existing
+        else:
+            meta = pl.DataFrame(schema={c: pl.Utf8 for c in meta_cols})
+
+        # Fill gaps: use the allSpecies(ids: [...]) root query to fetch
+        # full metadata for species not covered by topSpecies.
+        meta_ids = set(meta["speciesId"].unique().to_list()) if meta.height > 0 else set()
+        still_missing = detection_species_ids - meta_ids
+
+        if still_missing:
+            print(f"  Fetching metadata for {len(still_missing)} additional species via allSpecies...")
+            extra_meta = get_species_by_ids(sorted(still_missing))
+            if extra_meta.height > 0:
+                # Ensure both DataFrames have the same columns in the same order
+                for col in meta_cols:
+                    if col not in extra_meta.columns:
+                        extra_meta = extra_meta.with_columns(pl.lit(None).cast(pl.Utf8).alias(col))
+                extra_meta = extra_meta.select(meta_cols)
+                meta = meta.select(meta_cols)
+                meta = pl.concat([meta, extra_meta]).unique(subset=["speciesId"])
+
+        meta.write_parquet(SPECIES_META_PATH)
+        return meta
 
     return existing
 

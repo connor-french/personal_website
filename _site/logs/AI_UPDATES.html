@@ -313,6 +313,10 @@ gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
   <ul>
   <li><a href="#ai-updates" id="toc-ai-updates" class="nav-link active" data-scroll-target="#ai-updates">AI Updates</a>
   <ul class="collapse">
+  <li><a href="#fix-reactable-table-not-rendering" id="toc-fix-reactable-table-not-rendering" class="nav-link" data-scroll-target="#fix-reactable-table-not-rendering">2026-02-18 — Fix reactable table not rendering</a></li>
+  <li><a href="#rare-birds-paginated-table-with-reactable-py" id="toc-rare-birds-paginated-table-with-reactable-py" class="nav-link" data-scroll-target="#rare-birds-paginated-table-with-reactable-py">2026-02-18 — Rare birds paginated table with reactable-py</a></li>
+  <li><a href="#fix-broken-ebird-links-in-species-gallery" id="toc-fix-broken-ebird-links-in-species-gallery" class="nav-link" data-scroll-target="#fix-broken-ebird-links-in-species-gallery">2026-02-18 — Fix broken eBird links in species gallery</a></li>
+  <li><a href="#add-species-richness-tab-to-environmental-correlations" id="toc-add-species-richness-tab-to-environmental-correlations" class="nav-link" data-scroll-target="#add-species-richness-tab-to-environmental-correlations">2026-02-18 — Add species richness tab to environmental correlations</a></li>
   <li><a href="#automated-daily-birdweather-render-via-launchd" id="toc-automated-daily-birdweather-render-via-launchd" class="nav-link" data-scroll-target="#automated-daily-birdweather-render-via-launchd">2026-02-18 — Automated daily birdweather render via launchd</a></li>
   <li><a href="#move-pixi-environment-to-birdweather" id="toc-move-pixi-environment-to-birdweather" class="nav-link" data-scroll-target="#move-pixi-environment-to-birdweather">2026-02-18 — Move pixi environment to birdweather/</a></li>
   <li><a href="#fix-overview-counts-using-local-cached-detections" id="toc-fix-overview-counts-using-local-cached-detections" class="nav-link" data-scroll-target="#fix-overview-counts-using-local-cached-detections">2026-02-18 — Fix overview counts using local cached detections</a></li>
@@ -340,6 +344,41 @@ gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
 
 <section id="ai-updates" class="level1">
 <h1>AI Updates</h1>
+<section id="fix-reactable-table-not-rendering" class="level2">
+<h2 class="anchored" data-anchor-id="fix-reactable-table-not-rendering">2026-02-18 — Fix reactable table not rendering</h2>
+<ul>
+<li><strong>Root cause</strong>: <code>Reactable(...)</code> was called inside nested <code>if</code> blocks in <code>birdweather/index.qmd</code>. IPython only auto-displays the last <em>top-level</em> expression in a cell; expressions inside conditionals are silently discarded.</li>
+<li><strong>Fix</strong>: Wrapped the <code>Reactable(...)</code> call with <code>display()</code> so the widget is explicitly rendered.</li>
+</ul>
+</section>
+<section id="rare-birds-paginated-table-with-reactable-py" class="level2">
+<h2 class="anchored" data-anchor-id="rare-birds-paginated-table-with-reactable-py">2026-02-18 — Rare birds paginated table with reactable-py</h2>
+<ul>
+<li><strong>Replaced itables with reactable-py</strong> in <code>birdweather/pixi.toml</code> (PyPI dependency, since it’s not on conda-forge).</li>
+<li><strong>Updated “Rarest Visitors” section</strong> in <code>birdweather/index.qmd</code>: now shows all single-detection species (count == 1) in a searchable, paginated reactable table with thumbnail, species name, certainty indicator dots, and eBird link.</li>
+</ul>
+</section>
+<section id="fix-broken-ebird-links-in-species-gallery" class="level2">
+<h2 class="anchored" data-anchor-id="fix-broken-ebird-links-in-species-gallery">2026-02-18 — Fix broken eBird links in species gallery</h2>
+<ul>
+<li><strong>Root cause</strong>: The BirdWeather <code>topSpecies</code> API only returns the station’s top ~19 species — it caps at that regardless of the <code>limit</code> parameter. The remaining 117 detected species had no metadata (including <code>ebirdUrl</code>), rendering broken <code>href="#"</code> links in the gallery.</li>
+<li><strong>New function</strong> (<code>birdweather/fetch_data.py</code>): Added <code>get_species_by_ids()</code> which uses the root <code>allSpecies(ids: [...])</code> GraphQL query to batch-fetch full species metadata (ebirdUrl, imageUrl, etc.) for any set of species IDs.</li>
+<li><strong>Species meta sync</strong> (<code>birdweather/data_store.py</code>): <code>sync_species_meta</code> now falls back to <code>get_species_by_ids()</code> for species not covered by <code>topSpecies</code>. Also detects existing cache entries with null <code>ebirdUrl</code> and backfills them. All 136 species now have valid eBird URLs.</li>
+<li><strong>Gallery fix</strong> (<code>birdweather/index.qmd</code>): The “View on eBird →” link is now conditionally rendered only when <code>ebirdUrl</code> is non-empty, as a defensive measure.</li>
+<li><strong>Detections query</strong> (<code>birdweather/fetch_data.py</code>): Added <code>ebirdUrl</code>, <code>imageUrl</code>, <code>thumbnailUrl</code>, <code>color</code>, and <code>wikipediaSummary</code> to the <code>species</code> subquery in <code>get_detections()</code> for richer data going forward. Schema alignment in <code>sync_detections</code> handles old parquet files missing these columns.</li>
+<li>Deleted and rebuilt <code>species_meta.parquet</code> — now contains all 136 species with full metadata.</li>
+</ul>
+</section>
+<section id="add-species-richness-tab-to-environmental-correlations" class="level2">
+<h2 class="anchored" data-anchor-id="add-species-richness-tab-to-environmental-correlations">2026-02-18 — Add species richness tab to environmental correlations</h2>
+<ul>
+<li>Refactored the Environmental Correlations section in <code>birdweather/index.qmd</code> into a Quarto <code>.panel-tabset</code> with two tabs: <strong>Detection Count</strong> (original charts) and <strong>Species Richness</strong> (new charts).</li>
+<li>Species richness is computed as the number of unique species detected per day (<code>speciesId.n_unique()</code> grouped by date).</li>
+<li>Both tabs show temperature, humidity, and barometric pressure scatter plots with regression trend lines, mirroring each other’s structure.</li>
+<li>Data preparation is shared in a single hidden code cell; each tab has its own display cell.</li>
+<li>Added a <code>shown.bs.tab</code> JS listener that dispatches a <code>resize</code> event so Vega-Lite charts inside initially-hidden tabs recalculate their <code>width:"container"</code> dimensions on tab switch.</li>
+</ul>
+</section>
 <section id="automated-daily-birdweather-render-via-launchd" class="level2">
 <h2 class="anchored" data-anchor-id="automated-daily-birdweather-render-via-launchd">2026-02-18 — Automated daily birdweather render via launchd</h2>
 <ul>

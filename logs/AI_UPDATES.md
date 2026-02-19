@@ -1,5 +1,28 @@
 # AI Updates
 
+## 2026-02-18 — Fix reactable table not rendering
+- **Root cause**: `Reactable(...)` was called inside nested `if` blocks in `birdweather/index.qmd`. IPython only auto-displays the last *top-level* expression in a cell; expressions inside conditionals are silently discarded.
+- **Fix**: Wrapped the `Reactable(...)` call with `display()` so the widget is explicitly rendered.
+
+## 2026-02-18 — Rare birds paginated table with reactable-py
+- **Replaced itables with reactable-py** in `birdweather/pixi.toml` (PyPI dependency, since it's not on conda-forge).
+- **Updated "Rarest Visitors" section** in `birdweather/index.qmd`: now shows all single-detection species (count == 1) in a searchable, paginated reactable table with thumbnail, species name, certainty indicator dots, and eBird link.
+
+## 2026-02-18 — Fix broken eBird links in species gallery
+- **Root cause**: The BirdWeather `topSpecies` API only returns the station's top ~19 species — it caps at that regardless of the `limit` parameter. The remaining 117 detected species had no metadata (including `ebirdUrl`), rendering broken `href="#"` links in the gallery.
+- **New function** (`birdweather/fetch_data.py`): Added `get_species_by_ids()` which uses the root `allSpecies(ids: [...])` GraphQL query to batch-fetch full species metadata (ebirdUrl, imageUrl, etc.) for any set of species IDs.
+- **Species meta sync** (`birdweather/data_store.py`): `sync_species_meta` now falls back to `get_species_by_ids()` for species not covered by `topSpecies`. Also detects existing cache entries with null `ebirdUrl` and backfills them. All 136 species now have valid eBird URLs.
+- **Gallery fix** (`birdweather/index.qmd`): The "View on eBird →" link is now conditionally rendered only when `ebirdUrl` is non-empty, as a defensive measure.
+- **Detections query** (`birdweather/fetch_data.py`): Added `ebirdUrl`, `imageUrl`, `thumbnailUrl`, `color`, and `wikipediaSummary` to the `species` subquery in `get_detections()` for richer data going forward. Schema alignment in `sync_detections` handles old parquet files missing these columns.
+- Deleted and rebuilt `species_meta.parquet` — now contains all 136 species with full metadata.
+
+## 2026-02-18 — Add species richness tab to environmental correlations
+- Refactored the Environmental Correlations section in `birdweather/index.qmd` into a Quarto `.panel-tabset` with two tabs: **Detection Count** (original charts) and **Species Richness** (new charts).
+- Species richness is computed as the number of unique species detected per day (`speciesId.n_unique()` grouped by date).
+- Both tabs show temperature, humidity, and barometric pressure scatter plots with regression trend lines, mirroring each other's structure.
+- Data preparation is shared in a single hidden code cell; each tab has its own display cell.
+- Added a `shown.bs.tab` JS listener that dispatches a `resize` event so Vega-Lite charts inside initially-hidden tabs recalculate their `width:"container"` dimensions on tab switch.
+
 ## 2026-02-18 — Automated daily birdweather render via launchd
 - Created `scripts/render-birdweather.sh`: renders `birdweather/index.qmd` (via `pixi run`), then renders the full site, commits `_freeze/` changes, and pushes to GitHub (triggering Netlify auto-deploy). Logs to `~/Library/Logs/render-birdweather.log` and sends a macOS notification on failure.
 - Created `~/Library/LaunchAgents/com.connorfrench.render-birdweather.plist`: runs the script daily at 12 PM local time via macOS launchd. Handles wake-from-sleep catch-up.

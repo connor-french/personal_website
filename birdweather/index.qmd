@@ -400,37 +400,88 @@ else:
 
 ### Rarest Visitors
 
-Species detected the fewest times overall.
+All species detected exactly once — one-hit wonders!
 
 ```{python}
 #| label: rarest-species
 
+from reactable import Reactable, Column, ColFormat
+from reactable.models import CellInfo
+from reactable.widgets import STATIC_FILES as _REACTABLE_STATIC
+import htmltools
+from pathlib import Path
+
+# Inline the CSS without the broken <link href="/reactable.css"> tag that embed_css() adds
+_reactable_css = Path(str(_REACTABLE_STATIC / "reactable-py.esm.css")).read_text()
+display(HTML(f"<style>{_reactable_css}</style>"))
+
 if all_species.height > 0:
-    rarest = all_species.sort("count").head(10)
+    rare_ones = (
+        all_species
+        .filter(pl.col("count") == 1)
+        .sort("commonName")
+        .select("thumbnailUrl", "commonName", "scientificName", "almostCertain", "veryLikely", "uncertain", "unlikely", "ebirdUrl")
+    )
 
-    rare_html = """
-    <div style="margin: 1rem 0;">
-    <table style="width: 100%; border-collapse: collapse;">
-    <thead>
-      <tr style="border-bottom: 2px solid var(--bs-border-color, #dee2e6);">
-        <th style="padding: 0.5rem; text-align: left;">Species</th>
-        <th style="padding: 0.5rem; text-align: right;">Detections</th>
-      </tr>
-    </thead>
-    <tbody>
-    """
-    for row in rarest.iter_rows(named=True):
-        thumb = row.get("thumbnailUrl") or ""
-        img_tag = f'<img src="{thumb}" alt="{row["commonName"]}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;margin-right:0.5rem;vertical-align:middle;">' if thumb else ""
-        rare_html += f"""
-        <tr style="border-bottom: 1px solid var(--bs-border-color, #dee2e6);">
-          <td style="padding: 0.5rem;">{img_tag}<strong>{row["commonName"]}</strong> <em style="opacity:0.7;">({row["scientificName"]})</em></td>
-          <td style="padding: 0.5rem; text-align: right;">{row["count"]}</td>
-        </tr>
-        """
-    rare_html += "</tbody></table></div>"
+    if rare_ones.height > 0:
+        def render_species(ci: CellInfo):
+            row = rare_ones.row(ci.row_index, named=True)
+            thumb = row.get("thumbnailUrl") or ""
+            name = ci.value
+            sci = row.get("scientificName", "")
+            img = htmltools.img(
+                src=thumb,
+                alt=name,
+                style="width:32px;height:32px;border-radius:50%;object-fit:cover;margin-right:0.5rem;vertical-align:middle;",
+            ) if thumb else ""
+            return htmltools.div(
+                img,
+                htmltools.strong(name),
+                htmltools.span(f" ({sci})", style="opacity:0.7;font-style:italic;font-size:0.85em;"),
+                style="display:flex;align-items:center;",
+            )
 
-    display(HTML(rare_html))
+        def render_certainty(ci: CellInfo):
+            colors = {
+                "almostCertain": DARK_BLUE,
+                "veryLikely": ORANGE,
+                "uncertain": YELLOW,
+                "unlikely": "#999",
+            }
+            color = colors.get(ci.column_name, "#999")
+            if ci.value and ci.value > 0:
+                return htmltools.span("●", style=f"color:{color};font-size:1.2em;", title=str(ci.value))
+            return ""
+
+        def render_ebird(ci: CellInfo):
+            url = ci.value
+            if url:
+                return htmltools.a("eBird ↗", href=url, target="_blank", rel="noopener", style=f"color:{ORANGE};text-decoration:none;font-size:0.85em;")
+            return ""
+
+        display(Reactable(
+            rare_ones,
+            columns=[
+                Column(id="commonName", name="Species", cell=render_species, min_width=260),
+                Column(id="scientificName", show=False),
+                Column(id="thumbnailUrl", show=False),
+                Column(id="almostCertain", name="Almost Certain", cell=render_certainty, align="center", max_width=70),
+                Column(id="veryLikely", name="Very Likely", cell=render_certainty, align="center", max_width=70),
+                Column(id="uncertain", name="Uncertain", cell=render_certainty, align="center", max_width=70),
+                Column(id="unlikely", name="Unlikely", cell=render_certainty, align="center", max_width=70),
+                Column(id="ebirdUrl", name="", cell=render_ebird, sortable=False, max_width=80),
+            ],
+            searchable=True,
+            pagination=True,
+            default_page_size=10,
+            striped=True,
+            highlight=True,
+            bordered=True,
+            compact=True,
+            full_width=True,
+        ))
+    else:
+        display(Markdown("*No single-detection species found.*"))
 else:
     display(Markdown("*No species data available.*"))
 ```
@@ -655,11 +706,14 @@ else:
 
 ## Environmental Correlations {#environment}
 
-How do environmental conditions relate to bird activity? These charts compare PUC sensor readings with detection counts.
+How do environmental conditions relate to bird activity? These charts compare PUC sensor readings with detection counts and species richness (unique species per day).
 
 ```{python}
-#| label: env-correlations
-#| output: asis
+#| label: env-correlations-data
+#| include: false
+
+# Prepare combined environment + detection data used by both tabs
+_env_corr_ready = False
 
 if env_hist.height > 0 and (daily_counts_30d.height > 0 or daily_counts.height > 0):
     # Aggregate environment readings to daily averages
@@ -687,12 +741,24 @@ if env_hist.height > 0 and (daily_counts_30d.height > 0 or daily_counts.height >
         .with_columns(pl.col("date").cast(pl.Date))
     )
 
-    # Use left join from env data onto detections, then try reverse,
-    # and pick whichever has more rows. Fill missing detections with 0.
+    # Daily species richness (unique species per day)
+    richness_daily = (
+        detections
+        .with_columns(pl.col("timestamp").dt.date().alias("date"))
+        .group_by("date")
+        .agg(pl.col("speciesId").n_unique().alias("speciesRichness"))
+        .with_columns(pl.col("date").cast(pl.Date))
+    )
+
+    # Combine environment, detections, and richness
     combined = (
         env_daily
         .join(det_daily, on="date", how="full", coalesce=True)
-        .with_columns(pl.col("detections").fill_null(0))
+        .join(richness_daily, on="date", how="full", coalesce=True)
+        .with_columns(
+            pl.col("detections").fill_null(0),
+            pl.col("speciesRichness").fill_null(0),
+        )
         .drop_nulls(subset=["avgTemperature"])
         .sort("date")
     )
@@ -709,99 +775,216 @@ if env_hist.height > 0 and (daily_counts_30d.height > 0 or daily_counts.height >
         date_min = combined["date"].min().strftime("%b %d, %Y")
         date_max = combined["date"].max().strftime("%b %d, %Y")
         date_range_str = f"{date_min} – {date_max}"
+        _env_corr_ready = True
+```
 
-        # Temperature vs detections
-        temp_chart = (
+```{=html}
+<script>
+// Vega-Lite charts with width:"container" don't render in hidden tabs.
+// Dispatch a resize event when switching tabs so charts recalculate dimensions.
+document.addEventListener("shown.bs.tab", function () {
+  window.dispatchEvent(new Event("resize"));
+});
+</script>
+```
+
+::: {.panel-tabset}
+
+### Detection Count
+
+```{python}
+#| label: env-corr-detections
+
+if _env_corr_ready:
+    # Temperature vs detections
+    temp_chart = (
+        alt.Chart(pdf)
+        .mark_circle(size=60, color=ORANGE, opacity=0.7)
+        .encode(
+            x=alt.X("avgTempF:Q", title="Avg Temperature (°F)", scale=alt.Scale(zero=False)),
+            y=alt.Y("detections:Q", title="Daily Detections"),
+            tooltip=[
+                alt.Tooltip("date:T", title="Date"),
+                alt.Tooltip("avgTempF:Q", title="Temp (°F)", format=".1f"),
+                alt.Tooltip("detections:Q", title="Detections"),
+            ],
+        )
+    )
+
+    temp_trend = temp_chart.transform_regression(
+        "avgTempF", "detections"
+    ).mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+
+    temp_combined = (
+        (temp_chart + temp_trend)
+        .properties(
+            title=alt.TitleParams("Temperature vs. Detection Count", subtitle=date_range_str),
+            width="container",
+            height=250,
+        )
+    )
+    temp_combined.display()
+
+    # Humidity vs detections
+    hum_chart = (
+        alt.Chart(pdf)
+        .mark_circle(size=60, color=DARK_BLUE, opacity=0.7)
+        .encode(
+            x=alt.X("avgHumidity:Q", title="Avg Humidity (%)", scale=alt.Scale(zero=False)),
+            y=alt.Y("detections:Q", title="Daily Detections"),
+            tooltip=[
+                alt.Tooltip("date:T", title="Date"),
+                alt.Tooltip("avgHumidity:Q", title="Humidity (%)", format=".1f"),
+                alt.Tooltip("detections:Q", title="Detections"),
+            ],
+        )
+    )
+
+    hum_trend = hum_chart.transform_regression(
+        "avgHumidity", "detections"
+    ).mark_line(color=ORANGE, strokeDash=[5, 3], strokeWidth=2)
+
+    hum_combined = (
+        (hum_chart + hum_trend)
+        .properties(
+            title=alt.TitleParams("Humidity vs. Detection Count", subtitle=date_range_str),
+            width="container",
+            height=250,
+        )
+    )
+    hum_combined.display()
+
+    # Barometric pressure vs detections
+    if combined.select(pl.col("avgPressure").is_not_null().sum()).item() > 2:
+        press_chart = (
             alt.Chart(pdf)
-            .mark_circle(size=60, color=ORANGE, opacity=0.7)
+            .mark_circle(size=60, color=MUSTARD, opacity=0.7)
             .encode(
-                x=alt.X("avgTempF:Q", title="Avg Temperature (°F)", scale=alt.Scale(zero=False)),
+                x=alt.X("avgPressure:Q", title="Avg Barometric Pressure (hPa)", scale=alt.Scale(zero=False)),
                 y=alt.Y("detections:Q", title="Daily Detections"),
                 tooltip=[
                     alt.Tooltip("date:T", title="Date"),
-                    alt.Tooltip("avgTempF:Q", title="Temp (°F)", format=".1f"),
+                    alt.Tooltip("avgPressure:Q", title="Pressure", format=".1f"),
                     alt.Tooltip("detections:Q", title="Detections"),
                 ],
             )
         )
 
-        temp_trend = temp_chart.transform_regression(
-            "avgTempF", "detections"
+        press_trend = press_chart.transform_regression(
+            "avgPressure", "detections"
         ).mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
 
-        temp_combined = (
-            (temp_chart + temp_trend)
+        press_combined = (
+            (press_chart + press_trend)
             .properties(
-                title=alt.TitleParams("Temperature vs. Detection Count", subtitle=date_range_str),
+                title=alt.TitleParams("Barometric Pressure vs. Detection Count", subtitle=date_range_str),
                 width="container",
                 height=250,
             )
         )
-        temp_combined.display()
+        press_combined.display()
+else:
+    display(Markdown("*Not enough data for correlation analysis.*"))
+```
 
-        # Humidity vs detections
-        hum_chart = (
+### Species Richness
+
+```{python}
+#| label: env-corr-richness
+
+if _env_corr_ready:
+    # Temperature vs species richness
+    temp_rich_chart = (
+        alt.Chart(pdf)
+        .mark_circle(size=60, color=ORANGE, opacity=0.7)
+        .encode(
+            x=alt.X("avgTempF:Q", title="Avg Temperature (°F)", scale=alt.Scale(zero=False)),
+            y=alt.Y("speciesRichness:Q", title="Daily Species Richness"),
+            tooltip=[
+                alt.Tooltip("date:T", title="Date"),
+                alt.Tooltip("avgTempF:Q", title="Temp (°F)", format=".1f"),
+                alt.Tooltip("speciesRichness:Q", title="Species"),
+            ],
+        )
+    )
+
+    temp_rich_trend = temp_rich_chart.transform_regression(
+        "avgTempF", "speciesRichness"
+    ).mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+
+    temp_rich_combined = (
+        (temp_rich_chart + temp_rich_trend)
+        .properties(
+            title=alt.TitleParams("Temperature vs. Species Richness", subtitle=date_range_str),
+            width="container",
+            height=250,
+        )
+    )
+    temp_rich_combined.display()
+
+    # Humidity vs species richness
+    hum_rich_chart = (
+        alt.Chart(pdf)
+        .mark_circle(size=60, color=DARK_BLUE, opacity=0.7)
+        .encode(
+            x=alt.X("avgHumidity:Q", title="Avg Humidity (%)", scale=alt.Scale(zero=False)),
+            y=alt.Y("speciesRichness:Q", title="Daily Species Richness"),
+            tooltip=[
+                alt.Tooltip("date:T", title="Date"),
+                alt.Tooltip("avgHumidity:Q", title="Humidity (%)", format=".1f"),
+                alt.Tooltip("speciesRichness:Q", title="Species"),
+            ],
+        )
+    )
+
+    hum_rich_trend = hum_rich_chart.transform_regression(
+        "avgHumidity", "speciesRichness"
+    ).mark_line(color=ORANGE, strokeDash=[5, 3], strokeWidth=2)
+
+    hum_rich_combined = (
+        (hum_rich_chart + hum_rich_trend)
+        .properties(
+            title=alt.TitleParams("Humidity vs. Species Richness", subtitle=date_range_str),
+            width="container",
+            height=250,
+        )
+    )
+    hum_rich_combined.display()
+
+    # Barometric pressure vs species richness
+    if combined.select(pl.col("avgPressure").is_not_null().sum()).item() > 2:
+        press_rich_chart = (
             alt.Chart(pdf)
-            .mark_circle(size=60, color=DARK_BLUE, opacity=0.7)
+            .mark_circle(size=60, color=MUSTARD, opacity=0.7)
             .encode(
-                x=alt.X("avgHumidity:Q", title="Avg Humidity (%)", scale=alt.Scale(zero=False)),
-                y=alt.Y("detections:Q", title="Daily Detections"),
+                x=alt.X("avgPressure:Q", title="Avg Barometric Pressure (hPa)", scale=alt.Scale(zero=False)),
+                y=alt.Y("speciesRichness:Q", title="Daily Species Richness"),
                 tooltip=[
                     alt.Tooltip("date:T", title="Date"),
-                    alt.Tooltip("avgHumidity:Q", title="Humidity (%)", format=".1f"),
-                    alt.Tooltip("detections:Q", title="Detections"),
+                    alt.Tooltip("avgPressure:Q", title="Pressure", format=".1f"),
+                    alt.Tooltip("speciesRichness:Q", title="Species"),
                 ],
             )
         )
 
-        hum_trend = hum_chart.transform_regression(
-            "avgHumidity", "detections"
-        ).mark_line(color=ORANGE, strokeDash=[5, 3], strokeWidth=2)
+        press_rich_trend = press_rich_chart.transform_regression(
+            "avgPressure", "speciesRichness"
+        ).mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
 
-        hum_combined = (
-            (hum_chart + hum_trend)
+        press_rich_combined = (
+            (press_rich_chart + press_rich_trend)
             .properties(
-                title=alt.TitleParams("Humidity vs. Detection Count", subtitle=date_range_str),
+                title=alt.TitleParams("Barometric Pressure vs. Species Richness", subtitle=date_range_str),
                 width="container",
                 height=250,
             )
         )
-        hum_combined.display()
-
-        # Barometric pressure vs detections
-        if combined.select(pl.col("avgPressure").is_not_null().sum()).item() > 2:
-            press_chart = (
-                alt.Chart(pdf)
-                .mark_circle(size=60, color=MUSTARD, opacity=0.7)
-                .encode(
-                    x=alt.X("avgPressure:Q", title="Avg Barometric Pressure (hPa)", scale=alt.Scale(zero=False)),
-                    y=alt.Y("detections:Q", title="Daily Detections"),
-                    tooltip=[
-                        alt.Tooltip("date:T", title="Date"),
-                        alt.Tooltip("avgPressure:Q", title="Pressure", format=".1f"),
-                        alt.Tooltip("detections:Q", title="Detections"),
-                    ],
-                )
-            )
-
-            press_trend = press_chart.transform_regression(
-                "avgPressure", "detections"
-            ).mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
-
-            press_combined = (
-                (press_chart + press_trend)
-                .properties(
-                    title=alt.TitleParams("Barometric Pressure vs. Detection Count", subtitle=date_range_str),
-                    width="container",
-                    height=250,
-                )
-            )
-            press_combined.display()
-    else:
-        print("*Not enough overlapping data between environment readings and detections.*")
+        press_rich_combined.display()
 else:
-    print("*Environmental sensor data or detection data not available for correlation analysis.*")
+    display(Markdown("*Not enough data for correlation analysis.*"))
 ```
+
+:::
 
 ### Sensor Readings Over Time
 
@@ -878,7 +1061,8 @@ if top_species_all.height > 0:
         # Truncate Wikipedia summary
         if len(wiki) > 150:
             wiki = wiki[:147] + "..."
-        ebird = row.get("ebirdUrl") or "#"
+        ebird = row.get("ebirdUrl") or ""
+        ebird_link = f'<a href="{ebird}" target="_blank" rel="noopener" style="font-size: 0.8rem;">View on eBird \u2192</a>' if ebird else ""
 
         gallery_html += f"""
         <div style="background: var(--bs-card-bg, #f8f9fa); border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
@@ -888,7 +1072,7 @@ if top_species_all.height > 0:
             <div style="font-style: italic; opacity: 0.7; font-size: 0.85rem;">{sci}</div>
             <div style="margin-top: 0.4rem; font-size: 0.85rem; color: {ORANGE}; font-weight: 600;">{count:,} detections</div>
             <p style="margin-top: 0.4rem; font-size: 0.8rem; line-height: 1.3; opacity: 0.8;">{wiki}</p>
-            <a href="{ebird}" target="_blank" rel="noopener" style="font-size: 0.8rem;">View on eBird →</a>
+            {ebird_link}
           </div>
         </div>
         """
