@@ -12,10 +12,32 @@ QUARTO="/Applications/quarto/bin/quarto"
 PIXI="$HOME/.pixi/bin/pixi"
 GIT="/usr/bin/git"
 PIXI_MANIFEST="$PROJECT_DIR/birdweather/pixi.toml"
+MAX_RETRIES=3
+RETRY_DELAY=30  # seconds between retries
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
 timestamp() {
   date "+%Y-%m-%d %H:%M:%S"
+}
+
+# Retry a command up to MAX_RETRIES times on failure
+run_with_retry() {
+  local label="$1"; shift
+  local attempt=1
+  while (( attempt <= MAX_RETRIES )); do
+    log "$label (attempt $attempt/$MAX_RETRIES)..."
+    if "$@" >> "$LOG_FILE" 2>&1; then
+      log "$label succeeded on attempt $attempt."
+      return 0
+    fi
+    log "$label failed on attempt $attempt."
+    if (( attempt < MAX_RETRIES )); then
+      log "Waiting ${RETRY_DELAY}s before retry..."
+      sleep "$RETRY_DELAY"
+    fi
+    (( attempt++ ))
+  done
+  return 1
 }
 
 log() {
@@ -44,21 +66,17 @@ else
   exit 1
 fi
 
-# Step 1: Render birdweather page using Pixi environment
-log "Rendering birdweather/index.qmd..."
-if ! "$PIXI" run --manifest-path "$PIXI_MANIFEST" "$QUARTO" render birdweather/index.qmd >> "$LOG_FILE" 2>&1; then
-  notify_failure "quarto render birdweather/index.qmd failed"
+# Step 1: Render birdweather page using Pixi environment (with retries)
+if ! run_with_retry "Render birdweather/index.qmd" "$PIXI" run --manifest-path "$PIXI_MANIFEST" "$QUARTO" render birdweather/index.qmd; then
+  notify_failure "quarto render birdweather/index.qmd failed after $MAX_RETRIES attempts"
   exit 1
 fi
-log "birdweather/index.qmd rendered successfully"
 
-# Step 2: Render the full site
-log "Rendering full site..."
-if ! "$QUARTO" render >> "$LOG_FILE" 2>&1; then
-  notify_failure "quarto render (full site) failed"
+# Step 2: Render the full site (with retries)
+if ! run_with_retry "Render full site" "$QUARTO" render; then
+  notify_failure "quarto render (full site) failed after $MAX_RETRIES attempts"
   exit 1
 fi
-log "Full site rendered successfully"
 
 # Step 3: Commit and push changes
 log "Committing changes..."
