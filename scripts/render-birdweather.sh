@@ -1,7 +1,8 @@
 #!/bin/zsh
 # render-birdweather.sh
-# Daily automated render of birdweather/index.qmd + full site, then commit & push.
+# Daily automated render of birdweather/index.qmd, then commit & push.
 # Designed to run via macOS launchd at 12 PM local time.
+# Netlify handles the full site rebuild on push.
 
 set -euo pipefail
 
@@ -41,7 +42,7 @@ run_with_retry() {
 }
 
 log() {
-  echo "[$(timestamp)] $1" | tee -a "$LOG_FILE"
+  echo "[$(timestamp)] $1" >> "$LOG_FILE"
 }
 
 notify_failure() {
@@ -72,13 +73,7 @@ if ! run_with_retry "Render birdweather/index.qmd" "$PIXI" run --manifest-path "
   exit 1
 fi
 
-# Step 2: Render the full site (with retries)
-if ! run_with_retry "Render full site" "$QUARTO" render; then
-  notify_failure "quarto render (full site) failed after $MAX_RETRIES attempts"
-  exit 1
-fi
-
-# Step 3: Commit and push changes
+# Step 2: Commit and push changes
 log "Committing changes..."
 "$GIT" add _freeze/ >> "$LOG_FILE" 2>&1
 "$GIT" add -u >> "$LOG_FILE" 2>&1
