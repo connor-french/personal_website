@@ -67,6 +67,3 @@ static/slides/data/*
 
 # BirdWeather cached data
 birdweather/data/
-
-# site files
-_site/
