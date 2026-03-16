@@ -313,6 +313,7 @@ gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
   <ul>
   <li><a href="#ai-updates" id="toc-ai-updates" class="nav-link active" data-scroll-target="#ai-updates">AI Updates</a>
   <ul class="collapse">
+  <li><a href="#prior-day-detections-reactable-summary" id="toc-prior-day-detections-reactable-summary" class="nav-link" data-scroll-target="#prior-day-detections-reactable-summary">2026-03-16 - Prior-day detections reactable summary</a></li>
   <li><a href="#fix-reactable-table-not-rendering" id="toc-fix-reactable-table-not-rendering" class="nav-link" data-scroll-target="#fix-reactable-table-not-rendering">2026-02-18 — Fix reactable table not rendering</a></li>
   <li><a href="#rare-birds-paginated-table-with-reactable-py" id="toc-rare-birds-paginated-table-with-reactable-py" class="nav-link" data-scroll-target="#rare-birds-paginated-table-with-reactable-py">2026-02-18 — Rare birds paginated table with reactable-py</a></li>
   <li><a href="#fix-broken-ebird-links-in-species-gallery" id="toc-fix-broken-ebird-links-in-species-gallery" class="nav-link" data-scroll-target="#fix-broken-ebird-links-in-species-gallery">2026-02-18 — Fix broken eBird links in species gallery</a></li>
@@ -344,6 +345,16 @@ gtag('config', 'G-140J9KG9C2', { 'anonymize_ip': true});
 
 <section id="ai-updates" class="level1">
 <h1>AI Updates</h1>
+<section id="prior-day-detections-reactable-summary" class="level2">
+<h2 class="anchored" data-anchor-id="prior-day-detections-reactable-summary">2026-03-16 - Prior-day detections reactable summary</h2>
+<ul>
+<li>Added a new <code>Yesterday's Detections</code> subsection under <code>Recent Activity</code> in <code>birdweather/index.qmd</code>.</li>
+<li>New table is a paginated, searchable <code>reactable</code> with one row per species detected yesterday.</li>
+<li>Each row now includes: linked species photo (to eBird), species name (common + scientific), yesterday detection total, a 24-hour inline SVG sparkline bar chart, and per-species average conditions at detection times.</li>
+<li>Environmental summaries use cached sensor data (<code>temperature</code>, <code>humidity</code>) matched to detections via nearest-timestamp <code>join_asof</code>.</li>
+<li>Precipitation is not shown because cached BirdWeather parquet files do not include historical precipitation; humidity is used as the available moisture proxy.</li>
+</ul>
+</section>
 <section id="fix-reactable-table-not-rendering" class="level2">
 <h2 class="anchored" data-anchor-id="fix-reactable-table-not-rendering">2026-02-18 — Fix reactable table not rendering</h2>
 <ul>

@@ -1,5 +1,12 @@
 # AI Updates
 
+## 2026-03-16 - Prior-day detections reactable summary
+- Added a new `Yesterday's Detections` subsection under `Recent Activity` in `birdweather/index.qmd`.
+- New table is a paginated, searchable `reactable` with one row per species detected yesterday.
+- Each row now includes: linked species photo (to eBird), species name (common + scientific), yesterday detection total, a 24-hour inline SVG sparkline bar chart, and per-species average conditions at detection times.
+- Environmental summaries use cached sensor data (`temperature`, `humidity`) matched to detections via nearest-timestamp `join_asof`.
+- Precipitation is not shown because cached BirdWeather parquet files do not include historical precipitation; humidity is used as the available moisture proxy.
+
 ## 2026-02-18 — Fix reactable table not rendering
 - **Root cause**: `Reactable(...)` was called inside nested `if` blocks in `birdweather/index.qmd`. IPython only auto-displays the last *top-level* expression in a cell; expressions inside conditionals are silently discarded.
 - **Fix**: Wrapped the `Reactable(...)` call with `display()` so the widget is explicitly rendered.

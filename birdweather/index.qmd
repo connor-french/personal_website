@@ -173,6 +173,247 @@ display(HTML(card_html))
 
 ## Recent Activity {#recent}
 
+### Yesterday's Detections
+
+One row per species detected yesterday, with hourly activity and average conditions at detection times.
+
+
+```{python}
+#| label: yesterday-detections-table
+
+from reactable import Reactable, Column
+from reactable.models import CellInfo
+from reactable.widgets import STATIC_FILES as _REACTABLE_STATIC_YDAY
+import htmltools
+from pathlib import Path
+
+# Inline reactable CSS to avoid broken stylesheet paths in rendered output.
+_reactable_css_yday = Path(str(_REACTABLE_STATIC_YDAY / "reactable-py.esm.css")).read_text()
+display(HTML(f"<style>{_reactable_css_yday}</style>"))
+
+yesterday_date = (datetime.utcnow() - timedelta(days=1)).date()
+
+yesterday_detections = (
+    detections
+    .filter(pl.col("timestamp").dt.date() == pl.lit(yesterday_date))
+    .with_columns(pl.col("timestamp").dt.hour().alias("hour"))
+)
+
+if yesterday_detections.height == 0:
+    display(Markdown(f"*No detections found for {yesterday_date.isoformat()}.*"))
+else:
+    species_info = (
+        yesterday_detections
+        .group_by("speciesId")
+        .agg(
+            pl.col("commonName").first().alias("commonName"),
+            pl.col("scientificName").first().alias("scientificName"),
+            pl.col("ebirdUrl").drop_nulls().first().alias("ebirdUrl"),
+            pl.col("thumbnailUrl").drop_nulls().first().alias("thumbnailUrl"),
+            pl.col("imageUrl").drop_nulls().first().alias("imageUrl"),
+            pl.len().alias("dailyDetections"),
+        )
+        .with_columns(
+            pl.coalesce([pl.col("thumbnailUrl"), pl.col("imageUrl")]).alias("photoUrl")
+        )
+    )
+
+    hourly_counts = (
+        yesterday_detections
+        .group_by(["speciesId", "hour"])
+        .agg(pl.len().alias("hourCount"))
+        .with_columns(pl.col("hour").cast(pl.Int64))
+    )
+
+    hourly_wide = hourly_counts.pivot(
+        values="hourCount",
+        index="speciesId",
+        on="hour",
+        aggregate_function="sum",
+    )
+
+    for hour in range(24):
+        hour_col = str(hour)
+        if hour_col not in hourly_wide.columns:
+            hourly_wide = hourly_wide.with_columns(pl.lit(0).alias(hour_col))
+
+    hourly_wide = hourly_wide.with_columns(
+        pl.concat_list([pl.col(str(hour)).fill_null(0).cast(pl.Int64) for hour in range(24)]).alias("hourlyCounts")
+    ).select("speciesId", "hourlyCounts")
+
+    env_means = pl.DataFrame(
+        schema={
+            "speciesId": pl.Utf8,
+            "avgTempC": pl.Float64,
+            "avgTempF": pl.Float64,
+            "avgHumidity": pl.Float64,
+        }
+    )
+
+    if env_hist.height > 0:
+        det_for_join = (
+            yesterday_detections
+            .select("speciesId", "timestamp")
+            .sort("timestamp")
+        )
+        env_for_join = (
+            env_hist
+            .select("timestamp", "temperature", "humidity")
+            .sort("timestamp")
+        )
+
+        det_with_env = det_for_join.join_asof(
+            env_for_join,
+            left_on="timestamp",
+            right_on="timestamp",
+            strategy="nearest",
+        )
+
+        env_means = (
+            det_with_env
+            .group_by("speciesId")
+            .agg(
+                pl.col("temperature").mean().alias("avgTempC"),
+                pl.col("humidity").mean().alias("avgHumidity"),
+            )
+            .with_columns((pl.col("avgTempC") * 9 / 5 + 32).alias("avgTempF"))
+        )
+
+    yesterday_species_table = (
+        species_info
+        .join(hourly_wide, on="speciesId", how="left")
+        .join(env_means, on="speciesId", how="left")
+        .with_columns(
+            pl.col("hourlyCounts").fill_null(pl.lit([0] * 24)),
+            pl.col("dailyDetections").fill_null(0).cast(pl.Int64),
+        )
+        .sort(["dailyDetections", "commonName"], descending=[True, False])
+    )
+
+    def _hour_label(hour: int) -> str:
+        return f"{hour % 12 or 12}{'AM' if hour < 12 else 'PM'}"
+
+    def render_photo(ci: CellInfo):
+        row = yesterday_species_table.row(ci.row_index, named=True)
+        photo = row.get("photoUrl") or ""
+        name = row.get("commonName") or "Species"
+        ebird_url = row.get("ebirdUrl") or ""
+
+        if not photo:
+            return htmltools.span("No photo", style="font-size:0.75rem;opacity:0.7;")
+
+        img = htmltools.img(
+            src=photo,
+            alt=name,
+            style="width:44px;height:44px;border-radius:8px;object-fit:cover;border:1px solid var(--bs-border-color, #dee2e6);",
+            loading="lazy",
+        )
+
+        if ebird_url:
+            return htmltools.a(
+                img,
+                href=ebird_url,
+                target="_blank",
+                rel="noopener",
+                title=f"Open {name} on eBird",
+            )
+
+        return img
+
+    def render_species(ci: CellInfo):
+        row = yesterday_species_table.row(ci.row_index, named=True)
+        common = row.get("commonName") or "Unknown species"
+        scientific = row.get("scientificName") or ""
+        return htmltools.div(
+            htmltools.strong(common),
+            htmltools.div(scientific, style="font-style:italic;opacity:0.75;font-size:0.82rem;"),
+        )
+
+    def render_sparkline(ci: CellInfo):
+        counts = list(ci.value) if isinstance(ci.value, (list, tuple)) else []
+        if not counts:
+            return ""
+
+        width = 192
+        height = 40
+        bar_width = 6
+        gap = 2
+        max_count = max(counts) if max(counts) > 0 else 1
+
+        bars = []
+        for idx, count in enumerate(counts[:24]):
+            bar_height = int(((height - 10) * count) / max_count) if count > 0 else 1
+            x = idx * (bar_width + gap)
+            y = height - bar_height - 2
+            fill = ORANGE if count > 0 else "var(--bs-border-color, #d9d9d9)"
+            bars.append(
+                f"<rect x='{x}' y='{y}' width='{bar_width}' height='{bar_height}' rx='1' ry='1' fill='{fill}'>"
+                f"<title>{_hour_label(idx)}: {count} detections</title>"
+                "</rect>"
+            )
+
+        return (
+            f"<svg width='{width}' height='{height}' viewBox='0 0 {width} {height}' role='img' "
+            "aria-label='Hourly detections sparkline'>"
+            f"<line x1='0' y1='{height - 2}' x2='{width}' y2='{height - 2}' stroke='var(--bs-border-color, #d9d9d9)' stroke-width='1' />"
+            + "".join(bars)
+            + "</svg>"
+        )
+
+    def render_conditions(ci: CellInfo):
+        row = yesterday_species_table.row(ci.row_index, named=True)
+        temp_f = row.get("avgTempF")
+        temp_c = row.get("avgTempC")
+        humidity = row.get("avgHumidity")
+
+        if temp_f is None and humidity is None:
+            return htmltools.span("No matched sensor readings", style="opacity:0.65;font-size:0.82rem;")
+
+        parts = []
+        if temp_f is not None and temp_c is not None:
+            parts.append(
+                htmltools.div(
+                    f"Avg temp: {temp_f:.1f}F ({temp_c:.1f}C)",
+                    style="font-size:0.82rem;line-height:1.25;",
+                )
+            )
+        if humidity is not None:
+            parts.append(
+                htmltools.div(
+                    f"Avg humidity: {humidity:.0f}%",
+                    style="font-size:0.82rem;line-height:1.25;",
+                )
+            )
+
+        return htmltools.div(*parts)
+
+    display(Reactable(
+        yesterday_species_table,
+        columns=[
+            Column(id="photoUrl", name="Photo", cell=render_photo, sortable=False, searchable=False, max_width=72, align="center"),
+            Column(id="commonName", name="Species", cell=render_species, min_width=240),
+            Column(id="scientificName", show=False),
+            Column(id="speciesId", show=False),
+            Column(id="ebirdUrl", show=False),
+            Column(id="hourlyCounts", name="Hourly Activity", cell=render_sparkline, sortable=False, searchable=False, html=True, min_width=210),
+            Column(id="dailyDetections", name="Detections", align="right", min_width=120),
+            Column(id="avgTempF", name="Conditions", cell=render_conditions, sortable=False, searchable=False, min_width=220),
+            Column(id="avgTempC", show=False),
+            Column(id="avgHumidity", show=False),
+            Column(id="thumbnailUrl", show=False),
+            Column(id="imageUrl", show=False),
+        ],
+        searchable=True,
+        pagination=True,
+        default_page_size=12,
+        striped=True,
+        highlight=True,
+        bordered=True,
+        compact=True,
+        full_width=True,
+    ))
+```
+
 ### This Week's Top Birds
 
 ```{python}
