@@ -1,5 +1,10 @@
 # AI Updates
 
+## 2026-03-17 - BirdWeather schedule changed to 8 AM
+- Updated `~/Library/LaunchAgents/com.connorfrench.render-birdweather.plist` to run daily at 8:00 AM local time (`Hour` changed from `12` to `8`).
+- Updated `scripts/render-birdweather.sh` header comment to match the new schedule.
+- Reloaded the LaunchAgent so the new run time takes effect immediately.
+
 ## 2026-03-16 - Prior-day detections reactable summary
 - Added a new `Yesterday's Detections` subsection under `Recent Activity` in `birdweather/index.qmd`.
 - New table is a paginated, searchable `reactable` with one row per species detected yesterday.

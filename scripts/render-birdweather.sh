@@ -1,7 +1,7 @@
 #!/bin/zsh
 # render-birdweather.sh
 # Daily automated render of birdweather/index.qmd, then commit & push.
-# Designed to run via macOS launchd at 12 PM local time.
+# Designed to run via macOS launchd at 8 AM local time.
 # Netlify handles the full site rebuild on push.
 
 set -euo pipefail
