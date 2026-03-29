@@ -448,38 +448,47 @@ else:
 
 ### New Arrivals This Week
 
-Species detected in the last 7 days that weren't seen the previous 30 days.
+Species detected in the last 7 days that were not detected at all in the 23 preceding days.
 
 ```{python}
 #| label: new-arrivals
 
-if top_species_week.height > 0 and top_species_month.height > 0:
-    week_ids = set(top_species_week["speciesId"].to_list())
-    month_ids = set(top_species_month["speciesId"].to_list())
-    # Species in last 7 days but not in prior month data
-    # (month includes the week, so we compare to the full month set minus week)
-    new_ids = week_ids - (month_ids - week_ids)
-    
-    # Actually: species in week that have very few detections in the month
-    # Better approach: species whose month count == week count (i.e. all detections are recent)
-    week_df = top_species_week.select("speciesId", "commonName", "scientificName", pl.col("count").alias("weekCount"))
-    month_df = top_species_month.select("speciesId", pl.col("count").alias("monthCount"))
-    
-    merged = week_df.join(month_df, on="speciesId", how="left").with_columns(
-        pl.col("monthCount").fill_null(0)
+if detections.height > 0:
+    latest_ts = detections["timestamp"].max()
+    week_start = latest_ts - timedelta(days=7)
+    prior_start = latest_ts - timedelta(days=30)
+
+    week_species = (
+        detections
+        .filter(pl.col("timestamp") >= pl.lit(week_start))
+        .group_by("speciesId")
+        .agg(
+            pl.col("commonName").drop_nulls().first().alias("commonName"),
+            pl.col("scientificName").drop_nulls().first().alias("scientificName"),
+            pl.len().alias("weekCount"),
+        )
     )
-    
-    # New arrivals: month count equals week count (they only appeared this week)
-    new_arrivals = merged.filter(pl.col("weekCount") == pl.col("monthCount"))
-    
+
+    prior_species = (
+        detections
+        .filter(
+            (pl.col("timestamp") >= pl.lit(prior_start))
+            & (pl.col("timestamp") < pl.lit(week_start))
+        )
+        .select("speciesId")
+        .unique()
+    )
+
+    new_arrivals = week_species.join(prior_species, on="speciesId", how="anti")
+
     if new_arrivals.height > 0:
-        new_list = new_arrivals.sort("weekCount", descending=True)
+        new_list = new_arrivals.sort(["weekCount", "commonName"], descending=[True, False])
         items = []
         for row in new_list.iter_rows(named=True):
             items.append(f"- **{row['commonName']}** (*{row['scientificName']}*) — {row['weekCount']} detection{'s' if row['weekCount'] != 1 else ''}")
         display(Markdown("\n".join(items)))
     else:
-        display(Markdown("*No new species this week — all detected species were also seen in the prior month.*"))
+        display(Markdown("*No new species this week — every species detected in the last 7 days was also detected in the 23 preceding days.*"))
 else:
     display(Markdown("*Not enough data to determine new arrivals.*"))
 ```

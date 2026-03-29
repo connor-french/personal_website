@@ -1,5 +1,10 @@
 # AI Updates
 
+## 2026-03-29 - Fix new arrivals window logic
+- Updated the `New Arrivals This Week` cell in `birdweather/index.qmd` to use raw `detections` timestamps instead of comparing top-species aggregate tables.
+- New definition is now exact: species detected at least once in the last 7 days and not detected at all in the 23 preceding days (30-day lookback split into `[-30, -7)` and `[-7, 0]`).
+- This avoids false positives/negatives caused by monthly aggregates that include the current week and by top-N truncation.
+
 ## 2026-03-17 - BirdWeather schedule changed to 8 AM
 - Updated `~/Library/LaunchAgents/com.connorfrench.render-birdweather.plist` to run daily at 8:00 AM local time (`Hour` changed from `12` to `8`).
 - Updated `scripts/render-birdweather.sh` header comment to match the new schedule.
