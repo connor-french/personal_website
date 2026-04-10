@@ -1019,7 +1019,20 @@ if env_hist.height > 0 and (daily_counts_30d.height > 0 or daily_counts.height >
             (pl.col("avgTemperature") * 9 / 5 + 32).alias("avgTempF")
         )
 
-        pdf = combined
+        # Full dataset for regression lines
+        pdf_full = combined
+
+        # Evenly sample up to 5000 rows (by date order) for scatter points
+        if pdf_full.height > 5000:
+            sample_idx = np.linspace(0, pdf_full.height - 1, num=5000, dtype=int).tolist()
+            pdf_points = (
+                pdf_full
+                .with_row_index("_row_idx")
+                .filter(pl.col("_row_idx").is_in(sample_idx))
+                .drop("_row_idx")
+            )
+        else:
+            pdf_points = pdf_full
 
         # Date range for subtitles
         date_min = combined["date"].min().strftime("%b %d, %Y")
@@ -1048,7 +1061,7 @@ document.addEventListener("shown.bs.tab", function () {
 if _env_corr_ready:
     # Temperature vs detections
     temp_chart = (
-        alt.Chart(pdf)
+        alt.Chart(pdf_points)
         .mark_circle(size=60, color=ORANGE, opacity=0.7)
         .encode(
             x=alt.X("avgTempF:Q", title="Avg Temperature (°F)", scale=alt.Scale(zero=False)),
@@ -1061,9 +1074,12 @@ if _env_corr_ready:
         )
     )
 
-    temp_trend = temp_chart.transform_regression(
-        "avgTempF", "detections"
-    ).mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+    temp_trend = (
+        alt.Chart(pdf_full)
+        .transform_regression("avgTempF", "detections")
+        .mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+        .encode(x="avgTempF:Q", y="detections:Q")
+    )
 
     temp_combined = (
         (temp_chart + temp_trend)
@@ -1077,7 +1093,7 @@ if _env_corr_ready:
 
     # Humidity vs detections
     hum_chart = (
-        alt.Chart(pdf)
+        alt.Chart(pdf_points)
         .mark_circle(size=60, color=DARK_BLUE, opacity=0.7)
         .encode(
             x=alt.X("avgHumidity:Q", title="Avg Humidity (%)", scale=alt.Scale(zero=False)),
@@ -1090,9 +1106,12 @@ if _env_corr_ready:
         )
     )
 
-    hum_trend = hum_chart.transform_regression(
-        "avgHumidity", "detections"
-    ).mark_line(color=ORANGE, strokeDash=[5, 3], strokeWidth=2)
+    hum_trend = (
+        alt.Chart(pdf_full)
+        .transform_regression("avgHumidity", "detections")
+        .mark_line(color=ORANGE, strokeDash=[5, 3], strokeWidth=2)
+        .encode(x="avgHumidity:Q", y="detections:Q")
+    )
 
     hum_combined = (
         (hum_chart + hum_trend)
@@ -1107,7 +1126,7 @@ if _env_corr_ready:
     # Barometric pressure vs detections
     if combined.select(pl.col("avgPressure").is_not_null().sum()).item() > 2:
         press_chart = (
-            alt.Chart(pdf)
+            alt.Chart(pdf_points)
             .mark_circle(size=60, color=MUSTARD, opacity=0.7)
             .encode(
                 x=alt.X("avgPressure:Q", title="Avg Barometric Pressure (hPa)", scale=alt.Scale(zero=False)),
@@ -1120,9 +1139,12 @@ if _env_corr_ready:
             )
         )
 
-        press_trend = press_chart.transform_regression(
-            "avgPressure", "detections"
-        ).mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+        press_trend = (
+            alt.Chart(pdf_full)
+            .transform_regression("avgPressure", "detections")
+            .mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+            .encode(x="avgPressure:Q", y="detections:Q")
+        )
 
         press_combined = (
             (press_chart + press_trend)
@@ -1145,7 +1167,7 @@ else:
 if _env_corr_ready:
     # Temperature vs species richness
     temp_rich_chart = (
-        alt.Chart(pdf)
+        alt.Chart(pdf_points)
         .mark_circle(size=60, color=ORANGE, opacity=0.7)
         .encode(
             x=alt.X("avgTempF:Q", title="Avg Temperature (°F)", scale=alt.Scale(zero=False)),
@@ -1158,9 +1180,12 @@ if _env_corr_ready:
         )
     )
 
-    temp_rich_trend = temp_rich_chart.transform_regression(
-        "avgTempF", "speciesRichness"
-    ).mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+    temp_rich_trend = (
+        alt.Chart(pdf_full)
+        .transform_regression("avgTempF", "speciesRichness")
+        .mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+        .encode(x="avgTempF:Q", y="speciesRichness:Q")
+    )
 
     temp_rich_combined = (
         (temp_rich_chart + temp_rich_trend)
@@ -1174,7 +1199,7 @@ if _env_corr_ready:
 
     # Humidity vs species richness
     hum_rich_chart = (
-        alt.Chart(pdf)
+        alt.Chart(pdf_points)
         .mark_circle(size=60, color=DARK_BLUE, opacity=0.7)
         .encode(
             x=alt.X("avgHumidity:Q", title="Avg Humidity (%)", scale=alt.Scale(zero=False)),
@@ -1187,9 +1212,12 @@ if _env_corr_ready:
         )
     )
 
-    hum_rich_trend = hum_rich_chart.transform_regression(
-        "avgHumidity", "speciesRichness"
-    ).mark_line(color=ORANGE, strokeDash=[5, 3], strokeWidth=2)
+    hum_rich_trend = (
+        alt.Chart(pdf_full)
+        .transform_regression("avgHumidity", "speciesRichness")
+        .mark_line(color=ORANGE, strokeDash=[5, 3], strokeWidth=2)
+        .encode(x="avgHumidity:Q", y="speciesRichness:Q")
+    )
 
     hum_rich_combined = (
         (hum_rich_chart + hum_rich_trend)
@@ -1204,7 +1232,7 @@ if _env_corr_ready:
     # Barometric pressure vs species richness
     if combined.select(pl.col("avgPressure").is_not_null().sum()).item() > 2:
         press_rich_chart = (
-            alt.Chart(pdf)
+            alt.Chart(pdf_points)
             .mark_circle(size=60, color=MUSTARD, opacity=0.7)
             .encode(
                 x=alt.X("avgPressure:Q", title="Avg Barometric Pressure (hPa)", scale=alt.Scale(zero=False)),
@@ -1217,9 +1245,12 @@ if _env_corr_ready:
             )
         )
 
-        press_rich_trend = press_rich_chart.transform_regression(
-            "avgPressure", "speciesRichness"
-        ).mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+        press_rich_trend = (
+            alt.Chart(pdf_full)
+            .transform_regression("avgPressure", "speciesRichness")
+            .mark_line(color=DARK_BLUE, strokeDash=[5, 3], strokeWidth=2)
+            .encode(x="avgPressure:Q", y="speciesRichness:Q")
+        )
 
         press_rich_combined = (
             (press_rich_chart + press_rich_trend)
@@ -1241,9 +1272,9 @@ else:
 ```{python}
 #| label: env-timeseries
 
+# ...existing code...
 if env_hist.height > 0:
-    # Downsample to hourly averages to stay within Altair's 5000-row limit
-    # (~65K raw readings over 30 days → ~720 hourly points)
+    # Downsample to hourly averages first
     env_plot = (
         env_hist
         .with_columns(
@@ -1259,8 +1290,20 @@ if env_hist.height > 0:
         .rename({"hour": "timestamp"})
     )
 
+    # Sample up to 5000 evenly spaced points from aggregated data for plotting
+    if env_plot.height > 5000:
+        sample_idx = np.linspace(0, env_plot.height - 1, num=5000, dtype=int).tolist()
+        env_plot_points = (
+            env_plot
+            .with_row_index("_row_idx")
+            .filter(pl.col("_row_idx").is_in(sample_idx))
+            .drop("_row_idx")
+        )
+    else:
+        env_plot_points = env_plot
+
     temp_ts = (
-        alt.Chart(env_plot)
+        alt.Chart(env_plot_points)
         .mark_line(color=ORANGE, strokeWidth=1.5)
         .encode(
             x=alt.X("timestamp:T", title=""),
@@ -1275,7 +1318,7 @@ if env_hist.height > 0:
     temp_ts.display()
 
     hum_ts = (
-        alt.Chart(env_plot)
+        alt.Chart(env_plot_points)
         .mark_line(color=DARK_BLUE, strokeWidth=1.5)
         .encode(
             x=alt.X("timestamp:T", title="Time"),
@@ -1290,6 +1333,7 @@ if env_hist.height > 0:
     hum_ts.display()
 else:
     display(Markdown("*No environmental sensor data available.*"))
+# ...existing code...
 ```
 
 ## Species Gallery {#gallery}
